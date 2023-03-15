@@ -39,7 +39,8 @@
     "**/*.tsx",
     "**/*.cjs",
     "**/*.mjs",
-    ".next/types/**/*.ts"
+    ".next/types/**/*.ts",
+    "D:\\Chris\\Documents\\GitHub\\WhirlCreekFarmV2\\.next/types/**/*.ts"
   ],
   "exclude": [
     "node_modules"
