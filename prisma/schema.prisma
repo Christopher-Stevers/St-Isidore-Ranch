@@ -69,11 +69,10 @@ model Order {
 }
 
 model Product {
-  id             String        @id @default(cuid())
-        
-  price          Int
+  id String @id @default(cuid())
+
   quantity       Int
-  order          Order?         @relation(fields: [orderId], references: [id])
+  order          Order?       @relation(fields: [orderId], references: [id])
   orderId        String?
   productClass   ProductClass @relation(fields: [productClassId], references: [id])
   productClassId String
@@ -85,6 +84,7 @@ model ProductClass {
   updatedAt DateTime  @updatedAt
   name      String
   products  Product[]
+  price     Int
 }
 
 model VerificationToken {
