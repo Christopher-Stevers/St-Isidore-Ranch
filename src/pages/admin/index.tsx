@@ -1,15 +1,12 @@
 import { type NextPage } from "next";
 import Head from "next/head";
 import Link from "next/link";
-import  AuthShowcase  from "~/components/AuthShowcase";
-import AdminMutations  from "~/components/AdminMutations";
+import AuthShowcase from "~/components/AuthShowcase";
+import AdminMutations from "~/components/AdminMutations";
 import { api } from "~/utils/api";
 
-
 const Home: NextPage = () => {
-
-  
-  const hello = api.user.hello.useQuery({ text: "from tRPC" })
+  const hello = api.user.hello.useQuery({ text: "from tRPC" });
 
   return (
     <>
@@ -62,4 +59,3 @@ const Home: NextPage = () => {
 };
 
 export default Home;
-

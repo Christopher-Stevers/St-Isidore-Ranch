@@ -1,32 +1,50 @@
 /** @type {import("eslint").Linter.Config} */
 const config = {
-  overrides: [
-    {
-      extends: [
-        "plugin:@typescript-eslint/recommended-requiring-type-checking",
-        "prettier/@typescript-eslint",
-      ],
-      files: ["*.ts", "*.tsx"],
-      parserOptions: {
-        project: "tsconfig.json",
-      },
-    },
-  ],
+  root: true,
   parser: "@typescript-eslint/parser",
+  plugins: ["import"],
+  extends: [
+    "plugin:@typescript-eslint/recommended",
+    "plugin:@typescript-eslint/recommended-requiring-type-checking",
+    "plugin:prettier/recommended",
+  ],
   parserOptions: {
-    project: "./tsconfig.json",
+    ecmaVersion: "latest",
+    sourceType: "module",
+    tsconfigRootDir: __dirname,
+    project: [
+      "./tsconfig.json",
+      "./cli/tsconfig.eslint.json", // separate eslint config for the CLI since we want to lint and typecheck differently due to template files
+      "./www/tsconfig.json",
+    ],
   },
-  plugins: ["@typescript-eslint"],
-  extends: ["next/core-web-vitals", "plugin:@typescript-eslint/recommended"],
   rules: {
+    "@typescript-eslint/restrict-template-expressions": "off",
+    "@typescript-eslint/no-unused-vars": [
+      "error",
+      { argsIgnorePattern: "^_", destructuredArrayIgnorePattern: "^_" },
+    ],
     "@typescript-eslint/consistent-type-imports": [
-      "warn",
+      "error",
+      { prefer: "type-imports", fixStyle: "inline-type-imports" },
+    ],
+    "import/consistent-type-specifier-style": ["error", "prefer-inline"],
+
+    // These rules are only disabled because we hit a bug in linting.
+    // See https://github.com/t3-oss/create-t3-app/pull/1036#discussion_r1060505136
+    // If you still see the bug once TypeScript@5 is used, please let typescript-eslint know!
+    "@typescript-eslint/no-unsafe-argument": "off",
+    "@typescript-eslint/no-unsafe-assignment": "off",
+    "@typescript-eslint/no-unsafe-call": "off",
+    "@typescript-eslint/no-unsafe-member-access": "off",
+    "@typescript-eslint/no-unsafe-return": "off",
+    "@typescript-eslint/no-unnecessary-type-assertion": "off",
+    "prettier/prettier": [
+      "error",
       {
-        prefer: "type-imports",
-        fixStyle: "inline-type-imports",
+        endOfLine: "auto",
       },
     ],
-    "@typescript-eslint/no-unused-vars": ["warn", { argsIgnorePattern: "^_" }],
   },
 };
 

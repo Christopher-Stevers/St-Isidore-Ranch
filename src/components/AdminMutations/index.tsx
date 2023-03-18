@@ -2,18 +2,20 @@ import React, { useState } from "react";
 import { signIn, signOut, useSession } from "next-auth/react";
 import { api } from "~/utils/api";
 import AdminProductCard from "~/components/AdminProductCard";
-import { ProductClass } from "~/typedefs/ProductClass";
+import { type ProductClass } from "~/typedefs/ProductClass";
 const AdminMutations: React.FC = () => {
-  const { data: productClasses, refetch: refetchProductClasses } =
+  const { data: productClasses, refetch } =
     api.productClass.getProductClasses.useQuery();
-
+  const refetchProductClasses = () => {
+    refetch().catch((e) => console.error(e));
+  };
   const [localProductClass, updateProductClass] = useState("");
   const [localProductPrice, updateProductPrice] = useState("");
   const { data: sessionData } = useSession();
 
   const { mutate: addProductClass } =
     api.productClass.addProductClass.useMutation({
-      onSuccess: async () => {
+      onSuccess: () => {
         if (typeof refetchProductClasses === "function") {
           refetchProductClasses();
         }

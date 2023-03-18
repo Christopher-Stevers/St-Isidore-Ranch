@@ -41,7 +41,7 @@
     "**/*.mjs",
     ".next/types/**/*.ts",
     "D:\\Chris\\Documents\\GitHub\\WhirlCreekFarmV2\\.next/types/**/*.ts"
-  ],
+, ".prettier.cjs"  ],
   "exclude": [
     "node_modules"
   ]

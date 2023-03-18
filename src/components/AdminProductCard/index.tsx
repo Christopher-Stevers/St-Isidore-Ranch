@@ -1,4 +1,4 @@
-import { ProductClass } from "~/typedefs/ProductClass";
+import { type ProductClass } from "~/typedefs/ProductClass";
 import React, { useState } from "react";
 
 import { api } from "~/utils/api";
@@ -12,7 +12,7 @@ const AdminProductCard = ({ productClass, refetch }: AdminProductCardProps) => {
 
   const { mutate: addProductsToClass } =
     api.product.addProductsToClass.useMutation({
-      onSuccess: async () => {
+      onSuccess: () => {
         if (typeof refetch === "function") {
           refetch();
         }
@@ -26,7 +26,7 @@ const AdminProductCard = ({ productClass, refetch }: AdminProductCardProps) => {
   };
   const { mutate: removeProductClass } =
     api.productClass.removeProductClass.useMutation({
-      onSuccess: async () => {
+      onSuccess: () => {
         if (typeof refetch === "function") {
           refetch();
         }

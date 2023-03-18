@@ -1,5 +1,5 @@
 import { z } from "zod";
-import { ProductClass } from "~/typedefs/ProductClass";
+import { type ProductClass } from "~/typedefs/ProductClass";
 
 import {
   createTRPCRouter,
@@ -51,7 +51,7 @@ export const productClassRouter = createTRPCRouter({
         ...productClass,
         productsCount: productClass._count.products,
       }));
-    }
+    },
   ),
 
   getAll: publicProcedure.query(({ ctx }) => {
