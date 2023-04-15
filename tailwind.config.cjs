@@ -4,8 +4,20 @@ const config = {
   theme: {
     extend: {
       fontFamily: {
-        serif: ["var(--roboto-slab)"],
+        accent: ["var(--tangerine)"],
+        display: ["var(--rye)"],
+        text: ["var(--cantarell)"],
         sans: ["var(--roboto)"],
+      },
+      colors: {
+        // Primary
+        primary: {
+          500: "hsl(137 58% 11%)",
+          700: "hsl(137, 58% 5%)",
+        },
+        backdrop: {
+          500: "hsl(36 62% 94%)",
+        },
       },
     },
   },

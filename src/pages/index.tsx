@@ -1,9 +1,10 @@
 import LayoutMain from "~/layouts/layoutMain";
+import AboutCard from "~/components/AboutCard";
 
 export default function Page() {
   return (
     <LayoutMain>
-      <h1 className="bg-red-500">Hello, Next.js!</h1>
+      <AboutCard />
     </LayoutMain>
   );
 }

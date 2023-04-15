@@ -6,7 +6,9 @@ const LayoutMain = ({ children }: React.PropsWithChildren) => {
   return (
     <>
       <HeaderMain />
-      {children}
+      <div className="grid content-center justify-center bg-backdrop-500 p-32">
+        {children}
+      </div>
       <FooterMain />
     </>
   );
