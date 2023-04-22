@@ -5,27 +5,31 @@ import HeroButton from "~/components/HeroButton";
 const HeaderMain: React.FC = () => {
   return (
     <>
-      <header className="h-screen w-full ">
+      <header className="relative h-screen w-full ">
         <Image
-          className="object-cover"
+          className="absolute top-0 object-cover"
           alt="image of cows grazing"
           fill={true}
           src={"/heroCattle.jpg"}
         />
         <div
-          className="absolute top-0 grid h-screen w-full grid-rows-2 items-center justify-center 
+          className="absolute top-0 grid 
+          h-screen w-full items-center
+          justify-center 
           justify-items-center 
+          justify-items-center
           gap-16
-          bg-black/30
-        font-display 
-        lg:grid-cols-2 lg:justify-end lg:p-32"
+        bg-black/30 
+        font-display
+        lg:grid-cols-2
+        lg:grid-rows-2 lg:justify-end lg:p-32"
         >
-          <div className="-md:left-20 relative mx-auto h-min self-start  xl:col-start-1">
-            <h1 className="font-rye w-min whitespace-nowrap text-8xl text-amber-50">
-              {" "}
-              St. Isidore Ranch
+          <div className="-md:left-20 relative mx-auto grid h-min gap-8 md:col-span-2 lg:col-span-1 lg:col-start-1 lg:self-start">
+            <h1 className="font-rye flex w-min w-full flex-wrap justify-center gap-x-4 gap-y-4 whitespace-nowrap text-6xl text-amber-50 md:text-7xl lg:flex-nowrap lg:justify-start lg:text-8xl">
+              <span className="inline"> St. Isidore </span>
+              <span className="inline">Ranch</span>
             </h1>
-            <div className="font-accent text-6xl text-amber-50">
+            <div className="text-center font-accent text-5xl text-amber-50 lg:text-left lg:text-6xl">
               Pasture to Fork
             </div>
           </div>
@@ -33,13 +37,13 @@ const HeaderMain: React.FC = () => {
           <HeroButton
             text="About"
             link="#about"
-            className="row-start-2 justify-self-end bg-white text-primary-500"
+            className="justify-self-center bg-white text-primary-500 md:row-start-2 md:justify-self-end"
           />
 
           <HeroButton
             text="Shop"
             link="/shop"
-            className="row-start-2 justify-self-start border-4 border-white bg-primary-500 text-white"
+            className="row-start-3 border-4 border-white bg-primary-500 text-white md:row-start-2 md:justify-self-start"
           />
         </div>
       </header>

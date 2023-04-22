@@ -11,7 +11,7 @@ const Social = ({ link, name, SocialIcon }: SocialType) => {
     <Link
       key={name}
       href={link}
-      className="flex h-10 w-full content-center items-center gap-2 "
+      className="flex h-10 w-min content-center items-center gap-2 "
     >
       <SocialIcon className=" h-10 h-full fill-backdrop-500" />
     </Link>

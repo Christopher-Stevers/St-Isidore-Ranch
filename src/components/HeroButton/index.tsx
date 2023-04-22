@@ -5,7 +5,7 @@ const HeroButton = ({ text, link, className }: ButtonProps) => {
     <FancyButton
       text={text}
       link={link}
-      className={`${className} h-24 w-60 text-3xl`}
+      className={`${className} h-16 w-32 text-2xl md:h-20 md:w-40 md:text-3xl lg:h-24 lg:w-60`}
     />
   );
 };
