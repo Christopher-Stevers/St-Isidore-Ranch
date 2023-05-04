@@ -59,24 +59,37 @@ model User {
   orders        Order[]
 }
 
+model Box {
+  id         String    @id @default(cuid())
+  createdAt  DateTime  @default(now())
+  updatedAt  DateTime?
+  totalPrice Int
+  boxSize    Int
+  items      Product[]
+  Order      Order?    @relation(fields: [orderId], references: [id])
+  orderId    String?
+}
+
 model Order {
   id        String    @id @default(cuid())
   createdAt DateTime  @default(now())
   updatedAt DateTime  @updatedAt
-  total     Int
-  items     Product[]
+  totalPrice Int
+  boxes     Box[]
   user      User      @relation(fields: [userId], references: [id])
   userId    String
 }
-
+// indivdual object
 model Product {
   id String @id @default(cuid())
-
+  // size of package ( quantity *  productClass price = price of product)
   quantity       Int
-  order          Order?       @relation(fields: [orderId], references: [id])
-  orderId        String?
+  // cut of meat 
   productClass   ProductClass @relation(fields: [productClassId], references: [id])
   productClassId String
+  // is this in a box
+  Box            Box?         @relation(fields: [boxId], references: [id])
+  boxId          String?
 }
 
 model ProductClass {
@@ -85,7 +98,6 @@ model ProductClass {
   updatedAt DateTime  @updatedAt
   name      String
   products  Product[]
-  price     Int
 }
 
 model VerificationToken {

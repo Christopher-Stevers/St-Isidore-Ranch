@@ -1,9 +1,8 @@
 const Monogram = ()=>{
 
 
-    return <div className="relative text-white text-3xl h-12 w-12">
-    <span className="absolute top-1.5 left-3">S</span>
-    <span className="top-0 left-[16px]  text-5xl absolute">I</span>
+    return <div className="font-display text-white text-5xl h-12 ">
+St I
     </div>
 }
 export default Monogram
