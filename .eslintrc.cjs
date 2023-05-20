@@ -22,11 +22,17 @@ const config = {
     "@typescript-eslint/restrict-template-expressions": "off",
     "@typescript-eslint/no-unused-vars": [
       "error",
-      { argsIgnorePattern: "^_", destructuredArrayIgnorePattern: "^_" },
+      {
+        argsIgnorePattern: "^_",
+        destructuredArrayIgnorePattern: "^_",
+      },
     ],
     "@typescript-eslint/consistent-type-imports": [
       "error",
-      { prefer: "type-imports", fixStyle: "inline-type-imports" },
+      {
+        prefer: "type-imports",
+        fixStyle: "inline-type-imports",
+      },
     ],
     "import/consistent-type-specifier-style": ["error", "prefer-inline"],
 

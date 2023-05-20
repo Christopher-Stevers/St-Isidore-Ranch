@@ -1,7 +1,7 @@
 /** @type {import('prettier').Config} */
 const config = {
   arrowParens: "always",
-  printWidth: 80,
+  printWidth: 60,
   singleQuote: false,
   jsxSingleQuote: false,
   semi: true,

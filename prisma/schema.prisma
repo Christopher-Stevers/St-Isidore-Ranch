@@ -97,6 +97,7 @@ model ProductClass {
   createdAt DateTime  @default(now())
   updatedAt DateTime  @updatedAt
   name      String
+  src       String
   products  Product[]
 }
 

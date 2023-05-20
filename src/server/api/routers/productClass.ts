@@ -16,14 +16,14 @@ export const productClassRouter = createTRPCRouter({
       };
     }),
 
-  addProductClass: protectedProcedure
-    .input(z.object({ text: z.string(), price: z.number() }))
+  addProductClass: publicProcedure
+    .input(z.object({ name: z.string(), src: z.string() }))
     .mutation(({ ctx, input }) => {
+      console.log("start mutation");
       return ctx.prisma.productClass.create({
         data: {
-          name: input.text,
-
-          price: input.price,
+          name: input.name,
+          src: input.src,
         },
       });
     }),
@@ -40,6 +40,7 @@ export const productClassRouter = createTRPCRouter({
 
   getProductClasses: publicProcedure.query(
     async ({ ctx }): Promise<ProductClass[]> => {
+      console.log("exec trpc");
       const productClasses = await ctx.prisma.productClass.findMany({
         include: {
           _count: {
@@ -47,6 +48,7 @@ export const productClassRouter = createTRPCRouter({
           },
         },
       });
+      console.log(productClasses, "my product c;asse");
       return productClasses.map((productClass) => ({
         ...productClass,
         productsCount: productClass._count.products,

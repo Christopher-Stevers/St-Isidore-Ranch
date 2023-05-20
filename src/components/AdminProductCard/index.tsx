@@ -43,7 +43,7 @@ const AdminProductCard = ({ productClass, refetch }: AdminProductCardProps) => {
         className="border-3 flex gap-4 rounded-sm border-green-500 bg-white p-4"
         key={productClass.id}
       >
-        price of ProductClass "{productClass.price}" Name of ProductClass "
+        price of ProductClass "{productClass.src}" Name of ProductClass "
         {productClass.name}"{" "}
         <div>Number of Products in Class "{productClass.productsCount}"</div>
         <div>

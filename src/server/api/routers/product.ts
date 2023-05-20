@@ -7,7 +7,6 @@ export const productRouter = createTRPCRouter({
     .input(z.object({ productClassId: z.string(), count: z.number() }))
     .mutation(({ ctx, input }) => {
       const data = [];
-      console.log(input.productClassId, "private key");
       for (let i = 0; i < input.count; i++) {
         const product = {
           productClassId: input.productClassId,
