@@ -20,9 +20,6 @@ const AddProductClassCard = ({
           }
         },
       },
-      {
-        networkMode: true,
-      },
     );
 
   const handleAddProductClass = () => {

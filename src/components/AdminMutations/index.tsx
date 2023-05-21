@@ -9,9 +9,7 @@ const AdminMutations: React.FC = () => {
     data: productClasses,
     isLoading,
     refetch,
-  } = api.productClass.getProductClasses.useQuery(undefined, {
-    networkMode: "always",
-  });
+  } = api.productClass.getProductClasses.useQuery(undefined);
   const refetchProductClasses = () => {
     refetch()
       .then(() => console.log("completed"))

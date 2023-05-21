@@ -2,7 +2,7 @@ import { type NextPage } from "next";
 import Head from "next/head";
 import Headline from "~/layouts/Headline";
 import AdminMutations from "~/components/AdminMutations";
-import { useSession, signIn, signOut } from "next-auth/react";
+import { signIn } from "next-auth/react";
 
 const Home: NextPage = () => {
   const handleSignIn = () => {
