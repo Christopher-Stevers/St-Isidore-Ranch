@@ -2,12 +2,14 @@ import { type NextPage } from "next";
 import Head from "next/head";
 import Headline from "~/layouts/Headline";
 import AdminMutations from "~/components/AdminMutations";
-import { signIn } from "next-auth/react";
+import { signIn, useSession } from "next-auth/react";
 
 const Home: NextPage = () => {
   const handleSignIn = () => {
     signIn().catch(console.error);
   };
+  const session = useSession();
+  console.log(session, "my session");
   return (
     <>
       <Head>

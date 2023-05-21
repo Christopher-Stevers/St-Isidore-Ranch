@@ -1,5 +1,13 @@
 import { type ProductClass } from "~/typedefs/ProductClass";
 import React, { useState } from "react";
+import Image from "next/image";
+import {
+  PencilIcon,
+  XMarkIcon,
+  CheckIcon,
+  TrashIcon,
+} from "@heroicons/react/24/solid";
+import TogglePlusMinus from "~/components/base/TogglePlusMinus.tsx";
 
 import { api } from "~/utils/api";
 
@@ -36,18 +44,21 @@ const AdminProductCard = ({ productClass, refetch }: AdminProductCardProps) => {
   const setLocalProductCount = (e: React.ChangeEvent<HTMLInputElement>) => {
     updateLocalProductCount(e.target.value);
   };
-
+  const openEdit = () => {
+    setEditable(!editable);
+  };
   return (
     <>
       <div
-        className="border-3 flex gap-4 rounded-sm border-green-500 bg-white p-4"
+        className="bg flex gap-4 rounded-sm  bg-black p-4 text-white"
         key={productClass.id}
       >
-        price of ProductClass "{productClass.src}" Name of ProductClass "
-        {productClass.name}"{" "}
+        <div className="ring-2">
+          <Image alt="no src" src={productClass.src} width={100} height={100} />
+        </div>
         <div>Number of Products in Class "{productClass.productsCount}"</div>
         <div>
-          <div> Add products</div>
+          <TogglePlusMinus />
           <input
             onChange={setLocalProductCount}
             className=" h-4  bg-blue-500"
@@ -57,11 +68,12 @@ const AdminProductCard = ({ productClass, refetch }: AdminProductCardProps) => {
             Create Products
           </button>
         </div>
+
         <button
           onClick={() => removeProductClass({ id: productClass.id })}
-          className="font-bold text-red-500"
+          className="h-min"
         >
-          x
+          <TrashIcon className="h-5 w-5 fill-white" />
         </button>
       </div>
     </>

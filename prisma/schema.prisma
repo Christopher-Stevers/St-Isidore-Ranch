@@ -12,6 +12,7 @@ datasource db {
   // https://next-auth.js.org/adapters/prisma#create-the-prisma-schema
   // https://www.prisma.io/docs/reference/api-reference/prisma-schema-reference#string
   url          = env("DATABASE_URL")
+  relationMode = "prisma"
 }
 
 model Example {
@@ -26,8 +27,8 @@ model Account {
   userId            String
   type              String
   provider          String
-  providerAccountId String
-  efresh_token_expires_in Int?
+  providerAccountId String @unique
+  refresh_token_expires_in Int?
   refresh_token     String? @db.Text
   access_token      String? @db.Text
   expires_at        Int?
@@ -38,6 +39,7 @@ model Account {
   user              User    @relation(fields: [userId], references: [id], onDelete: Cascade)
 
   @@unique([provider, providerAccountId])
+  @@index([userId])
 }
 
 model Session {
@@ -46,6 +48,8 @@ model Session {
   userId       String
   expires      DateTime
   user         User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@index([userId])
 }
 
 model User {
@@ -68,8 +72,19 @@ model Box {
   items      Product[]
   Order      Order?    @relation(fields: [orderId], references: [id])
   orderId    String?
+
+  @@index([orderId])
 }
 
+model BoxTemplate {
+  id        String    @id @default(cuid())
+  createdAt DateTime  @default(now())
+  updatedAt DateTime  @updatedAt
+  name      String
+  src       String
+  boxSize   Int
+  products  ProductClass[]
+}
 model Order {
   id        String    @id @default(cuid())
   createdAt DateTime  @default(now())
@@ -78,6 +93,8 @@ model Order {
   boxes     Box[]
   user      User      @relation(fields: [userId], references: [id])
   userId    String
+
+  @@index([userId])
 }
 // indivdual object
 model Product {
@@ -90,6 +107,9 @@ model Product {
   // is this in a box
   Box            Box?         @relation(fields: [boxId], references: [id])
   boxId          String?
+
+  @@index([productClassId])
+  @@index([boxId])
 }
 
 model ProductClass {
@@ -99,6 +119,7 @@ model ProductClass {
   name      String
   src       String
   products  Product[]
+  BoxTemplates BoxTemplate[] @relation()
 }
 
 model VerificationToken {
