@@ -41,13 +41,14 @@ export const productClassRouter = createTRPCRouter({
   getProductClasses: publicProcedure.query(
     async ({ ctx }): Promise<ProductClass[]> => {
       console.log("exec trpc");
-      const productClasses = await ctx.prisma.productClass.findMany({
-        include: {
-          _count: {
-            select: { products: true },
+      const productClasses =
+        await ctx.prisma.productClass.findMany({
+          include: {
+            _count: {
+              select: { products: true },
+            },
           },
-        },
-      });
+        });
       console.log(productClasses, "my product c;asse");
       return productClasses.map((productClass) => ({
         ...productClass,
@@ -55,6 +56,19 @@ export const productClassRouter = createTRPCRouter({
       }));
     },
   ),
+  updateProductClass: protectedProcedure
+
+    .input(z.object({ id: z.string(), name: z.string() }))
+    .mutation(({ ctx, input }) => {
+      return ctx.prisma.productClass.update({
+        where: {
+          id: input.id,
+        },
+        data: {
+          name: input.name,
+        },
+      });
+    }),
 
   getAll: publicProcedure.query(({ ctx }) => {
     return ctx.prisma.user.findMany();

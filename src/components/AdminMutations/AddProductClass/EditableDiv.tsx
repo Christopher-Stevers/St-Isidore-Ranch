@@ -8,15 +8,16 @@ const EditableDiv = ({
   className: string;
 }) => {
   const [value, setValue] = divState;
+  console.log(editable, "editable");
   if (editable)
     return (
       <input
-        className={className}
+        className={`${className} text-black`}
         value={value}
         onChange={(e) => setValue(e.target.value)}
       />
     );
-  return <div className={className}></div>;
+  return <div className={className}>{value}</div>;
 };
 
 export default EditableDiv;

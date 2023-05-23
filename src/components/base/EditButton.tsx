@@ -1,4 +1,7 @@
-import { CheckIcon, PencilIcon } from "@heroicons/react/outline";
+import {
+  CheckIcon,
+  PencilIcon,
+} from "@heroicons/react/24/outline";
 
 const EditButton = ({
   editableState,
@@ -7,7 +10,10 @@ const EditButton = ({
 }) => {
   const [editable, setEditable] = editableState;
   return (
-    <button onClick={() => setEditable(!editable)} className="h-min">
+    <button
+      onClick={() => setEditable(!editable)}
+      className="h-min"
+    >
       {editable ? (
         <CheckIcon className="h-5 w-5 fill-white" />
       ) : (
