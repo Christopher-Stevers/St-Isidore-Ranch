@@ -8,7 +8,6 @@ const EditableDiv = ({
   className: string;
 }) => {
   const [value, setValue] = divState;
-  console.log(editable, "editable");
   if (editable)
     return (
       <input

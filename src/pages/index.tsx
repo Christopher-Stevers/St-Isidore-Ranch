@@ -2,22 +2,43 @@ import LayoutMain from "~/layouts/layoutMain";
 import AboutCard from "~/components/AboutCard";
 
 export default function Page() {
-  const loremIpsum = `Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed euismod, nisl nec aliquam aliquam, nunc nisl aliquet nisl, eget aliquam nunc justo eget nisl. N`;
+  const loremIpsum = `Our calves stay with their mother the first 6 months of their lives. After that, they are fed a diet of grass and hay. We do not use any hormones or antibiotics on our cows. We believe that the best way to raise a cow is to let it live a happy life.`;
   const defaultProps = {
     direction: "left",
-    title: "Title",
+    title: "Our Cows",
     text: loremIpsum,
-    link: "/about",
+    link: "",
     video: "https://www.youtube.com/embed/lIkwIEXWx8c",
+    src: "/cow_pasture.jpg",
+  };
+  const defaultProps1 = {
+    direction: "left",
+    title: "Our Beef",
+    text: "To guarantee top-notch quality, we uphold rigorous standards of health and animal welfare throughout our operations. After our animals have reached maturity, they are processed by a provincially licensed butcher. Finally, we deliver the beef right to your doorstep using a refrigerated courier service.",
+    link: "",
+    video: "https://www.youtube.com/embed/lIkwIEXWx8c",
+    src: "/cow_pasture.jpg",
+  };
+  const defaultProps2 = {
+    direction: "left",
+    title: "Our Vision",
+    text: "We are believe that grassfed beef should be an integral part of any sustainable farm. When you recieve a box of our meat, you can be sure that your purchase supports the future of food and the environment.",
+    link: "https://www.youtube.com/watch?v=jAuQybTleQE",
+    video: "https://www.youtube.com/embed/jAuQybTleQE",
   };
 
-  const aboutCardsProps = [defaultProps, defaultProps, defaultProps];
+  const aboutCardsProps = [
+    defaultProps,
+    defaultProps1,
+    defaultProps2,
+  ];
 
   return (
     <LayoutMain>
       {aboutCardsProps.map((props, index) => {
-        const { title, text, link, video } = props;
-        const direction = index % 2 === 0 ? "left" : "right";
+        const { title, text, link, video, src } = props;
+        const direction =
+          index % 2 === 0 ? "left" : "right";
         return (
           <AboutCard
             key={title}
@@ -26,6 +47,7 @@ export default function Page() {
             text={text}
             link={link}
             video={video}
+            src={src}
           />
         );
       })}

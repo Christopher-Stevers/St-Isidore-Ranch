@@ -15,8 +15,7 @@ const HeaderMain: React.FC = () => {
         <div
           className="absolute top-0 grid 
           h-screen w-full items-center
-          justify-center 
-          justify-items-center 
+          justify-center
           justify-items-center
           gap-16
         bg-black/30 
@@ -30,7 +29,7 @@ const HeaderMain: React.FC = () => {
               <span className="inline">Ranch</span>
             </h1>
             <div className="text-center font-accent text-5xl text-amber-50 lg:text-left lg:text-6xl">
-              Pasture to Fork
+              Pasture to Plate
             </div>
           </div>
 

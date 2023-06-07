@@ -1,7 +1,12 @@
 import { type AppType } from "next/app";
 import { type Session } from "next-auth";
 import { SessionProvider } from "next-auth/react";
-import { Roboto, Rye, Cantarell, Tangerine } from "next/font/google";
+import {
+  Roboto,
+  Rye,
+  Cantarell,
+  Tangerine,
+} from "next/font/google";
 
 import { api } from "~/utils/api";
 

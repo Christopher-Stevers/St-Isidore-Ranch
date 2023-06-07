@@ -6,7 +6,9 @@ import Discord from "~/components/svg/socialLogos/Discord";
 import Facebook from "~/components/svg/socialLogos/Facebook";
 import YouTube from "~/components/svg/socialLogos/Youtube";
 import Twitter from "~/components/svg/socialLogos/Twitter";
-import Social, { type SocialType } from "~/components/Social";
+import Social, {
+  type SocialType,
+} from "~/components/Social";
 
 type WebsiteLink = {
   name: string;
@@ -22,23 +24,8 @@ const HeaderMain: React.FC = () => {
     },
     {
       name: "Facebook",
-      link: "https://www.instagram.com/chris.stevers/",
+      link: "https://www.facebook.com/chris.stevers.10",
       SocialIcon: Facebook,
-    },
-    {
-      name: "YouTube",
-      link: "https://www.instagram.com/chris.stevers/",
-      SocialIcon: YouTube,
-    },
-    {
-      name: "Twitter",
-      link: "https://www.instagram.com/chris.stevers/",
-      SocialIcon: Twitter,
-    },
-    {
-      name: "Discord",
-      link: "https://www.instagram.com/chris.stevers/",
-      SocialIcon: Discord,
     },
   ];
   const websiteLinks: WebsiteLink[] = [
@@ -49,10 +36,6 @@ const HeaderMain: React.FC = () => {
     {
       name: "Shop",
       link: "/shop",
-    },
-    {
-      name: "Checkout",
-      link: "/checkout",
     },
   ];
   return (

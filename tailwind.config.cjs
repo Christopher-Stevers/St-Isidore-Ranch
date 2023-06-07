@@ -4,10 +4,10 @@ const config = {
   theme: {
     extend: {
       fontFamily: {
-        accent: ["Tangerine","var(--tangerine)"],
-        display: ["Rye","var(--rye)"],
+        accent: ["Tangerine", "var(--tangerine)"],
+        display: ["Rye", "var(--rye)"],
         text: ["Cantarell", "var(--cantarell)"],
-        sans: ["Roboto","var(--roboto)"],
+        sans: ["Roboto", "var(--roboto)"],
       },
       colors: {
         // Primary
@@ -17,6 +17,7 @@ const config = {
         },
         backdrop: {
           500: "hsl(36 62% 94%)",
+          700: "hsl(36 62% 94%)",
         },
       },
     },
