@@ -1,36 +1,39 @@
 import Image from "next/image";
-import { type Product } from "@prisma/client";
+import { type Item } from "~/utils/boxTemplates";
+import AddToCart from "./AddToCart";
 export type ProductCardProps = {
   title: string;
-  text: string;
-  contents: Product[];
   src: string;
+  items: Item[];
+  totalPrice: number;
 };
 const ProductCard = ({
   title,
-  contents,
+  items,
   src,
-  price,
+  totalPrice,
 }: ProductCardProps) => {
   return (
-    <div className="grid-rows grid w-80 grid-rows-[209px_48px_auto_48px] gap-x-16 gap-y-4 bg-backdrop-500">
+    <div className="grid-rows grid w-80 grid-rows-[209px_48px_auto_48px] gap-x-16 gap-y-4 bg-backdrop-500 pb-8">
       <div className="flex items-center justify-between px-4">
         {" "}
         <h3 className="text-3xl font-semibold">{title}</h3>
         <div className="rounded-full bg-amber-100 px-2 text-2xl">
-          ${price}
+          {totalPrice !== 0 && `$${totalPrice}`}
         </div>
       </div>
-      <p className="w-full px-4 font-text text-xl">
-        {contents.map((product) => {
-          return (
-            <div className="flex gap-2">
-              <span>{product.quantity}</span>
-              {product.productClass}
-            </div>
-          );
-        })}
-      </p>
+      <div className="w-full px-4 font-text text-xl">
+        {items.length
+          ? items.map((item) => {
+              return (
+                <div key={item.name} className="flex gap-2">
+                  <span>{item.quantity}</span>
+                  {item.name}
+                </div>
+              );
+            })
+          : "Call me at 519-703-6780 if you'd like a custom box :)"}
+      </div>
       <div className={` row-start-1 `}>
         <Image
           alt="picture of product"
@@ -41,7 +44,9 @@ const ProductCard = ({
         />
       </div>
       <div className="flex justify-center font-semibold text-slate-500">
-        Out of Stock
+        {totalPrice !== 0 && (
+          <AddToCart items={items} title={title} />
+        )}
       </div>
     </div>
   );

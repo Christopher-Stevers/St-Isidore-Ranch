@@ -60,7 +60,6 @@ model User {
   image         String?
   accounts      Account[]
   sessions      Session[]
-  orders        Order[]
 }
 
 model Box {
@@ -91,10 +90,10 @@ model Order {
   updatedAt DateTime  @updatedAt
   totalPrice Int
   boxes     Box[]
-  user      User      @relation(fields: [userId], references: [id])
-  userId    String
 
-  @@index([userId])
+  paid      Boolean   @default(false)
+
+
 }
 // indivdual object
 model Product {
@@ -117,7 +116,7 @@ model ProductClass {
   createdAt DateTime  @default(now())
   updatedAt DateTime  @updatedAt
   name      String
-  src       String
+  src       String?
   products  Product[]
   BoxTemplates BoxTemplate[] @relation()
 }

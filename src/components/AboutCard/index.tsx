@@ -36,9 +36,9 @@ const AboutCard = ({
         {src ? (
           <Image
             alt="some cows"
-            className="h-[180px] w-[320px] object-cover xl:h-[270px]"
-            width="200"
-            height="200"
+            className="h-[180px] w-[320px] xl:h-[270px] xl:w-[480px]"
+            width="480"
+            height="270"
             src={src}
           />
         ) : (

@@ -29,7 +29,9 @@ const AdminProductCard = ({
       }
     },
   };
+  const inputStyle = " rounded-xl bg-white text-black";
   const addDirState = useState("");
+  const [addDir] = addDirState;
   const { mutate: updateNameMut } =
     api.productClass.updateProductClass.useMutation(
       mutationOpt,
@@ -37,12 +39,14 @@ const AdminProductCard = ({
 
   const { mutate: addProductsToClass } =
     api.product.addProductsToClass.useMutation(mutationOpt);
-  const handleAddProductsToClass = (
-    productClass: ProductClass,
-  ) => {
+  const handleAddProductsToClass = () => {
+    const signMultiplier = addDir === "Add" ? 1 : -1;
+    console.log(
+      parseInt(localProductCount) * signMultiplier,
+    );
     addProductsToClass({
       productClassId: productClass.id,
-      count: parseInt(localProductCount),
+      count: parseInt(localProductCount) * signMultiplier,
     });
   };
   const { mutate: removeProductClass } =
@@ -54,11 +58,6 @@ const AdminProductCard = ({
       },
     });
 
-  const setLocalProductCount = (
-    e: React.ChangeEvent<HTMLInputElement>,
-  ) => {
-    updateLocalProductCount(e.target.value);
-  };
   const updateProductClassName = () => {
     if (editable) {
       updateNameMut({
@@ -104,13 +103,14 @@ const AdminProductCard = ({
             items={[{ name: "Add" }, { name: "Subtract" }]}
           />
           <input
-            onChange={setLocalProductCount}
-            className="  rounded-xl bg-white"
+            onChange={(e) =>
+              updateLocalProductCount(e.target.value)
+            }
+            className={inputStyle}
           />
           <button
-            onClick={() =>
-              handleAddProductsToClass(productClass)
-            }
+            className={inputStyle}
+            onClick={handleAddProductsToClass}
           >
             Submit Inventory Adjustment
           </button>

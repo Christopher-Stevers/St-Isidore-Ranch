@@ -1,6 +1,13 @@
 import { useState } from "react";
-import LayoutSecondary from "~/layouts/layoutSecondary";
+import LayoutSecondary from "~/layouts/LayoutSecondary";
 import ProductCard from "~/components/ProductCard";
+import {
+  BarbecueBox,
+  DeluxeBox,
+  FamilyBox,
+  GroundBeefBox,
+  SamplerBox,
+} from "~/utils/boxTemplates";
 
 export default function Page() {
   const [search, setSearch] = useState("");
@@ -10,175 +17,15 @@ export default function Page() {
     setSearch(e.target.value);
   };
   const productCardsProps = [
-    {
-      title: "Barbecue Box",
-      src: "/grilling_box.jpg",
-      price: 150,
-      contents: [
-        {
-          id: "id",
-
-          quantity: 8,
-          productClass: "Hamburger Patties",
-          productClassId: "prckID",
-        },
-
-        {
-          id: "iddidnt",
-
-          quantity: 4,
-          productClass: "T-Bone Steaks",
-          productClassId: "steackId",
-        },
-        {
-          id: "iddidnt",
-
-          quantity: 4,
-          productClass: "Sirloin Steaks",
-          productClassId: "steackId",
-        },
-        {
-          id: "iddidnt",
-
-          quantity: 4,
-          productClass: "Wing Steaks",
-          productClassId: "steackId",
-        },
-      ],
-    },
-    {
-      title: "Family Box",
-      src: "/family_box.jpg",
-      price: 180,
-      contents: [
-        {
-          id: "id",
-
-          quantity: 4,
-          productClass: "Sirloin Steaks",
-          productClassId: "prckID",
-          src: "/meat.jpg",
-        },
-
-        {
-          id: "iddidnt",
-
-          quantity: 2,
-          productClass: "Blade Roast",
-          productClassId: "steackId",
-        },
-        {
-          id: "iddidnt",
-
-          quantity: 4,
-          productClass: "Ground Beef (1lb packages)",
-          productClassId: "steackId",
-        },
-        {
-          id: "iddidnt",
-
-          quantity: 8,
-          productClass: "Hamburger Patties",
-          productClassId: "steackId",
-        },
-      ],
-    },
-
-    {
-      title: "Sampler Box",
-      src: "/sampler_beef.jpg",
-      price: 100,
-      contents: [
-        {
-          id: "id",
-
-          quantity: 2,
-          productClass: "Sirloin Steaks",
-          productClassId: "prckID",
-          src: "/meat.jpg",
-        },
-
-        {
-          id: "iddidnt",
-
-          quantity: 1,
-          productClass: "Blade Roast",
-          productClassId: "steackId",
-        },
-        {
-          id: "iddidnt",
-
-          quantity: 2,
-          productClass: "Ground Beef (1lb packages)",
-          productClassId: "steackId",
-        },
-        {
-          id: "iddidnt",
-
-          quantity: 4,
-          productClass: "Hamburger Patties",
-          productClassId: "steackId",
-        },
-      ],
-    },
-
-    {
-      title: "Deluxe Box",
-      src: "/deluxe_box.jpg",
-      price: 440,
-      contents: [
-        {
-          id: "id",
-
-          quantity: 2,
-          productClass: "Prime Rib Roast",
-          productClassId: "prckID",
-          src: "/deluxe_box.jpg",
-        },
-
-        {
-          id: "iddidnt",
-
-          quantity: 4,
-          productClass: "Fillet Steak",
-          productClassId: "steackId",
-        },
-        {
-          id: "iddidnt",
-
-          quantity: 4,
-          productClass: "Porterhouse Steak",
-          productClassId: "steackId",
-        },
-      ],
-    },
-    {
-      title: "Ground Beef Box",
-      src: "/ground_beef.jpg",
-      price: 120,
-      contents: [
-        {
-          id: "id",
-
-          quantity: 10,
-          productClass: "Ground Beef (1lb packages)",
-          productClassId: "prckID",
-          src: "/ground_beef.jpg",
-        },
-
-        {
-          id: "iddidnt",
-
-          quantity: 4,
-          productClass: "Hamburger Patties",
-          productClassId: "steackId",
-        },
-      ],
-    },
+    new FamilyBox(),
+    new BarbecueBox(),
+    new DeluxeBox(),
+    new GroundBeefBox(),
+    new SamplerBox(),
   ];
   return (
-    <LayoutSecondary>
-      <div className="w-full justify-self-start p-12 lg:col-span-2 xl:col-span-3">
+    <LayoutSecondary title={"Products"}>
+      <div className="w-full justify-self-start py-12 lg:col-span-2 xl:col-span-3">
         <input
           onChange={handleSearch}
           defaultValue="search"
@@ -190,26 +37,32 @@ export default function Page() {
           const isTitleMatch = elem.title
             .toLowerCase()
             .includes(search.toLowerCase());
-          const isContentsMatch = elem.contents
-            .map((elem) => elem.productClass)
+          const isContentsMatch = elem.items
+            .map((elem) => elem.name)
             .join(" ")
             .toLowerCase()
             .includes(search.toLowerCase());
           return isTitleMatch || isContentsMatch;
         })
         .map((props) => {
-          const { title, contents, src, price } = props;
+          const { title, items, src, totalPrice } = props;
           return (
             <ProductCard
               key={title}
-              price={price}
+              totalPrice={totalPrice}
               title={title}
               src={src}
-              contents={contents}
+              items={items}
             />
           );
         })}
-      
+      <ProductCard
+        key={"Call me"}
+        totalPrice={0}
+        title={"Custom Box"}
+        src={"/telephone.jpg"}
+        items={[]}
+      />
     </LayoutSecondary>
   );
 }
