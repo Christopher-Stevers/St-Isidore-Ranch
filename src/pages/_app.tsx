@@ -11,6 +11,7 @@ import {
 import { api } from "~/utils/api";
 
 import "~/styles/globals.css";
+import { CartProvider } from "~/providers/cart";
 
 const roboto = Roboto({
   weight: ["400", "700"],
@@ -39,11 +40,13 @@ const MyApp: AppType<{ session: Session | null }> = ({
 }) => {
   return (
     <SessionProvider session={session}>
-      <main
-        className={`${roboto.variable} ${rye.variable} ${cantarell.variable} ${tangerine.variable} font-sans`}
-      >
-        <Component {...pageProps} />
-      </main>
+      <CartProvider>
+        <main
+          className={`${roboto.variable} ${rye.variable} ${cantarell.variable} ${tangerine.variable} font-sans`}
+        >
+          <Component {...pageProps} />
+        </main>
+      </CartProvider>
     </SessionProvider>
   );
 };

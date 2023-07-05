@@ -41,9 +41,7 @@ const AdminProductCard = ({
     api.product.addProductsToClass.useMutation(mutationOpt);
   const handleAddProductsToClass = () => {
     const signMultiplier = addDir === "Add" ? 1 : -1;
-    console.log(
-      parseInt(localProductCount) * signMultiplier,
-    );
+
     addProductsToClass({
       productClassId: productClass.id,
       count: parseInt(localProductCount) * signMultiplier,

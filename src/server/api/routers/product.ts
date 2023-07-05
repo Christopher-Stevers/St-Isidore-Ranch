@@ -28,7 +28,8 @@ export const productRouter = createTRPCRouter({
       if (input.count < 0) {
         const productsToDelete =
           await prisma.product.findMany({
-            take: 10, // Retrieve the first 10 posts
+            take: input.count,
+            where: { productClassId: input.productClassId }, // Retrieve the first 10 posts
           });
         return prisma.product.deleteMany({
           where: {
@@ -55,7 +56,10 @@ export const productRouter = createTRPCRouter({
       ),
     )
     .query(async ({ ctx: { prisma }, input }) => {
-      const { status } = await checkInStock(input, prisma);
+      const { status, neededProducts } = await checkInStock(
+        input,
+        prisma,
+      );
       return status;
     }),
 });

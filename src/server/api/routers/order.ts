@@ -18,7 +18,7 @@ export const orderRouter = createTRPCRouter({
     .input(
       z.object({
         title: z.string(),
-        orderId: z.string(),
+        orderId: z.string().optional(),
       }),
     )
     .mutation(async ({ ctx: { prisma }, input }) => {
@@ -43,14 +43,38 @@ export const orderRouter = createTRPCRouter({
         box.items,
         prisma,
       );
+
       if (!status) {
         throw new Error("Not enough items in stock");
       }
-      return await prisma.order.upsert({
+      if (input.orderId === undefined) {
+        return await prisma.order.create({
+          data: {
+            totalPrice: box.totalPrice,
+            updatedAt: new Date(),
+            boxes: {
+              create: {
+                totalPrice: box.totalPrice,
+                boxSize: box.boxSize,
+                items: {
+                  connect: neededProducts.map((product) => {
+                    return { id: product.id };
+                  }),
+                },
+              },
+            },
+          },
+
+          include: {
+            boxes: true,
+          },
+        });
+      }
+      return await prisma.order.update({
         where: {
           id: input.orderId,
         },
-        create: {
+        data: {
           totalPrice: box.totalPrice,
           updatedAt: new Date(),
           boxes: {
@@ -66,20 +90,8 @@ export const orderRouter = createTRPCRouter({
           },
         },
 
-        update: {
-          totalPrice: { increment: box.totalPrice },
-          updatedAt: new Date(),
-          boxes: {
-            create: {
-              totalPrice: box.totalPrice,
-              boxSize: box.boxSize,
-              items: {
-                connect: neededProducts.map((product) => {
-                  return { id: product.id };
-                }),
-              },
-            },
-          },
+        include: {
+          boxes: true,
         },
       });
     }),

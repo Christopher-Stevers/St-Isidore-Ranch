@@ -12,16 +12,16 @@ export const checkInStock = async (
         productClass: {
           name: element.name,
         },
-        boxId: null,
+        Box: null,
       },
     });
-
     if (products.length < element.quantity) {
       return { status: false, neededProducts: [] };
     }
 
     neededProducts.push(products);
   }
+
   return {
     neededProducts: neededProducts.flat(),
     status: true,
