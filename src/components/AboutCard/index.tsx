@@ -4,7 +4,7 @@ export type AboutCardProps = {
   direction: "left" | "right";
   title: string;
   text: string;
-
+  src?: string;
   link: string;
   video: string;
 };

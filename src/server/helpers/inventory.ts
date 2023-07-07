@@ -8,13 +8,16 @@ export const checkInStock = async (
   const neededProducts = [];
   for (const element of input) {
     const products = await prisma.product.findMany({
+      take: element.quantity,
       where: {
+        sold: false,
         productClass: {
           name: element.name,
         },
         Box: null,
       },
     });
+    console.log(products);
     if (products.length < element.quantity) {
       return { status: false, neededProducts: [] };
     }

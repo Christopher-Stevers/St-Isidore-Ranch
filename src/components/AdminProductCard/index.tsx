@@ -1,6 +1,5 @@
 import { type ProductClass } from "~/typedefs/ProductClass";
 import React, { useState } from "react";
-import Image from "next/image";
 import { TrashIcon } from "@heroicons/react/24/solid";
 import TogglePlusMinus from "~/components/base/TogglePlusMinus";
 
@@ -16,6 +15,11 @@ const AdminProductCard = ({
   productClass,
   refetch,
 }: AdminProductCardProps) => {
+  const { data: availableProducts } =
+    api.productClass.getAvailableProductsOfClass.useQuery({
+      id: productClass.id,
+    });
+  console.log(availableProducts);
   const [localProductCount, updateLocalProductCount] =
     useState("");
   const editableState = useState(false);
@@ -73,16 +77,8 @@ const AdminProductCard = ({
         className="bg flex gap-4 rounded-sm  bg-black p-4 text-white"
         key={productClass.id}
       >
-        <div className="ring-2">
-          <Image
-            alt="no src"
-            src={productClass.src}
-            width={100}
-            height={100}
-          />
-        </div>
         <div className="flex h-min gap-2">
-          <div>{productClass.productsCount}</div>
+          <div>{availableProducts}</div>
           <EditableDiv
             className="w-40 rounded-full"
             editable={editable}

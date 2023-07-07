@@ -21,7 +21,7 @@ const AddProductClassCard = ({
     });
 
   const handleAddProductClass = () => {
-    const result = addProductClass({
+    addProductClass({
       name: localProductClass,
       src: localProductPic,
     });

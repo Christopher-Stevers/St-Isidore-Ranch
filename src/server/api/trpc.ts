@@ -14,10 +14,8 @@
  *
  * These allow you to access things when processing a request, like the database, the session, etc.
  */
-import { type CreateNextContextOptions } from "@trpc/server/adapters/next";
 import { type Session } from "next-auth";
 
-import { getServerAuthSession } from "~/server/auth";
 import { prisma } from "~/server/db";
 
 type CreateContextOptions = {
@@ -49,11 +47,7 @@ const createInnerTRPCContext = (
  *
  * @see https://trpc.io/docs/context
  */
-export const createTRPCContext = async (
-  opts: CreateNextContextOptions,
-) => {
-  const { req, res } = opts;
-
+export const createTRPCContext = () => {
   // Get the session from the server using the getServerSession wrapper function
   //  const session = await getServerAuthSession({ req, res });
   return createInnerTRPCContext({
@@ -66,7 +60,7 @@ export const createTRPCContext = async (
  *
  * This is where the tRPC API is initialized, connecting the context and transformer.
  */
-import { initTRPC, TRPCError } from "@trpc/server";
+import { initTRPC } from "@trpc/server";
 import superjson from "superjson";
 
 const t = initTRPC

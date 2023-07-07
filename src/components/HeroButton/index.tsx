@@ -1,6 +1,12 @@
-import FancyButton, { type ButtonProps } from "../FancyButton";
+import FancyButton, {
+  type ButtonProps,
+} from "../FancyButton";
 
-const HeroButton = ({ text, link, className }: ButtonProps) => {
+const HeroButton = ({
+  text,
+  link,
+  className,
+}: ButtonProps) => {
   return (
     <FancyButton
       text={text}

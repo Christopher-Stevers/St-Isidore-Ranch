@@ -1,9 +1,13 @@
+import { ShoppingCartIcon } from "@heroicons/react/24/outline";
 import React, {
   type ReactNode,
   createContext,
   useReducer,
+  useState,
+  useEffect,
 } from "react";
-import { type Box } from "@prisma/client";
+import Link from "next/link";
+import { api } from "~/utils/api";
 // cart item is typeof this
 /*{
     id: "64a495db328c2b21142da7d9",
@@ -23,31 +27,32 @@ import { type Box } from "@prisma/client";
     ],
   };
   */
-interface CartItem {
-  id: string;
-  createdAt: Date;
-  updatedAt: Date;
-  totalPrice: number;
-  paid: boolean;
-  boxes: {
-    id: string;
-    createdAt: Date;
-    updatedAt: Date;
-    totalPrice: number;
-    boxSize: number;
-    orderId: string;
-  }[];
-}
+type Order =
+  | {
+      id: string;
+      createdAt: Date;
+      updatedAt: Date | null;
+      totalPrice: number;
+      paid: boolean;
+      boxes: {
+        id: string;
+        createdAt: Date;
+        updatedAt: Date | null;
+        totalPrice: number;
+        boxSize: number;
+        orderId: string | null;
+        title: string;
+      }[];
+    }
+  | null
+  | undefined;
 
-type CartState = CartItem[];
-
-type CartAction =
-  | { type: "ADD_TO_CART"; payload: CartItem }
-  | { type: "REMOVE_FROM_CART"; payload: string };
+type CartAction = { type: "UPDATE_CART"; payload: Order };
 
 const CartContext = createContext<
-  [CartState, React.Dispatch<CartAction>]
->({} as [CartState, React.Dispatch<CartAction>]);
+  [Order | null, React.Dispatch<CartAction>]
+>({} as [Order | null, React.Dispatch<CartAction>]);
+
 export const useCart = () => {
   const context = React.useContext(CartContext);
   if (!context) {
@@ -58,16 +63,12 @@ export const useCart = () => {
   return context;
 };
 const cartReducer = (
-  state: CartState,
+  state: Order,
   action: CartAction,
-): CartState => {
+): Order => {
   switch (action.type) {
-    case "ADD_TO_CART":
-      return [...state, action.payload];
-    case "REMOVE_FROM_CART":
-      return state.filter(
-        (item) => item.id !== action.payload,
-      );
+    case "UPDATE_CART":
+      return action.payload;
     default:
       return state;
   }
@@ -78,10 +79,48 @@ const CartProvider = ({
 }: {
   children: ReactNode | ReactNode[];
 }) => {
-  const [state, dispatch] = useReducer(cartReducer, []);
+  const [localOrderId, setLocalOrderId] = useState<
+    string | null
+  >(null);
+  const { data: order, refetch: refetchOrder } =
+    api.order.getOrder.useQuery(
+      {
+        id: localOrderId,
+      },
+      {
+        onSuccess: (data) => {
+          if (data) {
+            dispatch({
+              type: "UPDATE_CART",
+              payload: data,
+            });
+          }
+        },
+      },
+    );
+  const [state, dispatch] = useReducer(cartReducer, order);
+  useEffect(() => {
+    const localOrderId = localStorage.getItem("orderId");
+    if (localOrderId) {
+      setLocalOrderId(localOrderId);
+      refetchOrder().catch(console.error);
+    }
+  }, []);
 
+  useEffect(() => {
+    if (state?.id) {
+      localStorage.setItem("orderId", state?.id);
+    }
+  }, [state?.id]);
   return (
     <CartContext.Provider value={[state, dispatch]}>
+      <Link
+        href="/checkout"
+        className="fixed bottom-0 right-0"
+      >
+        {state?.boxes.length}{" "}
+        <ShoppingCartIcon className="h-10 w-10" />
+      </Link>
       {children}
     </CartContext.Provider>
   );

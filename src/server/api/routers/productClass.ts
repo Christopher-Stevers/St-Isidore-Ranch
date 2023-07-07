@@ -16,6 +16,18 @@ export const productClassRouter = createTRPCRouter({
       };
     }),
 
+  getAvailableProductsOfClass: publicProcedure
+    .input(z.object({ id: z.string() }))
+    .query(async ({ ctx, input }) => {
+      const products = await ctx.prisma.product.count({
+        where: {
+          productClassId: input.id,
+          sold: false,
+          Box: null,
+        },
+      });
+      return products;
+    }),
   addProductClass: publicProcedure
     .input(z.object({ name: z.string(), src: z.string() }))
     .mutation(({ ctx, input }) => {

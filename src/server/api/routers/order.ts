@@ -1,11 +1,5 @@
 import { z } from "zod";
-import {
-  GroundBeefBox,
-  DeluxeBox,
-  FamilyBox,
-  BarbecueBox,
-  SamplerBox,
-} from "~/utils/boxTemplates";
+import { getBoxFromClass } from "~/utils/boxTemplates";
 import { checkInStock } from "~/server/helpers/inventory";
 
 import {
@@ -14,6 +8,69 @@ import {
 } from "~/server/api/trpc";
 
 export const orderRouter = createTRPCRouter({
+  getOrder: protectedProcedure
+    .input(
+      z.object({
+        id: z.string().nullable().optional(),
+      }),
+    )
+    .query(async ({ ctx: { prisma }, input }) => {
+      if (input.id === null) {
+        return null;
+      }
+
+      const propsectiveOrder =
+        await prisma.order.findUnique({
+          where: {
+            id: input.id,
+          },
+
+          include: {
+            boxes: {
+              include: {
+                items: true,
+              },
+            },
+          },
+        });
+      if (propsectiveOrder?.paid) {
+        return null;
+      }
+      return propsectiveOrder;
+    }),
+  removeItemFromOrder: protectedProcedure
+    .input(
+      z.object({
+        orderId: z.string().nullable(),
+        boxTitle: z.string(),
+        boxId: z.string(),
+      }),
+    )
+    .mutation(async ({ ctx: { prisma }, input }) => {
+      const box = getBoxFromClass(input.boxTitle);
+      if (!input.orderId) return null;
+      return prisma.order.update({
+        where: {
+          id: input.orderId,
+        },
+        data: {
+          totalPrice: { decrement: box.totalPrice },
+          updatedAt: new Date(),
+          boxes: {
+            deleteMany: [
+              {
+                title: input.boxTitle,
+                id: input.boxId,
+              },
+            ],
+          },
+        },
+        include: {
+          boxes: true,
+        },
+      });
+    }),
+
   addToOrder: protectedProcedure
     .input(
       z.object({
@@ -22,28 +79,12 @@ export const orderRouter = createTRPCRouter({
       }),
     )
     .mutation(async ({ ctx: { prisma }, input }) => {
-      const getBoxFromClass = (title: string) => {
-        switch (title) {
-          case "Ground Beef Box":
-            return new GroundBeefBox();
-          case "Deluxe Box":
-            return new DeluxeBox();
-          case "Family Box":
-            return new FamilyBox();
-          case "Barbeque Box":
-            return new BarbecueBox();
-          case "Sample Box":
-            return new SamplerBox();
-          default:
-            throw new Error("Invalid box title");
-        }
-      };
       const box = getBoxFromClass(input.title);
       const { neededProducts, status } = await checkInStock(
         box.items,
         prisma,
       );
-
+      console.log(neededProducts, neededProducts.length);
       if (!status) {
         throw new Error("Not enough items in stock");
       }
@@ -54,6 +95,7 @@ export const orderRouter = createTRPCRouter({
             updatedAt: new Date(),
             boxes: {
               create: {
+                title: input.title,
                 totalPrice: box.totalPrice,
                 boxSize: box.boxSize,
                 items: {
@@ -75,10 +117,11 @@ export const orderRouter = createTRPCRouter({
           id: input.orderId,
         },
         data: {
-          totalPrice: box.totalPrice,
+          totalPrice: { increment: box.totalPrice },
           updatedAt: new Date(),
           boxes: {
             create: {
+              title: input.title,
               totalPrice: box.totalPrice,
               boxSize: box.boxSize,
               items: {

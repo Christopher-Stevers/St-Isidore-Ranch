@@ -11,7 +11,7 @@ const LayoutSecondary = ({
   return (
     <>
       <HeaderSecondary>{title}</HeaderSecondary>
-      <div className="grid min-h-[calc(100vh-340px)] grid-cols-[320px] content-center justify-center justify-items-center gap-16 pb-48 lg:grid-cols-[repeat(2,_320px)] xl:grid-cols-[repeat(3,_320px)] ">
+      <div className="min-h-[calc(100vh-340px)] pb-48 ">
         {children}
       </div>
       <FooterMain />

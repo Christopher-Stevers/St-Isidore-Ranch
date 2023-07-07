@@ -145,3 +145,20 @@ export class FamilyBox implements Box {
     this.orderId = "1";
   }
 }
+
+export const getBoxFromClass = (title: string) => {
+  switch (title) {
+    case "Ground Beef Box":
+      return new GroundBeefBox();
+    case "Deluxe Box":
+      return new DeluxeBox();
+    case "Family Box":
+      return new FamilyBox();
+    case "Barbeque Box":
+      return new BarbecueBox();
+    case "Sample Box":
+      return new SamplerBox();
+    default:
+      throw new Error("Invalid box title");
+  }
+};

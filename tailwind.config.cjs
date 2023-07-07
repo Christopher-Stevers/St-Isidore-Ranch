@@ -10,7 +10,7 @@ const config = {
         sans: ["Roboto", "var(--roboto)"],
       },
       colors: {
-        // Primary
+        form: "#30313d",
         primary: {
           500: "hsl(137 58% 11%)",
           700: "hsl(137, 58% 5%)",

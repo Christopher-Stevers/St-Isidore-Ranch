@@ -1,6 +1,7 @@
 import { type Item } from "~/utils/boxTemplates";
 import { api } from "~/utils/api";
 import { useCart } from "~/providers/cart";
+import Link from "next/link";
 
 const AddToCart = ({
   items,
@@ -18,12 +19,12 @@ const AddToCart = ({
       onSuccess: (data) => {
         console.log(data);
         cartDispatch({
-          type: "ADD_TO_CART",
+          type: "UPDATE_CART",
           payload: data,
         });
       },
     });
-  const mockedOrder = {
+  /* const mockedOrder = {
     id: "64a495db328c2b21142da7d9",
     createdAt: "2023-07-04T21:57:47.631Z",
     updatedAt: "2023-07-04T21:57:47.628Z",
@@ -39,13 +40,9 @@ const AddToCart = ({
         orderId: "64a495db328c2b21142da7d9",
       },
     ],
-  };
+  };*/
   const handleAddToCard = () => {
-    addToCart({ title });
-    cartDispatch({
-      type: "ADD_TO_CART",
-      payload: mockedOrder,
-    });
+    addToCart({ title, orderId: cartState?.id });
   };
   return (
     <>
@@ -57,9 +54,12 @@ const AddToCart = ({
           >
             Add to Cart
           </button>
-          <button className="rounded bg-primary-500 py-2 px-4 font-semibold text-white hover:bg-black">
+          <Link
+            href="/checkout"
+            className="flex items-center rounded bg-primary-500 py-2 px-4 font-semibold text-white hover:bg-black"
+          >
             Checkout
-          </button>
+          </Link>
         </div>
       ) : (
         <span className="py-2 px-4 font-semibold leading-loose text-black">

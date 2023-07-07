@@ -25,44 +25,46 @@ export default function Page() {
   ];
   return (
     <LayoutSecondary title={"Products"}>
-      <div className="w-full justify-self-start py-12 lg:col-span-2 xl:col-span-3">
-        <input
-          onChange={handleSearch}
-          defaultValue="search"
-          className="w-full rounded-full border border-black p-2 px-4 text-lg"
+      <div className="grid grid-cols-[320px] content-center justify-center justify-items-center gap-16 lg:grid-cols-[repeat(2,_320px)] xl:grid-cols-[repeat(3,_320px)] ">
+        <div className="w-full justify-self-start py-12 lg:col-span-2 xl:col-span-3">
+          <input
+            onChange={handleSearch}
+            defaultValue="search"
+            className="w-full rounded-full border border-black p-2 px-4 text-lg"
+          />
+        </div>
+        {productCardsProps
+          .filter((elem) => {
+            const isTitleMatch = elem.title
+              .toLowerCase()
+              .includes(search.toLowerCase());
+            const isContentsMatch = elem.items
+              .map((elem) => elem.name)
+              .join(" ")
+              .toLowerCase()
+              .includes(search.toLowerCase());
+            return isTitleMatch || isContentsMatch;
+          })
+          .map((props) => {
+            const { title, items, src, totalPrice } = props;
+            return (
+              <ProductCard
+                key={title}
+                totalPrice={totalPrice}
+                title={title}
+                src={src}
+                items={items}
+              />
+            );
+          })}
+        <ProductCard
+          key={"Call me"}
+          totalPrice={0}
+          title={"Custom Box"}
+          src={"/telephone.jpg"}
+          items={[]}
         />
       </div>
-      {productCardsProps
-        .filter((elem) => {
-          const isTitleMatch = elem.title
-            .toLowerCase()
-            .includes(search.toLowerCase());
-          const isContentsMatch = elem.items
-            .map((elem) => elem.name)
-            .join(" ")
-            .toLowerCase()
-            .includes(search.toLowerCase());
-          return isTitleMatch || isContentsMatch;
-        })
-        .map((props) => {
-          const { title, items, src, totalPrice } = props;
-          return (
-            <ProductCard
-              key={title}
-              totalPrice={totalPrice}
-              title={title}
-              src={src}
-              items={items}
-            />
-          );
-        })}
-      <ProductCard
-        key={"Call me"}
-        totalPrice={0}
-        title={"Custom Box"}
-        src={"/telephone.jpg"}
-        items={[]}
-      />
     </LayoutSecondary>
   );
 }

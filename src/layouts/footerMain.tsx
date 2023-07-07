@@ -2,10 +2,10 @@ import React from "react";
 import Image from "next/image";
 import Link from "next/link";
 import Instagram from "~/components/svg/socialLogos/Instagram";
-import Discord from "~/components/svg/socialLogos/Discord";
+//import Discord from "~/components/svg/socialLogos/Discord";
 import Facebook from "~/components/svg/socialLogos/Facebook";
-import YouTube from "~/components/svg/socialLogos/Youtube";
-import Twitter from "~/components/svg/socialLogos/Twitter";
+//import YouTube from "~/components/svg/socialLogos/Youtube";
+//import Twitter from "~/components/svg/socialLogos/Twitter";
 import Social, {
   type SocialType,
 } from "~/components/Social";

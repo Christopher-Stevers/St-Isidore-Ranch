@@ -1,4 +1,8 @@
-const Instagram = ({ className }: { className?: string }) => {
+const Instagram = ({
+  className,
+}: {
+  className?: string;
+}) => {
   return (
     <svg
       className={className}

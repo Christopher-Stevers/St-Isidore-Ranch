@@ -19,7 +19,7 @@ const AdminMutations: React.FC = () => {
 
   return (
     <div className="flex flex-col items-center justify-center gap-4">
-      Product Class Admin {JSON.stringify(productClasses)}
+      Product Class Admin
       <div>
         <AddProductClassCard
           refetchProductClasses={refetchProductClasses}
