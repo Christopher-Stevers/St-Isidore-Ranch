@@ -25,6 +25,7 @@ export default function Page() {
     text: "We are believe that grassfed beef should be an integral part of any sustainable farm. When you recieve a box of our meat, you can be sure that your purchase supports the future of food and the environment.",
     link: "https://www.youtube.com/watch?v=jAuQybTleQE",
     video: "https://www.youtube.com/embed/jAuQybTleQE",
+    src: "",
   };
 
   const aboutCardsProps = [
