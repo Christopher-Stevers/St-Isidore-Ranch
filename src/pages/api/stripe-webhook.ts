@@ -7,6 +7,7 @@ import { prisma } from "~/server/db";
 import type Stripe from "stripe";
 import { buffer } from "micro";
 import stripe from "../../server/stripe/client";
+import emailWrapper from "~/server/helpers/emailWrapper";
 
 // Stripe requires the raw body to construct the event.
 export const config = {
@@ -37,6 +38,37 @@ export default async function handler(
       // Handle the event
       switch (event.type) {
         case "payment_intent.payment_failed":
+          {
+            const paymentIntent = event.data
+              .object as Stripe.PaymentIntent;
+            // free up products
+            await prisma.product.updateMany({
+              where: {
+                Box: {
+                  Order: {
+                    paymentIntent: paymentIntent.id,
+                  },
+                },
+              },
+              data: {
+                sold: false,
+                boxId: null,
+              },
+            });
+            // delete order and boxes
+            await prisma.box.deleteMany({
+              where: {
+                Order: {
+                  paymentIntent: paymentIntent.id,
+                },
+              },
+            });
+            await prisma.order.delete({
+              where: {
+                paymentIntent: paymentIntent.id,
+              },
+            });
+          }
           // Used to provision services after the trial has ended.
           // The status of the invoice will show up as paid. Store the status in your database to reference when a user accesses your service to avoid hitting rate limits.
 
@@ -56,6 +88,7 @@ export default async function handler(
                     items: true,
                   },
                 },
+                address: true,
               },
             });
             if (
@@ -83,17 +116,34 @@ export default async function handler(
                   sold: true,
                 },
               });
+              console.log("sending email");
+              await emailWrapper({
+                email: "christopher.stevers1@gmail.com",
+                subject: "New Order",
+                htmlMessage: `<p>New order with id ${
+                  order?.id
+                } and payment intent ${id} has been payed for, total issues
+               </p><p> ${JSON.stringify(order)}
+         </p>
+         <p>   contents are ${JSON.stringify(items)} </p><p>
+                address is ${JSON.stringify(order.address)}
+                .`,
+                message: `New order with id ${
+                  order?.id
+                } and payment intent ${id} has been payed for, total is  
+              
+              ${JSON.stringify(order)}
+              contents are ${JSON.stringify(items)}
+              address is ${JSON.stringify(order.address)}
+              .</p>`,
+              });
             } else {
+              // if the order price has issues
               await stripe.refunds.create({
                 payment_intent: id,
               });
             }
-            // Used to provision services as they are added to a subscription.
           }
-          break;
-        case "payment_intent.processing":
-          // Used to provision services as they are updated.
-          console.log("Payment processing");
           break;
         default:
         // Unexpected event type

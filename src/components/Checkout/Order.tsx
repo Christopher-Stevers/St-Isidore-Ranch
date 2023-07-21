@@ -51,14 +51,19 @@ const Order = () => {
         <OrderView />
         <div>
           <AddAddress />
-          {clientSecret && (
-            <Elements
-              options={options}
-              stripe={stripePromise}
-            >
-              <OrderStripe />
-            </Elements>
-          )}
+          <div className="flex flex-col gap-y-6">
+            <h3 className="text-3xl font-semibold ">
+              Purchase Information
+            </h3>
+            {clientSecret && (
+              <Elements
+                options={options}
+                stripe={stripePromise}
+              >
+                <OrderStripe />
+              </Elements>
+            )}
+          </div>
         </div>
       </div>
     </div>

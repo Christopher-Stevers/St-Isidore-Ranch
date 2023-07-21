@@ -26,6 +26,7 @@ export const orderRouter = createTRPCRouter({
           },
 
           include: {
+            address: true,
             boxes: {
               include: {
                 items: true,

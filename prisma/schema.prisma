@@ -100,7 +100,6 @@ model Address {
   state String?
   postalCode String?
   country String?
-  phone String?
   email String?
   orders Order[]
   orderIds String[] @db.ObjectId

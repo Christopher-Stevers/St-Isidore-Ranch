@@ -8,6 +8,7 @@ import React, {
 } from "react";
 import Link from "next/link";
 import { api } from "~/utils/api";
+import { type Address } from "@prisma/client";
 // cart item is typeof this
 /*{
     id: "64a495db328c2b21142da7d9",
@@ -34,6 +35,7 @@ type Order =
       updatedAt: Date | null;
       totalPrice: number;
       paid: boolean;
+      address: Address | null;
       boxes: {
         id: string;
         createdAt: Date;

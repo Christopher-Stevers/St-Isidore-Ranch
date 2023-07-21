@@ -8,7 +8,12 @@ const AddressFieldInput = ({
   field,
 }: {
   name: string;
-  field: string;
+  field:
+    | "address1"
+    | "address2"
+    | "city"
+    | "postalCode"
+    | "name";
 }) => {
   const [order] = useCart();
   const [value, setValue] = useState("");
@@ -21,6 +26,13 @@ const AddressFieldInput = ({
       [field]: addressValueDebounced,
     });
   };
+  const intialValue = order?.address?.[field] ?? "";
+  useEffect(() => {
+    if (intialValue) {
+      setValue(intialValue);
+    }
+  }, [intialValue]);
+
   useEffect(() => {
     if (addressValueDebounced) {
       handleUpdateAddress();
@@ -28,9 +40,12 @@ const AddressFieldInput = ({
   }, [addressValueDebounced]);
   return (
     <div>
-      <label className="block text-form">{name}</label>
+      <label className="block text-sm text-form">
+        {name}
+      </label>
       <input
         onChange={(e) => setValue(e.target.value)}
+        value={value}
         className="block w-full rounded-md border  p-3 text-sm text-form outline-none focus-visible:ring-transparent"
         id={field}
       />
