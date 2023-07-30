@@ -18,7 +18,13 @@ const OrderView = () => {
         <p>
           Oops, looks like you didn't add anything to your
           cart - go back and add some items in the{" "}
-          <Link href="/shop">store</Link>.
+          <Link
+            className="text-primary-500 underline"
+            href="/shop"
+          >
+            store
+          </Link>
+          .
         </p>
       )}
       <div className="text-xl font-semibold">

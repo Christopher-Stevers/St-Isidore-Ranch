@@ -85,7 +85,6 @@ export const orderRouter = createTRPCRouter({
         box.items,
         prisma,
       );
-      console.log(neededProducts, neededProducts.length);
       if (!status) {
         throw new Error("Not enough items in stock");
       }
@@ -136,6 +135,7 @@ export const orderRouter = createTRPCRouter({
 
         include: {
           boxes: true,
+          address: true,
         },
       });
     }),

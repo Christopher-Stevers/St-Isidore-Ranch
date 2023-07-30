@@ -20,10 +20,13 @@ export default function Post({ post }: Props) {
   return (
     <>
       <LayoutSecondary title={"Blog"}>
-        <article className="mb-32">
+        <article className="mx-32 mb-32">
           <Head>
             <title>{post.title}</title>
           </Head>
+          <h3 className="py-8 text-3xl font-semibold">
+            {post.title}
+          </h3>
           <div
             dangerouslySetInnerHTML={{
               __html: post.content,

@@ -116,32 +116,76 @@ export default async function handler(
                   sold: true,
                 },
               });
-              console.log("sending email");
+
+              const getProductClassOfItemById = async (
+                id: string,
+              ) => {
+                const productClass =
+                  await prisma.productClass.findUnique({
+                    where: {
+                      id: id,
+                    },
+                  });
+                return productClass?.name;
+              };
+              const htmlMessage = `<p>New order with id ${
+                order?.id
+              } and payment intent ${id} has been payed for total of ${
+                order.totalPrice
+              }
+               </p>
+               <p>Order is for boxes:</p>
+               <ul>
+               
+               ${order?.boxes?.map((box) => {
+                 return `<li> ${box.title} </li>`;
+               })}
+               </ul>
+               <p>user's email is ${
+                 paymentIntent.receipt_email
+               }</p>
+         <p>contents are</p>
+         
+         <ul>
+         
+         ${await Promise.all(
+           items?.map(async (item) => {
+             return `<li> ${await getProductClassOfItemById(
+               item.productClassId,
+             )} </li>`;
+           }),
+         )}
+         </ul>
+         <p>
+                address is:
+                <p>${order.address?.address1}</p><p>${
+                order.address?.address2
+              }</p>
+                 <p>${order.address?.postalCode}</p><p>${
+                order.address?.city
+              }</p><p>${order.address?.name}</p>
+                .`;
               await emailWrapper({
                 email: "christopher.stevers1@gmail.com",
                 subject: "New Order",
-                htmlMessage: `<p>New order with id ${
-                  order?.id
-                } and payment intent ${id} has been payed for, total issues
-               </p><p> ${JSON.stringify(order)}
-         </p>
-         <p>   contents are ${JSON.stringify(items)} </p><p>
-                address is ${JSON.stringify(order.address)}
-                .`,
-                message: `New order with id ${
-                  order?.id
-                } and payment intent ${id} has been payed for, total is  
-              
-              ${JSON.stringify(order)}
-              contents are ${JSON.stringify(items)}
-              address is ${JSON.stringify(order.address)}
-              .</p>`,
+                htmlMessage,
+                message: `New order with id ${order?.id} please enable html email to see full order`,
               });
             } else {
               // if the order price has issues
               await stripe.refunds.create({
                 payment_intent: id,
               });
+              await prisma.order.update({
+                where: {
+                  paymentIntent: id,
+                },
+                data: {
+                  paid: false,
+                  paymentIntent: null,
+                },
+              });
+              await stripe.paymentIntents.cancel(id);
             }
           }
           break;

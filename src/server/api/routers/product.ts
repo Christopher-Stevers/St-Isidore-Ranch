@@ -25,7 +25,6 @@ export const productRouter = createTRPCRouter({
         };
         data.push(product);
       }
-      console.log(data.length);
       if (input.count < 0) {
         const productsToDelete =
           await prisma.product.findMany({

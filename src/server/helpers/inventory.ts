@@ -17,7 +17,6 @@ export const checkInStock = async (
         Box: null,
       },
     });
-    console.log(products);
     if (products.length < element.quantity) {
       return { status: false, neededProducts: [] };
     }

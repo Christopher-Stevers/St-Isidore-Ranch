@@ -73,16 +73,12 @@ export class GroundBeefBox implements Box {
   boxSize: number;
   items: Item[];
   constructor() {
-    this.totalPrice = 120;
+    this.totalPrice = 300;
     this.title = "Ground Beef Box";
     this.boxSize = 0;
     this.src = "/ground_beef_box.jpg";
     this.items = [
-      { quantity: 10, name: "Ground Beef (1lb packages)" },
-      {
-        quantity: 4,
-        name: "Hamburger Patties",
-      },
+      { quantity: 30, name: "Ground Beef (1lb packages)" },
     ];
   }
 }
@@ -94,7 +90,7 @@ export class DeluxeBox implements Box {
   items: Item[];
   constructor() {
     this.title = "Deluxe Box";
-    this.totalPrice = 440;
+    this.totalPrice = 300;
     this.boxSize = 0;
     this.src = "/deluxe_box.jpg";
 
@@ -124,7 +120,7 @@ export class FamilyBox implements Box {
   src: string;
   constructor() {
     this.title = "Family Box";
-    this.totalPrice = 500;
+    this.totalPrice = 300;
     this.boxSize = 0;
     this.src = "/family_box.jpg";
     this.items = [

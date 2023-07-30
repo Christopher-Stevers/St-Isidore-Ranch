@@ -11,8 +11,7 @@ const OrderStripe = () => {
   const stripe = useStripe();
   const elements = useElements();
 
-  const [email, setEmail] = useState("");
-  console.log(email);
+  const [, setEmail] = useState("");
   const [message, setMessage] = useState<string | null>(
     null,
   );
@@ -55,6 +54,7 @@ const OrderStripe = () => {
   }, [stripe]);
 
   const handleSubmit = () => {
+    localStorage.removeItem("orderId");
     if (!stripe || !elements) {
       // Stripe.js hasn't yet loaded.
       // Make sure to disable form submission until Stripe.js has loaded.
@@ -95,7 +95,6 @@ const OrderStripe = () => {
     {
       layout: "tabs",
     };
-
   return (
     <form
       id="payment-form"
@@ -113,10 +112,12 @@ const OrderStripe = () => {
         options={paymentElementOptions}
       />
       <button
+        className="text-sans my-8 rounded-lg bg-primary-700 px-4 py-2 text-white"
         disabled={isLoading || !stripe || !elements}
+        onClick={handleSubmit}
         id="submit"
       >
-        <span id="button-text">
+        <span id="button-text ">
           {isLoading ? (
             <div className="spinner" id="spinner"></div>
           ) : (

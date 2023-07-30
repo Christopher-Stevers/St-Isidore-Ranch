@@ -19,7 +19,6 @@ const AdminProductCard = ({
     api.productClass.getAvailableProductsOfClass.useQuery({
       id: productClass.id,
     });
-  console.log(availableProducts);
   const [localProductCount, updateLocalProductCount] =
     useState("");
   const editableState = useState(false);

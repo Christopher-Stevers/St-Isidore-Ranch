@@ -11,13 +11,11 @@ const AddToCart = ({
   title: string;
 }) => {
   const [cartState, cartDispatch] = useCart();
-  console.log(cartState);
   const { data: isInStock } =
     api.product.getInStock.useQuery(items);
   const { mutate: addToCart } =
     api.order.addToOrder.useMutation({
       onSuccess: (data) => {
-        console.log(data);
         cartDispatch({
           type: "UPDATE_CART",
           payload: data,

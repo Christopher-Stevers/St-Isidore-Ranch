@@ -118,9 +118,11 @@ const CartProvider = ({
     <CartContext.Provider value={[state, dispatch]}>
       <Link
         href="/checkout"
-        className="fixed bottom-0 right-0"
+        className="fixed bottom-6 right-6 rounded-full border-4 border-primary-500  bg-backdrop-700 p-3 text-primary-500"
       >
-        {state?.boxes.length}{" "}
+        <div className="absolute inset-x-7 top-2 bg-backdrop-700 font-sans font-bold">
+          {state?.boxes.length}
+        </div>
         <ShoppingCartIcon className="h-10 w-10" />
       </Link>
       {children}

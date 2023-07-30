@@ -4,12 +4,14 @@ import OrderStripe from "./OrderStripe";
 import { useCart } from "~/providers/cart";
 import AddAddress from "./AddAddress";
 import { api } from "~/utils/api";
+import Link from "next/link";
 import { env } from "~/env.mjs";
 import {
   type StripeElementsOptions,
   loadStripe,
 } from "@stripe/stripe-js";
 import OrderView from "./OrderView";
+import { ChevronLeftIcon } from "@heroicons/react/24/solid";
 const stripePromise = loadStripe(
   env.NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY,
 );
@@ -47,24 +49,32 @@ const Order = () => {
 
   return (
     <div className="px-32">
+      <Link
+        href="/store"
+        className="flex content-center items-center gap-2 py-8 hover:text-primary-500 hover:underline"
+      >
+        <ChevronLeftIcon className="h-4 w-4 text-current" />{" "}
+        Back to Store
+      </Link>
       <div className="grid grid-cols-2">
         <OrderView />
-        <div>
-          <AddAddress />
-          <div className="flex flex-col gap-y-6">
-            <h3 className="text-3xl font-semibold ">
-              Purchase Information
-            </h3>
-            {clientSecret && (
+
+        {clientSecret && (
+          <div>
+            <AddAddress />
+            <div className="flex flex-col gap-y-6">
+              <h3 className="text-3xl font-semibold ">
+                Purchase Information
+              </h3>
               <Elements
                 options={options}
                 stripe={stripePromise}
               >
                 <OrderStripe />
               </Elements>
-            )}
+            </div>
           </div>
-        </div>
+        )}
       </div>
     </div>
   );
