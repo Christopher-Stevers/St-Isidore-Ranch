@@ -48,11 +48,6 @@ export const addressRouter = createTRPCRouter({
       const order = await prisma.order.findUnique({
         where: { id: input.orderId },
       });
-      console.log(
-        "currentAddress",
-
-        input.orderId,
-      );
       if (order?.addressId) {
         return prisma.address.update({
           where: {

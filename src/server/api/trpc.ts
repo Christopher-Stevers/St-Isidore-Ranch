@@ -15,7 +15,7 @@ import { TRPCError } from "@trpc/server";
  *
  * These allow you to access things when processing a request, like the database, the session, etc.
  */
-import { type Session } from "next-auth";
+import { getServerSession, type Session } from "next-auth";
 
 import { prisma } from "~/server/db";
 
@@ -48,11 +48,21 @@ const createInnerTRPCContext = (
  *
  * @see https://trpc.io/docs/context
  */
-export const createTRPCContext = () => {
+export const createTRPCContext = async ({
+  req,
+  res,
+}: {
+  req: NextApiRequest;
+  res: NextApiResponse;
+}) => {
   // Get the session from the server using the getServerSession wrapper function
-  //  const session = await getServerAuthSession({ req, res });
+  const session = await getServerSession(
+    req,
+    res,
+    authOptions,
+  );
   return createInnerTRPCContext({
-    session: null,
+    session,
   });
 };
 
@@ -63,6 +73,11 @@ export const createTRPCContext = () => {
  */
 import { initTRPC } from "@trpc/server";
 import superjson from "superjson";
+import {
+  type NextApiRequest,
+  type NextApiResponse,
+} from "next";
+import { authOptions } from "../auth";
 
 const t = initTRPC
   .context<typeof createTRPCContext>()
@@ -99,9 +114,20 @@ export const publicProcedure = t.procedure;
 /** Reusable middleware that enforces users are logged in before running the procedure. */
 const enforceUserIsAuthed = t.middleware(
   ({ ctx, next }) => {
-    if (!ctx.session || !ctx.session.user) {
+    const { session } = ctx;
+    if (
+      (!session || !session.user) &&
+      !(
+        session?.user.email ===
+          "christopher.stevers1@gmail.com" ||
+        session?.user.email ===
+          "csteverswoodchipping@gmail.com"
+      )
+    ) {
       throw new TRPCError({ code: "UNAUTHORIZED" });
     }
+
+    console.log(ctx.session);
     return next({
       ctx: {
         // infers the `session` as non-nullable
