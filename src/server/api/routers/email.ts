@@ -1,12 +1,12 @@
 import {
   createTRPCRouter,
-  protectedProcedure,
+  publicProcedure,
 } from "~/server/api/trpc";
 import { z } from "zod";
 import emailWrapper from "~/server/helpers/emailWrapper";
 
 export const emailRouter = createTRPCRouter({
-  emailMe: protectedProcedure
+  emailMe: publicProcedure
     .input(
       z.object({
         name: z.string(),

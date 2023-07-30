@@ -3,6 +3,7 @@ import { z } from "zod";
 import {
   createTRPCRouter,
   protectedProcedure,
+  publicProcedure,
 } from "~/server/api/trpc";
 import { checkInStock } from "~/server/helpers/inventory";
 
@@ -46,7 +47,7 @@ export const productRouter = createTRPCRouter({
         data,
       });
     }),
-  getInStock: protectedProcedure
+  getInStock: publicProcedure
     .input(
       z.array(
         z.object({

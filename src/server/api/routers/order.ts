@@ -4,11 +4,11 @@ import { checkInStock } from "~/server/helpers/inventory";
 
 import {
   createTRPCRouter,
-  protectedProcedure,
+  publicProcedure,
 } from "~/server/api/trpc";
 
 export const orderRouter = createTRPCRouter({
-  getOrder: protectedProcedure
+  getOrder: publicProcedure
     .input(
       z.object({
         id: z.string().nullable().optional(),
@@ -39,7 +39,7 @@ export const orderRouter = createTRPCRouter({
       }
       return propsectiveOrder;
     }),
-  removeItemFromOrder: protectedProcedure
+  removeItemFromOrder: publicProcedure
     .input(
       z.object({
         orderId: z.string().nullable(),
@@ -73,7 +73,7 @@ export const orderRouter = createTRPCRouter({
       });
     }),
 
-  addToOrder: protectedProcedure
+  addToOrder: publicProcedure
     .input(
       z.object({
         title: z.string(),

@@ -8,14 +8,6 @@ import {
 } from "~/server/api/trpc";
 
 export const productClassRouter = createTRPCRouter({
-  hello: publicProcedure
-    .input(z.object({ text: z.string() }))
-    .query(({ input }) => {
-      return {
-        greeting: `Hello ${input.text}`,
-      };
-    }),
-
   getAvailableProductsOfClass: publicProcedure
     .input(z.object({ id: z.string() }))
     .query(async ({ ctx, input }) => {
@@ -28,7 +20,7 @@ export const productClassRouter = createTRPCRouter({
       });
       return products;
     }),
-  addProductClass: publicProcedure
+  addProductClass: protectedProcedure
     .input(z.object({ name: z.string(), src: z.string() }))
     .mutation(({ ctx, input }) => {
       return ctx.prisma.productClass.create({
@@ -78,12 +70,4 @@ export const productClassRouter = createTRPCRouter({
         },
       });
     }),
-
-  getAll: publicProcedure.query(({ ctx }) => {
-    return ctx.prisma.user.findMany();
-  }),
-
-  getSecretMessage: protectedProcedure.query(() => {
-    return "you can now see this secret message!";
-  }),
 });

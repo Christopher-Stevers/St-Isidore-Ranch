@@ -1,3 +1,4 @@
+import { TRPCError } from "@trpc/server";
 /**
  * YOU PROBABLY DON'T NEED TO EDIT THIS FILE, UNLESS:
  * 1. You want to modify request context (see Part 1).
@@ -99,7 +100,7 @@ export const publicProcedure = t.procedure;
 const enforceUserIsAuthed = t.middleware(
   ({ ctx, next }) => {
     if (!ctx.session || !ctx.session.user) {
-      // throw new TRPCError({ code: "UNAUTHORIZED" });
+      throw new TRPCError({ code: "UNAUTHORIZED" });
     }
     return next({
       ctx: {

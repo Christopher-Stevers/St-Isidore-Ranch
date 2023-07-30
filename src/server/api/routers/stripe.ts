@@ -3,11 +3,11 @@ import stripe from "~/server/stripe/client";
 
 import {
   createTRPCRouter,
-  protectedProcedure,
+  publicProcedure,
 } from "~/server/api/trpc";
 
 export const stripeRouter = createTRPCRouter({
-  createPaymentIntent: protectedProcedure
+  createPaymentIntent: publicProcedure
     .input(
       z.object({
         orderId: z.string(),

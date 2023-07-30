@@ -2,11 +2,11 @@ import { z } from "zod";
 
 import {
   createTRPCRouter,
-  protectedProcedure,
+  publicProcedure,
 } from "~/server/api/trpc";
 
 export const addressRouter = createTRPCRouter({
-  upsertAddress: protectedProcedure
+  upsertAddress: publicProcedure
     .input(
       z.object({
         id: z.string().optional(),
