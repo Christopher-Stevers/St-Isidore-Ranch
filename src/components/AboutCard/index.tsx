@@ -11,7 +11,6 @@ const AboutCard = ({
   direction,
   title,
   text,
-  link,
   video,
   src,
 }: AboutCardProps) => {
