@@ -109,6 +109,7 @@ export const orderRouter = createTRPCRouter({
 
           include: {
             boxes: true,
+            address: true,
           },
         });
       }
