@@ -1,11 +1,6 @@
-import LayoutShared from "~/components/shared/LayoutShared";
-import Order from "~/components/Checkout/Order";
-const Checkout = () => {
-  return (
-    <LayoutShared title={"Checkout"}>
-      <Order />
-    </LayoutShared>
-  );
+import Checkout from "~/components/Checkout/index";
+const Page = () => {
+  return <Checkout />;
 };
 
-export default Checkout;
+export default Page;

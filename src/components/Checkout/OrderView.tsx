@@ -1,8 +1,19 @@
 import { useCart } from "~/providers/cart";
 import BoxConfirm from "./BoxConfirm";
 import Link from "next/link";
-const OrderView = () => {
+import React, { type SetStateAction } from "react";
+import CheckoutConfirmButton from "./CheckoutConfirmButton";
+import { ADDRESS } from ".";
+import useMediaQuery, {
+  mediaQueryCompare,
+} from "~/hooks/useMediaQuery";
+const OrderView = ({
+  setPaymentStep,
+}: {
+  setPaymentStep: React.Dispatch<SetStateAction<string>>;
+}) => {
   const [order] = useCart();
+  const currentMaxBreakpoint = useMediaQuery();
   return (
     <div className="flex flex-col gap-y-6">
       <h3 className="text-3xl font-semibold">
@@ -30,6 +41,16 @@ const OrderView = () => {
       <div className="text-xl font-semibold">
         Total ${order?.totalPrice}
       </div>
+
+      {!mediaQueryCompare(currentMaxBreakpoint, "lg") && (
+        <CheckoutConfirmButton
+          onClick={() => {
+            setPaymentStep(ADDRESS);
+          }}
+        >
+          Confirm
+        </CheckoutConfirmButton>
+      )}
     </div>
   );
 };

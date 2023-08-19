@@ -112,7 +112,7 @@ const OrderStripe = () => {
         options={paymentElementOptions}
       />
       <button
-        className="text-sans my-8 rounded-lg bg-primary-700 px-4 py-2 text-white"
+        className="text-sans my-8 w-1/2 rounded-lg bg-primary-700 px-4 py-2 text-white"
         disabled={isLoading || !stripe || !elements}
         onClick={handleSubmit}
         id="submit"
@@ -121,7 +121,7 @@ const OrderStripe = () => {
           {isLoading ? (
             <div className="spinner" id="spinner"></div>
           ) : (
-            "Pay now"
+            "Order Now"
           )}
         </span>
       </button>

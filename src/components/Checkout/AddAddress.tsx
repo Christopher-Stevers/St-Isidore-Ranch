@@ -1,5 +1,12 @@
+import React, { type SetStateAction } from "react";
 import AddressFieldInput from "./AddressFieldInput";
-const AddAddress = () => {
+import { PAYMENT } from "./index";
+import CheckoutConfirmButton from "./CheckoutConfirmButton";
+const AddAddress = ({
+  setPaymentStep,
+}: {
+  setPaymentStep: React.Dispatch<SetStateAction<string>>;
+}) => {
   return (
     <div className="flex flex-col gap-6 pb-6">
       <h3 className="text-3xl font-semibold ">
@@ -24,6 +31,14 @@ const AddAddress = () => {
         field="postalCode"
       />
       <AddressFieldInput name="Name" field="name" />
+
+      <CheckoutConfirmButton
+        onClick={() => {
+          setPaymentStep(PAYMENT);
+        }}
+      >
+        Save
+      </CheckoutConfirmButton>
     </div>
   );
 };

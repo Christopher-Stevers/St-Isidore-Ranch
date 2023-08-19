@@ -10,7 +10,7 @@ const HeaderMain: React.FC = () => {
           className="absolute top-0 object-cover"
           alt="image of cows grazing"
           fill={true}
-          src={"/heroCattle.jpg"}
+          src={"/hero2.jpg"}
         />
         <div
           className=" absolute top-0 
@@ -24,7 +24,7 @@ const HeaderMain: React.FC = () => {
         lg:grid-rows-2 lg:justify-end lg:p-32"
         >
           <div className="-md:left-20 relative mx-auto grid h-min gap-8 md:col-span-2 lg:col-span-1 lg:col-start-1 lg:self-start">
-            <h1 className="flex w-min w-full flex-wrap justify-center gap-x-4 gap-y-4 whitespace-nowrap font-display text-6xl text-black md:text-7xl lg:flex-nowrap lg:justify-start lg:text-8xl">
+            <h1 className="flex w-min  flex-wrap justify-center gap-x-4 gap-y-4 whitespace-nowrap font-display text-6xl text-black md:text-7xl lg:flex-nowrap lg:justify-start lg:text-8xl">
               <span className="inline"> St. Isidore </span>
               <span className="inline">Ranch</span>
             </h1>

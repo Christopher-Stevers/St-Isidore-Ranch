@@ -22,26 +22,11 @@ const AddToCart = ({
         });
       },
     });
-  /* const mockedOrder = {
-    id: "64a495db328c2b21142da7d9",
-    createdAt: "2023-07-04T21:57:47.631Z",
-    updatedAt: "2023-07-04T21:57:47.628Z",
-    totalPrice: 120,
-    paid: false,
-    boxes: [
-      {
-        id: "64a495db328c2b21142da7da",
-        createdAt: "2023-07-04T21:57:47.631Z",
-        updatedAt: null,
-        totalPrice: 120,
-        boxSize: 0,
-        orderId: "64a495db328c2b21142da7d9",
-      },
-    ],
-  };*/
+
   const handleAddToCard = () => {
     addToCart({ title, orderId: cartState?.id });
   };
+
   return (
     <>
       {isInStock ? (
