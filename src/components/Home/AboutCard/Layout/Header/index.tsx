@@ -1,6 +1,6 @@
 import React from "react";
 import Image from "next/image";
-import HeroButton from "~/components/HeroButton";
+import HeroButton from "./HeroButton";
 
 const HeaderMain: React.FC = () => {
   return (

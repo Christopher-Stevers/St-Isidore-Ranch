@@ -1,5 +1,5 @@
 import { type Box } from "@prisma/client";
-import { getBoxFromClass } from "~/utils/boxTemplates";
+import { getBoxFromClass } from "~/utils/boxManagement";
 import { XCircleIcon } from "@heroicons/react/24/outline";
 import { api } from "~/utils/api";
 import { useCart } from "~/providers/cart";

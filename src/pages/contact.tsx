@@ -1,7 +1,7 @@
 import { useState } from "react";
 import StyledInput from "~/components/base/StyledInput";
 
-import LayoutSecondary from "~/layouts/LayoutSecondary";
+import LayoutShared from "~/components/shared/LayoutShared";
 import { PaperAirplaneIcon } from "@heroicons/react/24/solid";
 import { api } from "~/utils/api";
 
@@ -22,7 +22,7 @@ const Contact = () => {
     });
   };
   return (
-    <LayoutSecondary title={"Contact Me"}>
+    <LayoutShared title={"Contact Me"}>
       <div className="flex w-full justify-center px-32">
         <div className="grow">
           <h3 className="text-3xl font-semibold ">
@@ -80,7 +80,7 @@ const Contact = () => {
           </div>
         </div>
       </div>
-    </LayoutSecondary>
+    </LayoutShared>
   );
 };
 

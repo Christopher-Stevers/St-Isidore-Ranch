@@ -1,4 +1,4 @@
-import { type Item } from "~/utils/boxTemplates";
+import { type Item } from "~/utils/boxManagement";
 import { type PrismaClient } from "@prisma/client";
 
 export const checkInStock = async (

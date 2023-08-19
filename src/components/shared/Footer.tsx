@@ -15,7 +15,7 @@ type WebsiteLink = {
   link: string;
 };
 
-const HeaderMain: React.FC = () => {
+const Footer: React.FC = () => {
   const socials: SocialType[] = [
     {
       name: "Instagram",
@@ -91,4 +91,4 @@ const HeaderMain: React.FC = () => {
     </>
   );
 };
-export default HeaderMain;
+export default Footer;

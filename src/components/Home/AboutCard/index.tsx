@@ -1,4 +1,6 @@
 import Image from "next/image";
+import AboutButton from "./AboutButton";
+
 export type AboutCardProps = {
   direction: "left" | "right";
   title: string;
@@ -13,6 +15,7 @@ const AboutCard = ({
   text,
   video,
   src,
+  link,
 }: AboutCardProps) => {
   const colStart =
     direction === "left"
@@ -20,14 +23,14 @@ const AboutCard = ({
       : "xl:col-start-2";
 
   return (
-    <div className="grid-rows grid w-80 grid-rows-[209px_48px_auto_48px] gap-x-16 gap-y-4 xl:w-full xl:w-min xl:grid-cols-[480px_480px] xl:grid-rows-[48px_auto_48px]">
+    <div className="grid-rows grid w-80 grid-rows-[209px_48px_auto_48px] gap-x-16 gap-y-4 xl:w-min xl:grid-cols-[480px_480px] xl:grid-rows-[48px_auto_48px]">
       <h3 className="text-3xl font-semibold">{title}</h3>
       <p className="w-full font-text text-xl">{text} </p>
-      {/* <AboutButton
+      <AboutButton
         text="Learn More"
         link={link}
         className="h-12 w-40 bg-primary-500 text-white xl:row-start-3"
-      />*/}
+      />
       <div
         className={`${colStart} row-start-1 xl:row-end-4`}
       >

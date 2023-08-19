@@ -1,7 +1,7 @@
-import HeaderSecondary from "~/layouts/headerSecondary";
-import FooterMain from "~/layouts/footerMain";
+import HeaderShared from "~/components/shared/HeaderShared";
+import Footer from "~/components/shared/Footer";
 import { type ReactNode } from "react";
-const LayoutSecondary = ({
+const LayoutShared = ({
   title,
   children,
 }: {
@@ -10,12 +10,12 @@ const LayoutSecondary = ({
 }) => {
   return (
     <>
-      <HeaderSecondary>{title}</HeaderSecondary>
+      <HeaderShared>{title}</HeaderShared>
       <div className="min-h-[calc(100vh-340px)] pb-48 ">
         {children}
       </div>
-      <FooterMain />
+      <Footer />
     </>
   );
 };
-export default LayoutSecondary;
+export default LayoutShared;

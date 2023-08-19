@@ -1,6 +1,6 @@
 import Image from "next/image";
-import { type Item } from "~/utils/boxTemplates";
-import AddToCart from "./AddToCart";
+import { type Item } from "~/utils/boxManagement";
+import AddToCart from "./AddToCartButtons";
 export type ProductCardProps = {
   title: string;
   src: string;
@@ -16,7 +16,6 @@ const ProductCard = ({
   return (
     <div className="grid-rows grid w-80 grid-rows-[209px_48px_auto_48px] gap-x-16 gap-y-4 bg-backdrop-500 pb-8">
       <div className="flex items-center justify-between px-4">
-        {" "}
         <h3 className="text-3xl font-semibold">{title}</h3>
         <div className="rounded-full bg-amber-100 px-2 text-2xl">
           {totalPrice !== 0 && `$${totalPrice}`}

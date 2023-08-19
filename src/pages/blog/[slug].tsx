@@ -5,7 +5,7 @@ import { type PostType } from "~/typedefs/Blog";
 import Head from "next/head";
 import { remark } from "remark";
 import html from "remark-html";
-import LayoutSecondary from "~/layouts/LayoutSecondary";
+import LayoutShared from "~/components/shared/LayoutShared";
 
 type Props = {
   post: PostType;
@@ -19,7 +19,7 @@ export default function Post({ post }: Props) {
   }
   return (
     <>
-      <LayoutSecondary title={"Blog"}>
+      <LayoutShared title={"Blog"}>
         <article className="mx-32 mb-32">
           <Head>
             <title>{post.title}</title>
@@ -33,7 +33,7 @@ export default function Post({ post }: Props) {
             }}
           />
         </article>
-      </LayoutSecondary>
+      </LayoutShared>
     </>
   );
 }

@@ -1,8 +1,8 @@
 import FancyButton, {
   type ButtonProps,
-} from "../FancyButton";
+} from "~/components/base/FancyButton";
 
-const HeroButton = ({
+const AboutButton = ({
   text,
   link,
   className,
@@ -11,9 +11,8 @@ const HeroButton = ({
     <FancyButton
       text={text}
       link={link}
-      className={`${className} h-16 w-32 text-2xl md:h-20 md:w-40 md:text-3xl lg:h-24 lg:w-60`}
+      className={`${className} p-4`}
     />
   );
 };
-
-export default HeroButton;
+export default AboutButton;

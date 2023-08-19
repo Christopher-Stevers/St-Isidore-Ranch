@@ -1,5 +1,5 @@
 import { z } from "zod";
-import { getBoxFromClass } from "~/utils/boxTemplates";
+import { getBoxFromClass } from "~/utils/boxManagement";
 import { checkInStock } from "~/server/helpers/inventory";
 
 import {

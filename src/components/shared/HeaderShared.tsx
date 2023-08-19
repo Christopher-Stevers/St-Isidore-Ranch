@@ -1,10 +1,13 @@
-import { type PropsWithChildren } from "react";
-import Image from "next/image";
+import { type ReactNode } from "react";
 import Link from "next/link";
-
-const Headline = ({ children }: PropsWithChildren) => {
+import Image from "next/image";
+const LayoutShared = ({
+  children,
+}: {
+  children: ReactNode;
+}) => {
   return (
-    <div className="flex w-full content-center items-center justify-between gap-8 p-4">
+    <div className="flex w-full content-center items-center justify-between gap-8 p-8 px-16 pb-4">
       <Link href="/">
         {" "}
         <Image
@@ -29,4 +32,4 @@ const Headline = ({ children }: PropsWithChildren) => {
     </div>
   );
 };
-export default Headline;
+export default LayoutShared;

@@ -1,4 +1,4 @@
-import { type Item } from "~/utils/boxTemplates";
+import { type Item } from "~/utils/boxManagement";
 import { api } from "~/utils/api";
 import { useCart } from "~/providers/cart";
 import Link from "next/link";

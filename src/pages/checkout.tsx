@@ -1,10 +1,10 @@
-import LayoutSecondary from "~/layouts/LayoutSecondary";
+import LayoutShared from "~/components/shared/LayoutShared";
 import Order from "~/components/Checkout/Order";
 const Checkout = () => {
   return (
-    <LayoutSecondary title={"Checkout"}>
+    <LayoutShared title={"Checkout"}>
       <Order />
-    </LayoutSecondary>
+    </LayoutShared>
   );
 };
 

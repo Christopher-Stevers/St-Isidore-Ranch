@@ -10,7 +10,7 @@ export type Item = {
   name: string;
 };
 
-export class BarbecueBox implements Box {
+class BarbecueBox implements Box {
   totalPrice: number;
   title: string;
   src: string;
@@ -38,7 +38,7 @@ export class BarbecueBox implements Box {
     ];
   }
 }
-export class SamplerBox implements Box {
+class SamplerBox implements Box {
   totalPrice: number;
   title: string;
   src: string;
@@ -66,7 +66,7 @@ export class SamplerBox implements Box {
     ];
   }
 }
-export class GroundBeefBox implements Box {
+class GroundBeefBox implements Box {
   totalPrice: number;
   src: string;
   title: string;
@@ -82,7 +82,7 @@ export class GroundBeefBox implements Box {
     ];
   }
 }
-export class DeluxeBox implements Box {
+class DeluxeBox implements Box {
   title: string;
   totalPrice: number;
   src: string;
@@ -111,7 +111,7 @@ export class DeluxeBox implements Box {
   }
 }
 
-export class FamilyBox implements Box {
+class FamilyBox implements Box {
   title: string;
   totalPrice: number;
   boxSize: number;
@@ -158,3 +158,11 @@ export const getBoxFromClass = (title: string) => {
       throw new Error("Invalid box title");
   }
 };
+
+export const createdBoxes = [
+  new GroundBeefBox(),
+  new DeluxeBox(),
+  new FamilyBox(),
+  new BarbecueBox(),
+  new SamplerBox(),
+];
