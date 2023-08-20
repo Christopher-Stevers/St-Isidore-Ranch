@@ -1,5 +1,4 @@
 import { type NextPage } from "next";
-import Headline from "~/layouts/Headline";
 import AdminMutations from "~/components/AdminMutations";
 import { signIn, useSession } from "next-auth/react";
 
