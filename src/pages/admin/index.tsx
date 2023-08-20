@@ -10,7 +10,7 @@ const Home: NextPage = () => {
   const data = useSession();
   return (
     <>
-      <Headline>Admin</Headline>
+      Admin
       <main>
         <button onClick={handleSignIn}>Sign In</button>
         <div>{JSON.stringify(data)}</div>
