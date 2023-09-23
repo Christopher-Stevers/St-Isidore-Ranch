@@ -28,7 +28,7 @@ const TranslateAndFade = ({
       },
       {
         rootMargin: "400px 0px 0px 0px",
-        threshold: 1,
+        threshold: window.innerWidth > 768 ? 0.5 : 0,
       },
     );
     observer.observe(node);
