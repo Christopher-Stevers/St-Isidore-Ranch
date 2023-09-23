@@ -339,6 +339,9 @@ export const getBoxFromClass = (title: string) => {
     case "1/4 Beef":
       return new QuarterBeefBundle();
     case "1/8 Beef":
+      return new EightBeefBundle();
+    default:
+      throw new Error("Box not found");
   }
 };
 

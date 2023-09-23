@@ -30,7 +30,7 @@ const BoxConfirm = ({ box }: { box: Box }) => {
     >
       <div className="w-60">
         <span className="text-xl">{box.title}</span>
-        {getBoxFromClass(box.title).items.map((item) => (
+        {getBoxFromClass(box.title)?.items.map((item) => (
           <div key={item.name}>
             {item.quantity} {item.name}
           </div>
