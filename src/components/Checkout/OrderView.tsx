@@ -7,6 +7,7 @@ import { ADDRESS } from ".";
 import useMediaQuery, {
   mediaQueryCompare,
 } from "~/hooks/useMediaQuery";
+import { formatDollars } from "~/utils/lib";
 const OrderView = ({
   setPaymentStep,
 }: {
@@ -39,7 +40,7 @@ const OrderView = ({
         </p>
       )}
       <div className="text-xl font-semibold">
-        Total ${order?.totalPrice}
+        Total {formatDollars(order?.totalPrice)}
       </div>
 
       {!mediaQueryCompare(currentMaxBreakpoint, "lg") && (

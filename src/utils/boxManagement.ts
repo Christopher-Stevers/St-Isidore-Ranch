@@ -20,7 +20,7 @@ class GrillingBundle implements Box {
   items: Item[];
   constructor() {
     this.title = "Grilling Bundle";
-    this.totalPrice = 279.5;
+    this.totalPrice = 27999;
     this.src = "/boxPics/grilledBeef.jpg";
     this.boxSize = 0;
     this.items = [
@@ -53,7 +53,7 @@ class EverythingBundle implements Box {
   items: Item[];
   constructor() {
     this.title = "Everything Bundle";
-    this.totalPrice = 260.1;
+    this.totalPrice = 25999;
     this.src = "/boxPics/everythingBeef.jpg";
     this.boxSize = 0;
     this.items = [
@@ -87,7 +87,7 @@ class GroundBeefBoxSM implements Box {
   boxSize: number;
   items: Item[];
   constructor() {
-    this.totalPrice = 100;
+    this.totalPrice = 10000;
     this.title = `Ground Beef Bundle 
 ( Small )`;
     this.boxSize = 0;
@@ -107,7 +107,7 @@ class GroundBeefBoxMD implements Box {
   boxSize: number;
   items: Item[];
   constructor() {
-    this.totalPrice = 200;
+    this.totalPrice = 20000;
     this.title = `Ground Beef Bundle 
 ( Medium )`;
     this.boxSize = 0;
@@ -127,7 +127,7 @@ class GroundBeefBoxLG implements Box {
   boxSize: number;
   items: Item[];
   constructor() {
-    this.totalPrice = 300;
+    this.totalPrice = 30000;
     this.title = `Ground Beef Bundle 
 ( Large )`;
     this.boxSize = 0;
@@ -148,7 +148,7 @@ class PrimeSteaksBox implements Box {
   items: Item[];
   constructor() {
     this.title = "Prime Steaks";
-    this.totalPrice = 568.8;
+    this.totalPrice = 56999;
     this.boxSize = 0;
     this.src = "/boxPics/steakBeef.jpg";
 
@@ -173,7 +173,7 @@ class OvenBundle implements Box {
   src: string;
   constructor() {
     this.title = "Oven Bundle";
-    this.totalPrice = 196.09;
+    this.totalPrice = 19599;
     this.boxSize = 0;
     this.src = "/boxPics/roastBeef.jpg";
     this.items = [
@@ -203,7 +203,7 @@ class HamburgerPatties implements Box {
   src: string;
   constructor() {
     this.title = "Hamburger Patties";
-    this.totalPrice = 39.99;
+    this.totalPrice = 3999;
     this.boxSize = 0;
     this.src = "/boxPics/pattyBeef.jpg";
     this.items = [{ quantity: 8, name: "1/4 patties" }];
@@ -220,7 +220,7 @@ class QuarterBeefBundle implements Box {
   src: string;
   constructor() {
     this.title = "1/4 Beef";
-    this.totalPrice = 1327.76;
+    this.totalPrice = 132776;
     this.boxSize = 0;
     this.src = "/boxPics/sideBeef.jpg";
     this.items = [
@@ -282,7 +282,7 @@ class EightBeefBundle implements Box {
   src: string;
   constructor() {
     this.title = "1/8 Beef";
-    this.totalPrice = 663.88;
+    this.totalPrice = 66388;
     this.boxSize = 0;
     this.src = "/boxPics/sideBeef.jpg";
     this.items = [
@@ -362,10 +362,10 @@ export const getBoxFromClass = (title: string) => {
   }
 };
 
-export const createdBoxes = [
+export const createdBoxes = [new PrimeSteaksBox()];
+/*
   new GrillingBundle(),
   new EverythingBundle(),
-  new PrimeSteaksBox(),
   new OvenBundle(),
   new HamburgerPatties(),
   new GroundBeefBoxSM(),
@@ -373,4 +373,4 @@ export const createdBoxes = [
   new GroundBeefBoxLG(),
   new EightBeefBundle(),
   new QuarterBeefBundle(),
-];
+*/

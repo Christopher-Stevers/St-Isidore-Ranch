@@ -3,6 +3,7 @@ import { getBoxFromClass } from "~/utils/boxManagement";
 import { XCircleIcon } from "@heroicons/react/24/outline";
 import { api } from "~/utils/api";
 import { useCart } from "~/providers/cart";
+import { formatDollars } from "~/utils/lib";
 
 const BoxConfirm = ({ box }: { box: Box }) => {
   const [, cartDispatch] = useCart();
@@ -38,7 +39,7 @@ const BoxConfirm = ({ box }: { box: Box }) => {
           </div>
         ))}
       </div>
-      <span>${box.totalPrice}</span>
+      <span>{formatDollars(box.totalPrice)}</span>
       <button
         onClick={handleRemoveFronOrder}
         className="relative flex w-full flex-1"

@@ -1,6 +1,7 @@
 import Image from "next/image";
 import { type Item } from "~/utils/boxManagement";
 import AddToCart from "./AddToCartButtons";
+import { formatDollars } from "~/utils/lib";
 export type ProductCardProps = {
   title: string;
   src: string;
@@ -21,7 +22,7 @@ const ProductCard = ({
         </h3>
       </div>
       <div className="rounded-full px-2 text-right text-2xl">
-        {totalPrice !== 0 && `$${totalPrice}`}
+        {!totalPrice ? "" : formatDollars(totalPrice)}
       </div>
       <div className="w-full px-4 font-text text-xl">
         {items.length

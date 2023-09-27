@@ -19,10 +19,10 @@ model Account {
   type                     String
   provider                 String
   providerAccountId        String  @unique
-  refresh_token_expires_in Int?
+  refresh_token_expires_in Float?
   refresh_token            String?
   access_token             String?
-  expires_at               Int?
+  expires_at               Float?
   token_type               String?
   scope                    String?
   id_token                 String?
@@ -58,8 +58,8 @@ model Box {
   id         String   @id @default(auto()) @map("_id") @db.ObjectId
   createdAt  DateTime  @default(now())
   updatedAt  DateTime?
-  totalPrice Int
-  boxSize    Int
+  totalPrice Float
+  boxSize    Float
   items      Product[]
   Order      Order?    @relation(fields: [orderId], references: [id])
   orderId    String?   @db.ObjectId
@@ -73,7 +73,7 @@ model BoxTemplate {
   updatedAt       DateTime       @updatedAt
   name            String
   src             String
-  boxSize         Int
+  boxSize         Float
   products        ProductClass[] @relation(fields: [productClassIds], references: [id])
   productClassIds String[]       @db.ObjectId
 }
@@ -82,7 +82,7 @@ model Order {
   id         String  @id @default(auto()) @map("_id") @db.ObjectId
   createdAt  DateTime @default(now())
   updatedAt  DateTime @updatedAt
-  totalPrice Int
+  totalPrice Float
   boxes      Box[]
   paymentIntent String? @unique
   addressId String? @db.ObjectId 
@@ -107,7 +107,7 @@ model Address {
 
 model Product {
   id             String      @id @default(auto()) @map("_id") @db.ObjectId
-  quantity       Int
+  quantity       Float
   productClass   ProductClass @relation(fields: [productClassId], references: [id])
   productClassId String       @db.ObjectId
   Box            Box?         @relation(fields: [boxId], references: [id])
@@ -149,5 +149,5 @@ model StripeEvent {
     account          String?
     created          DateTime
     livemode         Boolean
-    pending_webhooks Int
+    pending_webhooks Float
 }

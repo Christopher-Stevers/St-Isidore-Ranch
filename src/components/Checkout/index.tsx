@@ -78,6 +78,7 @@ const Checkout = () => {
 
   return (
     <LayoutShared title={"Checkout"}>
+      {paymentStep}
       <div className="px-32">
         <BackLink>
           <button
