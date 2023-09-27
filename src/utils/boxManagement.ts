@@ -1,3 +1,5 @@
+// box management, todo extract magic strings, then extract to db records.
+
 type Box = {
   title: string;
   totalPrice: number;
