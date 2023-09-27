@@ -1,11 +1,7 @@
-import {
-  type NextApiRequest,
-  type NextApiResponse,
-} from "next";
+import { type NextApiResponse } from "next";
 import { env } from "~/env.mjs";
 import { prisma } from "~/server/db";
 import type Stripe from "stripe";
-import { buffer } from "micro";
 import stripe from "../../server/stripe/client";
 import emailWrapper from "~/server/helpers/emailWrapper";
 
