@@ -186,6 +186,9 @@ export default async function handler(
                 },
               });
               await stripe.paymentIntents.cancel(id);
+              throw new Error(
+                `${paymentIntent.amount}  ${order?.totalPrice} not equal`,
+              );
             }
           }
           break;
