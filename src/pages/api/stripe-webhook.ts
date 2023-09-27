@@ -18,7 +18,7 @@ export default async function handler(
   req: Request,
   res: NextApiResponse,
 ) {
-  if (req.method === "POST") {
+  if (req.method === "GET") {
     const sig = req.headers.get(
       "stripe-signature",
     ) as string;
