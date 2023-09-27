@@ -362,8 +362,8 @@ export const getBoxFromClass = (title: string) => {
   }
 };
 
-export const createdBoxes = [new PrimeSteaksBox()];
-/*
+export const createdBoxes = [
+  new PrimeSteaksBox(),
   new GrillingBundle(),
   new EverythingBundle(),
   new OvenBundle(),
@@ -373,4 +373,6 @@ export const createdBoxes = [new PrimeSteaksBox()];
   new GroundBeefBoxLG(),
   new EightBeefBundle(),
   new QuarterBeefBundle(),
-*/
+];
+/*
+ */
