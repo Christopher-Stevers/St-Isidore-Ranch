@@ -19,18 +19,19 @@ export const config = {
 const webhookSecret = env.STRIPE_WEBHOOK_SECRET;
 
 export default async function handler(
-  req: NextApiRequest,
+  req: Request,
   res: NextApiResponse,
 ) {
   if (req.method === "POST") {
-    const buf = await buffer(req);
-    const sig = req.headers["stripe-signature"];
+    const sig = req.headers.get(
+      "stripe-signature",
+    ) as string;
 
     let event: Stripe.Event;
 
     try {
       event = stripe.webhooks.constructEvent(
-        buf,
+        await (await req.blob()).text(),
         sig as string,
         webhookSecret,
       );
