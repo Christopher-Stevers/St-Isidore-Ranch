@@ -18,23 +18,23 @@ class GrillingBundle implements Box {
   items: Item[];
   constructor() {
     this.title = "Grilling Bundle";
-    this.totalPrice = 150;
-    this.src = "/barbecue_box.jpg";
+    this.totalPrice = 279.5;
+    this.src = "/boxPics/grilledBeef.jpg";
     this.boxSize = 0;
     this.items = [
-      { quantity: 4, name: "10 oz. Boneless Ribeye Steak" },
       {
         quantity: 4,
-        name: "10 oz. NY Strip Steak",
+        name: "Boneless Ribeye Steak ( 8 oz. )",
       },
       {
         quantity: 2,
-        name: "6 oz. Tenderloin Steak",
+        name: "NY Strip Steak ( 8 oz. )",
       },
       {
-        quantity: 4,
-        name: "8 oz. Sirloin Steak",
+        quantity: 2,
+        name: "Sirloin Steak ( 8 oz. )",
       },
+
       {
         quantity: 16,
         name: "1/4 lb. Hamburger Patties",
@@ -50,21 +50,17 @@ class SamplerBundle implements Box {
   items: Item[];
   constructor() {
     this.title = "Sampler Bundle";
-    this.totalPrice = 100;
-    this.src = "/sampler_box.jpg";
+    this.totalPrice = 260.1;
+    this.src = "/boxPics/samplerBeef.jpg";
     this.boxSize = 0;
     this.items = [
       {
-        quantity: 2,
-        name: "10 oz. NY Strip Steak",
-      },
-      {
         quantity: 4,
-        name: "8 oz. Sirloin Steak",
+        name: "NY Strip Steak ( 8 oz. )",
       },
       {
         quantity: 2,
-        name: "Bottom Round Steak ( 1 lb. )",
+        name: "Sirloin Steak ( 8 oz. )",
       },
       {
         quantity: 1,
@@ -88,10 +84,11 @@ class GroundBeefBoxSM implements Box {
   boxSize: number;
   items: Item[];
   constructor() {
-    this.totalPrice = 300;
-    this.title = "Small Ground Beef Bundle";
+    this.totalPrice = 100;
+    this.title = `Ground Beef Bundle 
+( Small )`;
     this.boxSize = 0;
-    this.src = "/ground_beef_box.jpg";
+    this.src = "/boxPics/groundBeef.jpg";
     this.items = [
       {
         quantity: 10,
@@ -107,10 +104,11 @@ class GroundBeefBoxMD implements Box {
   boxSize: number;
   items: Item[];
   constructor() {
-    this.totalPrice = 300;
-    this.title = "Medium Ground Beef Bundle";
+    this.totalPrice = 200;
+    this.title = `Ground Beef Bundle 
+( Medium )`;
     this.boxSize = 0;
-    this.src = "/ground_beef_box.jpg";
+    this.src = "/boxPics/groundBeef.jpg";
     this.items = [
       {
         quantity: 25,
@@ -127,9 +125,10 @@ class GroundBeefBoxLG implements Box {
   items: Item[];
   constructor() {
     this.totalPrice = 300;
-    this.title = "Large Ground Beef Bundle";
+    this.title = `Ground Beef Bundle 
+( Large )`;
     this.boxSize = 0;
-    this.src = "/ground_beef_box.jpg";
+    this.src = "/boxPics/groundBeef.jpg";
     this.items = [
       {
         quantity: 40,
@@ -146,14 +145,17 @@ class PremiumSteaksBox implements Box {
   items: Item[];
   constructor() {
     this.title = "Premium Steaks Bundle";
-    this.totalPrice = 300;
+    this.totalPrice = 568.8;
     this.boxSize = 0;
-    this.src = "/deluxe_box.jpg";
+    this.src = "/boxPics/steakBeef.jpg";
 
     this.items = [
-      { quantity: 6, name: "10 oz. Boneless Ribeye Steak" },
-      { quantity: 6, name: "6 oz. Tenderloin Steak" },
-      { quantity: 6, name: "8 oz. Sirloin Steak" },
+      {
+        quantity: 6,
+        name: "Boneless Ribeye Steak ( 8 oz. )",
+      },
+      { quantity: 6, name: "Tenderloin Steak ( 6 oz. )" },
+      { quantity: 6, name: "Sirloin Steak ( 8 oz. )" },
     ];
   }
 }
@@ -167,9 +169,9 @@ class OvenBundle implements Box {
   src: string;
   constructor() {
     this.title = "Oven Bundle";
-    this.totalPrice = 300;
+    this.totalPrice = 196.09;
     this.boxSize = 0;
-    this.src = "/family_box.jpg";
+    this.src = "/boxPics/roastBeef.jpg";
     this.items = [
       { quantity: 2, name: "London Broil ( 1 lb. )" },
       {
@@ -197,9 +199,9 @@ class HamburgerPatties implements Box {
   src: string;
   constructor() {
     this.title = "Hamburger Patties";
-    this.totalPrice = 300;
+    this.totalPrice = 39.99;
     this.boxSize = 0;
-    this.src = "/family_box.jpg";
+    this.src = "/boxPics/pattyBeef.jpg";
     this.items = [{ quantity: 8, name: "1/4 patties" }];
     this.orderId = "1";
   }
@@ -214,22 +216,25 @@ class QuarterBeefBundle implements Box {
   src: string;
   constructor() {
     this.title = "1/4 Beef";
-    this.totalPrice = 300;
+    this.totalPrice = 1327.76;
     this.boxSize = 0;
-    this.src = "/family_box.jpg";
+    this.src = "/boxPics/sideBeef.jpg";
     this.items = [
-      { quantity: 4, name: "10 oz. Boneless Ribeye Steak" },
       {
         quantity: 4,
-        name: "10 oz. NY Strip Steak",
+        name: "Boneless Ribeye Steak ( 8 oz. )",
+      },
+      {
+        quantity: 4,
+        name: "NY Strip Steak ( 8 oz. )",
       },
       {
         quantity: 2,
-        name: "6 oz. Tenderloin Steak",
+        name: "Tenderloin Steak ( 6 oz. )",
       },
       {
         quantity: 4,
-        name: "8 oz. Sirloin Steak",
+        name: "Sirloin Steak ( 8 oz. )",
       },
       { quantity: 2, name: "London Broil ( 2 lb. )" },
       {
@@ -248,9 +253,9 @@ class QuarterBeefBundle implements Box {
         quantity: 4,
         name: "Bone-In Short Ribs",
       },
-      { quantity: 6, name: "Top Round Steak ( 1 lb. )" },
+      { quantity: 3, name: "London Broil ( 2 lb. )" },
 
-      { quantity: 4, name: "Bottom Round Steak ( 1 lb. )" },
+      { quantity: 2, name: "Bottom Round Roast ( 2 lb. )" },
       {
         quantity: 32,
         name: "Ground Beef ( 1 lb. )",
@@ -272,18 +277,21 @@ class EightBeefBundle implements Box {
   src: string;
   constructor() {
     this.title = "1/8 Beef";
-    this.totalPrice = 300;
+    this.totalPrice = 663.88;
     this.boxSize = 0;
-    this.src = "/family_box.jpg";
+    this.src = "/boxPics/sideBeef.jpg";
     this.items = [
-      { quantity: 2, name: "10 oz. Boneless Ribeye Steak" },
       {
         quantity: 2,
-        name: "10 oz. NY Strip Steak",
+        name: "Boneless Ribeye Steak ( 8 oz. )",
       },
       {
         quantity: 2,
-        name: "8 oz. Sirloin Steak",
+        name: "NY Strip Steak ( 8 oz. )",
+      },
+      {
+        quantity: 2,
+        name: "Sirloin Steak ( 8 oz. )",
       },
       { quantity: 1, name: "London Broil ( 2 lb. )" },
       {
@@ -324,11 +332,11 @@ export const getBoxFromClass = (title: string) => {
       return new GrillingBundle();
     case "Sampler Bundle":
       return new SamplerBundle();
-    case "Small Ground Beef Bundle":
+    case "Ground Beef Bundle ( Small )":
       return new GroundBeefBoxSM();
-    case "Medium Ground Beef Bundle":
+    case "Ground Beef Bundle ( Medium )":
       return new GroundBeefBoxMD();
-    case "Large Ground Beef Bundle":
+    case "Ground Beef Bundle ( Large )":
       return new GroundBeefBoxLG();
     case "Premium Steaks Bundle":
       return new PremiumSteaksBox();
@@ -348,12 +356,12 @@ export const getBoxFromClass = (title: string) => {
 export const createdBoxes = [
   new GrillingBundle(),
   new SamplerBundle(),
-  new GroundBeefBoxSM(),
-  new GroundBeefBoxMD(),
-  new GroundBeefBoxLG(),
   new PremiumSteaksBox(),
   new OvenBundle(),
   new HamburgerPatties(),
+  new GroundBeefBoxSM(),
+  new GroundBeefBoxMD(),
+  new GroundBeefBoxLG(),
   new QuarterBeefBundle(),
   new EightBeefBundle(),
 ];
