@@ -29,7 +29,9 @@ const BoxConfirm = ({ box }: { box: Box }) => {
       className="flex gap-6 bg-backdrop-500 px-8 py-4"
     >
       <div className="w-60">
-        <span className="text-xl">{box.title}</span>
+        <span className="whitespace-pre text-xl">
+          {box.title}
+        </span>
         {getBoxFromClass(box.title)?.items.map((item) => (
           <div key={item.name}>
             {item.quantity} {item.name}

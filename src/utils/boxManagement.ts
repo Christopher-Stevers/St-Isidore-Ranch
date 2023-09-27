@@ -24,7 +24,8 @@ class GrillingBundle implements Box {
     this.items = [
       {
         quantity: 4,
-        name: "Boneless Ribeye Steak ( 8 oz. )",
+        name: `Boneless Ribeye Steak 
+( 8 oz. )`,
       },
       {
         quantity: 2,
@@ -42,16 +43,16 @@ class GrillingBundle implements Box {
     ];
   }
 }
-class SamplerBundle implements Box {
+class EverythingBundle implements Box {
   totalPrice: number;
   title: string;
   src: string;
   boxSize: number;
   items: Item[];
   constructor() {
-    this.title = "Sampler Bundle";
+    this.title = "Everything Bundle";
     this.totalPrice = 260.1;
-    this.src = "/boxPics/samplerBeef.jpg";
+    this.src = "/boxPics/everythingBeef.jpg";
     this.boxSize = 0;
     this.items = [
       {
@@ -137,14 +138,14 @@ class GroundBeefBoxLG implements Box {
     ];
   }
 }
-class PremiumSteaksBox implements Box {
+class PrimeSteaksBox implements Box {
   title: string;
   totalPrice: number;
   src: string;
   boxSize: number;
   items: Item[];
   constructor() {
-    this.title = "Premium Steaks Bundle";
+    this.title = "Prime Steaks";
     this.totalPrice = 568.8;
     this.boxSize = 0;
     this.src = "/boxPics/steakBeef.jpg";
@@ -152,7 +153,8 @@ class PremiumSteaksBox implements Box {
     this.items = [
       {
         quantity: 6,
-        name: "Boneless Ribeye Steak ( 8 oz. )",
+        name: `Boneless Ribeye Steak 
+( 8 oz. )`,
       },
       { quantity: 6, name: "Tenderloin Steak ( 6 oz. )" },
       { quantity: 6, name: "Sirloin Steak ( 8 oz. )" },
@@ -222,7 +224,8 @@ class QuarterBeefBundle implements Box {
     this.items = [
       {
         quantity: 4,
-        name: "Boneless Ribeye Steak ( 8 oz. )",
+        name: `Boneless Ribeye Steak 
+( 8 oz. )`,
       },
       {
         quantity: 4,
@@ -283,7 +286,8 @@ class EightBeefBundle implements Box {
     this.items = [
       {
         quantity: 2,
-        name: "Boneless Ribeye Steak ( 8 oz. )",
+        name: `Boneless Ribeye Steak 
+( 8 oz. )`,
       },
       {
         quantity: 2,
@@ -330,16 +334,19 @@ export const getBoxFromClass = (title: string) => {
   switch (title) {
     case "Grilling Bundle":
       return new GrillingBundle();
-    case "Sampler Bundle":
-      return new SamplerBundle();
-    case "Ground Beef Bundle ( Small )":
+    case "Everything Bundle":
+      return new EverythingBundle();
+    case `Ground Beef Bundle 
+( Small )`:
       return new GroundBeefBoxSM();
-    case "Ground Beef Bundle ( Medium )":
+    case `Ground Beef Bundle 
+( Medium )`:
       return new GroundBeefBoxMD();
-    case "Ground Beef Bundle ( Large )":
+    case `Ground Beef Bundle 
+( Large )`:
       return new GroundBeefBoxLG();
-    case "Premium Steaks Bundle":
-      return new PremiumSteaksBox();
+    case "Prime Steaks":
+      return new PrimeSteaksBox();
     case "Oven Bundle":
       return new OvenBundle();
     case "Hamburger Patties":
@@ -349,19 +356,19 @@ export const getBoxFromClass = (title: string) => {
     case "1/8 Beef":
       return new EightBeefBundle();
     default:
-      throw new Error("Box not found");
+      throw new Error(`${title} not found`);
   }
 };
 
 export const createdBoxes = [
   new GrillingBundle(),
-  new SamplerBundle(),
-  new PremiumSteaksBox(),
+  new EverythingBundle(),
+  new PrimeSteaksBox(),
   new OvenBundle(),
   new HamburgerPatties(),
   new GroundBeefBoxSM(),
   new GroundBeefBoxMD(),
   new GroundBeefBoxLG(),
-  new QuarterBeefBundle(),
   new EightBeefBundle(),
+  new QuarterBeefBundle(),
 ];

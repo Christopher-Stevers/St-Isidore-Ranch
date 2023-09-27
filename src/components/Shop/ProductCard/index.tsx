@@ -29,7 +29,9 @@ const ProductCard = ({
               return (
                 <div key={item.name} className="flex gap-2">
                   <span>{item.quantity}</span>
-                  {item.name}
+                  <span className="whitespace-pre">
+                    {item.name}
+                  </span>
                 </div>
               );
             })
