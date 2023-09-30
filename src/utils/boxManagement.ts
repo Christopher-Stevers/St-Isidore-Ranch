@@ -1,5 +1,24 @@
 // box management, todo extract magic strings, then extract to db records.
 
+// products
+const BONELESSRIBEYE = `Boneless Ribeye Steak 
+( 8 oz. )`;
+const NYSTRIP = "NY Strip Steak ( 8 oz. )";
+const SIRLOIN = "Sirloin Steak ( 8 oz. )";
+const HAMBURGER = "1/4 lb. Hamburger Patties";
+const TENDERLOIN = "Tenderloin Steak ( 6 oz. )";
+const BLADEROAST = "Blade Roast ( 2 lb. )";
+const GROUNDBEEF = "Ground Beef ( 1 lb. )";
+const STEWMEAT = "Stew Meat ( 1 lb. )";
+const BONEINSHORTRIBS = "Bone-In Short Ribs";
+const LONDONBROIL = "London Broil ( 2 lb. )";
+const CHUCKROAST = "Chuck Roast ( 2 lb. )";
+const TOPROUND = "Top Round Steak ( 1 lb. )";
+const BOTTOMROUND = "Bottom Round Steak ( 1 lb. )";
+const LIVER = "Liver ( 1 lb. )";
+const LOREM_IPSUM =
+  "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla euismod, nisl eget aliquam ultricies, nunc nunc aliquet nunc, vitae aliquam nun";
+
 type Box = {
   title: string;
   totalPrice: number;
@@ -15,10 +34,14 @@ export type Item = {
 class GrillingBundle implements Box {
   totalPrice: number;
   title: string;
+  description: string;
   src: string;
   boxSize: number;
   items: Item[];
+
   constructor() {
+    this.description = LOREM_IPSUM;
+    this.description = LOREM_IPSUM;
     this.title = "Grilling Bundle";
     this.totalPrice = 27999;
     this.src = "/boxPics/grilledBeef.jpg";
@@ -26,21 +49,20 @@ class GrillingBundle implements Box {
     this.items = [
       {
         quantity: 4,
-        name: `Boneless Ribeye Steak 
-( 8 oz. )`,
+        name: BONELESSRIBEYE,
       },
       {
         quantity: 2,
-        name: "NY Strip Steak ( 8 oz. )",
+        name: NYSTRIP,
       },
       {
         quantity: 2,
-        name: "Sirloin Steak ( 8 oz. )",
+        name: SIRLOIN,
       },
 
       {
         quantity: 16,
-        name: "1/4 lb. Hamburger Patties",
+        name: HAMBURGER,
       },
     ];
   }
@@ -48,10 +70,13 @@ class GrillingBundle implements Box {
 class EverythingBundle implements Box {
   totalPrice: number;
   title: string;
+  description: string;
   src: string;
   boxSize: number;
   items: Item[];
+
   constructor() {
+    this.description = LOREM_IPSUM;
     this.title = "Everything Bundle";
     this.totalPrice = 25999;
     this.src = "/boxPics/everythingBeef.jpg";
@@ -59,19 +84,19 @@ class EverythingBundle implements Box {
     this.items = [
       {
         quantity: 4,
-        name: "NY Strip Steak ( 8 oz. )",
+        name: NYSTRIP,
       },
       {
         quantity: 2,
-        name: "Sirloin Steak ( 8 oz. )",
+        name: SIRLOIN,
       },
       {
         quantity: 1,
-        name: "Blade Roast ( 2 lb. )",
+        name: BLADEROAST,
       },
       {
         quantity: 4,
-        name: "Ground Beef ( 1 lb. )",
+        name: GROUNDBEEF,
       },
       {
         quantity: 1,
@@ -84,9 +109,12 @@ class GroundBeefBoxSM implements Box {
   totalPrice: number;
   src: string;
   title: string;
+  description: string;
   boxSize: number;
   items: Item[];
+
   constructor() {
+    this.description = LOREM_IPSUM;
     this.totalPrice = 10000;
     this.title = `Ground Beef Bundle 
 ( Small )`;
@@ -95,7 +123,7 @@ class GroundBeefBoxSM implements Box {
     this.items = [
       {
         quantity: 10,
-        name: "Ground Beef ( 1 lb. )",
+        name: GROUNDBEEF,
       },
     ];
   }
@@ -104,9 +132,12 @@ class GroundBeefBoxMD implements Box {
   totalPrice: number;
   src: string;
   title: string;
+  description: string;
   boxSize: number;
   items: Item[];
+
   constructor() {
+    this.description = LOREM_IPSUM;
     this.totalPrice = 20000;
     this.title = `Ground Beef Bundle 
 ( Medium )`;
@@ -115,7 +146,7 @@ class GroundBeefBoxMD implements Box {
     this.items = [
       {
         quantity: 25,
-        name: "Ground Beef ( 1 lb. )",
+        name: GROUNDBEEF,
       },
     ];
   }
@@ -124,9 +155,12 @@ class GroundBeefBoxLG implements Box {
   totalPrice: number;
   src: string;
   title: string;
+  description: string;
   boxSize: number;
   items: Item[];
+
   constructor() {
+    this.description = LOREM_IPSUM;
     this.totalPrice = 30000;
     this.title = `Ground Beef Bundle 
 ( Large )`;
@@ -135,18 +169,21 @@ class GroundBeefBoxLG implements Box {
     this.items = [
       {
         quantity: 40,
-        name: "Ground Beef ( 1 lb. )",
+        name: GROUNDBEEF,
       },
     ];
   }
 }
 class PrimeSteaksBox implements Box {
   title: string;
+  description: string;
   totalPrice: number;
   src: string;
   boxSize: number;
   items: Item[];
+
   constructor() {
+    this.description = LOREM_IPSUM;
     this.title = "Prime Steaks";
     this.totalPrice = 56999;
     this.boxSize = 0;
@@ -155,23 +192,25 @@ class PrimeSteaksBox implements Box {
     this.items = [
       {
         quantity: 6,
-        name: `Boneless Ribeye Steak 
-( 8 oz. )`,
+        name: BONELESSRIBEYE,
       },
-      { quantity: 6, name: "Tenderloin Steak ( 6 oz. )" },
-      { quantity: 6, name: "Sirloin Steak ( 8 oz. )" },
+      { quantity: 6, name: TENDERLOIN },
+      { quantity: 6, name: SIRLOIN },
     ];
   }
 }
 
 class OvenBundle implements Box {
   title: string;
+  description: string;
   totalPrice: number;
   boxSize: number;
   items: Item[];
   orderId: string;
   src: string;
+
   constructor() {
+    this.description = LOREM_IPSUM;
     this.title = "Oven Bundle";
     this.totalPrice = 19599;
     this.boxSize = 0;
@@ -180,15 +219,15 @@ class OvenBundle implements Box {
       { quantity: 2, name: "London Broil ( 1 lb. )" },
       {
         quantity: 2,
-        name: "Blade Roast ( 2 lb. )",
+        name: BLADEROAST,
       },
       {
         quantity: 2,
-        name: "Chuck Roast ( 2 lb. )",
+        name: CHUCKROAST,
       },
       {
         quantity: 3,
-        name: "Bone-In Short Ribs",
+        name: BONEINSHORTRIBS,
       },
     ];
     this.orderId = "1";
@@ -196,12 +235,14 @@ class OvenBundle implements Box {
 }
 class HamburgerPatties implements Box {
   title: string;
+  description: string;
   totalPrice: number;
   boxSize: number;
   items: Item[];
   orderId: string;
   src: string;
   constructor() {
+    this.description = LOREM_IPSUM;
     this.title = "Hamburger Patties";
     this.totalPrice = 3999;
     this.boxSize = 0;
@@ -213,12 +254,15 @@ class HamburgerPatties implements Box {
 
 class QuarterBeefBundle implements Box {
   title: string;
+  description: string;
   totalPrice: number;
   boxSize: number;
   items: Item[];
   orderId: string;
   src: string;
+
   constructor() {
+    this.description = LOREM_IPSUM;
     this.title = "1/4 Beef";
     this.totalPrice = 132776;
     this.boxSize = 0;
@@ -226,48 +270,47 @@ class QuarterBeefBundle implements Box {
     this.items = [
       {
         quantity: 4,
-        name: `Boneless Ribeye Steak 
-( 8 oz. )`,
+        name: BONELESSRIBEYE,
       },
       {
         quantity: 4,
-        name: "NY Strip Steak ( 8 oz. )",
+        name: NYSTRIP,
       },
       {
         quantity: 2,
-        name: "Tenderloin Steak ( 6 oz. )",
+        name: TENDERLOIN,
       },
       {
         quantity: 4,
-        name: "Sirloin Steak ( 8 oz. )",
+        name: SIRLOIN,
       },
-      { quantity: 2, name: "London Broil ( 2 lb. )" },
+      { quantity: 2, name: LONDONBROIL },
       {
         quantity: 2,
-        name: "Blade Roast ( 2 lb. )",
+        name: BLADEROAST,
       },
       {
         quantity: 2,
-        name: "Chuck Roast ( 2 lb. )",
+        name: CHUCKROAST,
       },
       {
         quantity: 6,
-        name: "Stew Meat ( 1 lb. )",
+        name: STEWMEAT,
       },
       {
         quantity: 4,
-        name: "Bone-In Short Ribs",
+        name: BONEINSHORTRIBS,
       },
-      { quantity: 3, name: "London Broil ( 2 lb. )" },
+      { quantity: 3, name: LONDONBROIL },
 
       { quantity: 2, name: "Bottom Round Roast ( 2 lb. )" },
       {
         quantity: 32,
-        name: "Ground Beef ( 1 lb. )",
+        name: GROUNDBEEF,
       },
       {
         quantity: 1,
-        name: "Liver ( 1 lb. )",
+        name: LIVER,
       },
     ];
     this.orderId = "1";
@@ -275,12 +318,15 @@ class QuarterBeefBundle implements Box {
 }
 class EightBeefBundle implements Box {
   title: string;
+  description: string;
   totalPrice: number;
   boxSize: number;
   items: Item[];
   orderId: string;
   src: string;
+
   constructor() {
+    this.description = LOREM_IPSUM;
     this.title = "1/8 Beef";
     this.totalPrice = 66388;
     this.boxSize = 0;
@@ -288,44 +334,43 @@ class EightBeefBundle implements Box {
     this.items = [
       {
         quantity: 2,
-        name: `Boneless Ribeye Steak 
-( 8 oz. )`,
+        name: BONELESSRIBEYE,
       },
       {
         quantity: 2,
-        name: "NY Strip Steak ( 8 oz. )",
+        name: NYSTRIP,
       },
       {
         quantity: 2,
-        name: "Sirloin Steak ( 8 oz. )",
+        name: SIRLOIN,
       },
-      { quantity: 1, name: "London Broil ( 2 lb. )" },
+      { quantity: 1, name: LONDONBROIL },
       {
         quantity: 1,
-        name: "Blade Roast ( 2 lb. )",
+        name: BLADEROAST,
       },
       {
         quantity: 1,
-        name: "Chuck Roast ( 2 lb. )",
+        name: CHUCKROAST,
       },
       {
         quantity: 3,
-        name: "Stew Meat ( 1 lb. )",
+        name: STEWMEAT,
       },
       {
         quantity: 2,
-        name: "Bone-In Short Ribs",
+        name: BONEINSHORTRIBS,
       },
-      { quantity: 4, name: "Top Round Steak ( 1 lb. )" },
+      { quantity: 4, name: TOPROUND },
 
-      { quantity: 2, name: "Bottom Round Steak ( 1 lb. )" },
+      { quantity: 2, name: BOTTOMROUND },
       {
         quantity: 16,
-        name: "Ground Beef ( 1 lb. )",
+        name: GROUNDBEEF,
       },
       {
         quantity: 1,
-        name: "Liver ( 1 lb. )",
+        name: LIVER,
       },
     ];
     this.orderId = "1";

@@ -215,6 +215,7 @@ export default async function handler(
 
     res.json({ received: true });
   } catch (err) {
+    console.log(err);
     res.status(400).send(err);
     return;
   }
