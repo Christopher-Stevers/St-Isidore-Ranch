@@ -18,9 +18,10 @@ export default async function handler(
   req: Request,
   res: NextApiResponse,
 ) {
-  console.log(req.body);
-  const sig = req.headers.get("stripe-signature") as string;
-
+  const headers = req.headers as unknown as {
+    [key: string]: string;
+  };
+  const sig = headers["stripe-signature"];
   let event: Stripe.Event;
 
   try {
