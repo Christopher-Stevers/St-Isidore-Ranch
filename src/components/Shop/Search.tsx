@@ -15,7 +15,7 @@ const Search = ({
     setSearch(e.target.value);
   };
   return (
-    <div className="w-full justify-self-start py-12 lg:col-span-2 xl:col-span-3">
+    <div className="w-full justify-self-start py-6 lg:col-span-2 xl:col-span-3">
       <input
         onChange={handleSearch}
         value={search}

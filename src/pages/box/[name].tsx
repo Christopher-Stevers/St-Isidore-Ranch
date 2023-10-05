@@ -62,19 +62,19 @@ const ProductPage = () => {
           <button
             onClick={handleContactExpand}
             className={`flex w-full content-center items-center border-2 ${
-              contactExpanded
+              !contactExpanded
                 ? " border-primary-500"
                 : "border-transparent"
             } p-2 text-2xl font-semibold`}
           >
             Ask a Question
-            {contactExpanded ? (
+            {!contactExpanded ? (
               <ChevronDownIcon className="ml-auto h-6 w-6" />
             ) : (
               <ChevronUpIcon className="ml-auto h-6 w-6" />
             )}
           </button>
-          {!contactExpanded && (
+          {contactExpanded && (
             <ContactForm
               toggleOpen={handleContactExpand}
               title="Ask a Question"

@@ -20,6 +20,8 @@ const Shop = () => {
     <LayoutShared title={"Shop"}>
       <div className="grid grid-cols-[320px] content-center justify-center justify-items-center gap-16 lg:grid-cols-[repeat(2,_320px)] xl:grid-cols-[repeat(3,_320px)] ">
         <Search searchState={[search, setSearch]} />
+      </div>
+      <div className="grid grid-cols-[320px] content-center justify-center justify-items-center gap-16 lg:grid-cols-[repeat(2,_320px)] xl:grid-cols-[repeat(3,_320px)] ">
         {searchedBoxes.map((props) => {
           const {
             title,
