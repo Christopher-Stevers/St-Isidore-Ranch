@@ -14,7 +14,7 @@ export default function Page() {
   const defaultProps1 = {
     direction: "left",
     title: "Our Beef",
-    text: "To guarantee top-notch quality, we uphold rigorous standards of health and animal welfare throughout our operations. After our animals have reached maturity, they are processed by a provincially licensed butcher. Finally, we deliver the beef right to your doorstep using a refrigerated courier service.",
+    text: "To guarantee top-notch quality, we uphold rigorous standards of health and animal welfare throughout our operations. After our animals have reached maturity, they are processed by a provincially licensed butcher. Finally, we deliver the beef right to your doorstep through our courier partners. If you aren't satisfied with your delivery, we will refund you.",
     link: "",
     video: "https://www.youtube.com/embed/lIkwIEXWx8c",
     src: "/vacuumSteak.avif",
