@@ -1,4 +1,4 @@
-import { type Item } from "~/utils/boxTemplates";
+import { type Item } from "~/utils/boxManagement";
 import { type PrismaClient } from "@prisma/client";
 
 export const checkInStock = async (
@@ -7,12 +7,16 @@ export const checkInStock = async (
 ) => {
   const neededProducts = [];
   for (const element of input) {
+    const elementWithoutNewLine = element.name.replace(
+      /\n/g,
+      " ",
+    );
     const products = await prisma.product.findMany({
       take: element.quantity,
       where: {
         sold: false,
         productClass: {
-          name: element.name,
+          name: elementWithoutNewLine,
         },
         Box: null,
       },

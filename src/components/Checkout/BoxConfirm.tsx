@@ -1,8 +1,9 @@
 import { type Box } from "@prisma/client";
-import { getBoxFromClass } from "~/utils/boxTemplates";
+import { getBoxFromClass } from "~/utils/boxManagement";
 import { XCircleIcon } from "@heroicons/react/24/outline";
 import { api } from "~/utils/api";
 import { useCart } from "~/providers/cart";
+import { formatDollars } from "~/utils/lib";
 
 const BoxConfirm = ({ box }: { box: Box }) => {
   const [, cartDispatch] = useCart();
@@ -29,14 +30,16 @@ const BoxConfirm = ({ box }: { box: Box }) => {
       className="flex gap-6 bg-backdrop-500 px-8 py-4"
     >
       <div className="w-60">
-        <span className="text-xl">{box.title}</span>
-        {getBoxFromClass(box.title).items.map((item) => (
+        <span className="whitespace-pre text-xl">
+          {box.title}
+        </span>
+        {getBoxFromClass(box.title)?.items.map((item) => (
           <div key={item.name}>
             {item.quantity} {item.name}
           </div>
         ))}
       </div>
-      <span>${box.totalPrice}</span>
+      <span>{formatDollars(box.totalPrice)}</span>
       <button
         onClick={handleRemoveFronOrder}
         className="relative flex w-full flex-1"

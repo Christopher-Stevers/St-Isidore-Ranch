@@ -1,4 +1,5 @@
 import { type AppType } from "next/app";
+import Head from "next/head";
 import { type Session } from "next-auth";
 import { SessionProvider } from "next-auth/react";
 import {
@@ -39,15 +40,26 @@ const MyApp: AppType<{ session: Session | null }> = ({
   pageProps: { session, ...pageProps },
 }) => {
   return (
-    <SessionProvider session={session}>
-      <CartProvider>
-        <main
-          className={`${roboto.variable} ${rye.variable} ${cantarell.variable} ${tangerine.variable} font-sans`}
-        >
-          <Component {...pageProps} />
-        </main>
-      </CartProvider>
-    </SessionProvider>
+    <>
+      <Head>
+        <title>St Isidore Ranch</title>
+        <meta title="St Isidore Ranch" />
+        <meta
+          name="description"
+          content="Grass fed beef | from pasture to plate"
+        />
+        <link rel="icon" href="/favicon.png" />
+      </Head>
+      <SessionProvider session={session}>
+        <CartProvider>
+          <main
+            className={`${roboto.variable} ${rye.variable} ${cantarell.variable} ${tangerine.variable} font-sans`}
+          >
+            <Component {...pageProps} />
+          </main>
+        </CartProvider>
+      </SessionProvider>
+    </>
   );
 };
 

@@ -1,11 +1,6 @@
-import LayoutSecondary from "~/layouts/LayoutSecondary";
-import Order from "~/components/Checkout/Order";
-const Checkout = () => {
-  return (
-    <LayoutSecondary title={"Checkout"}>
-      <Order />
-    </LayoutSecondary>
-  );
+import Checkout from "~/components/Checkout/index";
+const Page = () => {
+  return <Checkout />;
 };
 
-export default Checkout;
+export default Page;

@@ -1,5 +1,13 @@
+import React, { type SetStateAction } from "react";
+import Link from "next/link";
 import AddressFieldInput from "./AddressFieldInput";
-const AddAddress = () => {
+import { PAYMENT } from "./index";
+import CheckoutConfirmButton from "./CheckoutConfirmButton";
+const AddAddress = ({
+  setPaymentStep,
+}: {
+  setPaymentStep: React.Dispatch<SetStateAction<string>>;
+}) => {
   return (
     <div className="flex flex-col gap-6 pb-6">
       <h3 className="text-3xl font-semibold ">
@@ -7,8 +15,11 @@ const AddAddress = () => {
       </h3>
 
       <p>
-        Please note that we only ship within Ontario at this
-        time.
+        Please note that we only ship to Perth County,
+        London, and Waterloo at this time. If you live
+        outside of that, please{" "}
+        <Link href="/contact">contact me</Link> and I'll do
+        my best to accomodate you.
       </p>
       <AddressFieldInput
         name="Address line 1"
@@ -24,6 +35,14 @@ const AddAddress = () => {
         field="postalCode"
       />
       <AddressFieldInput name="Name" field="name" />
+
+      <CheckoutConfirmButton
+        onClick={() => {
+          setPaymentStep(PAYMENT);
+        }}
+      >
+        Save
+      </CheckoutConfirmButton>
     </div>
   );
 };

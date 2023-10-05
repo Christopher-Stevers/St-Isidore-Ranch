@@ -14,7 +14,6 @@ const emailWrapper = async ({
   message,
   htmlMessage,
 }: EmailOptions) => {
-  console.log(email);
   try {
     const transporter: Transporter =
       nodemailer.createTransport({
@@ -28,7 +27,7 @@ const emailWrapper = async ({
 
     const mailOptions = {
       from: env.EMAIL_USERNAME,
-      to: "christopherstevers@devstevers.com",
+      to: email,
       subject: subject,
       text: message,
       html: htmlMessage,

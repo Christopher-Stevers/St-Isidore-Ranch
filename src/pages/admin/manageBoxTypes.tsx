@@ -1,10 +1,10 @@
-import LayoutSecondary from "~/layouts/LayoutSecondary";
+import LayoutShared from "~/components/shared/LayoutShared";
 
 const ManageBoxTypes = () => {
   return (
-    <LayoutSecondary title={"Manage Box templates"}>
+    <LayoutShared title={"Manage Box templates"}>
       Manage box templates
-    </LayoutSecondary>
+    </LayoutShared>
   );
 };
 export default ManageBoxTypes;
