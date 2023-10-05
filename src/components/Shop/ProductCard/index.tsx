@@ -21,7 +21,7 @@ const ProductCard = ({
     <div className="grid w-80 grid-rows-[180px_36px] gap-x-16  gap-y-4 bg-backdrop-500 px-4 pb-8">
       <Link
         className="-mx-4 underline"
-        href={`/product/${title}`}
+        href={`/box/${title}`}
       >
         <Image
           alt="picture of product"
@@ -38,13 +38,8 @@ const ProductCard = ({
         </h3>
       </div>
       <div className="text-lg">
-        <span className="w-full truncate">
-          {description}
-        </span>
-        <Link
-          className="underline"
-          href={`/product/${title}`}
-        >
+        <div className=" w-full">{description}</div>
+        <Link className="underline" href={`/box/${title}`}>
           more info
         </Link>
       </div>

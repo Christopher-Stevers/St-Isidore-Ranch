@@ -6,9 +6,11 @@ import Link from "next/link";
 const AddToCart = ({
   items,
   title,
+  hasMainPageStyles,
 }: {
   items: Item[];
   title: string;
+  hasMainPageStyles?: boolean;
 }) => {
   const [cartState, cartDispatch] = useCart();
   const { data: isInStock } =
@@ -28,28 +30,40 @@ const AddToCart = ({
   };
 
   return (
-    <>
+    <div className="self-end">
       {isInStock ? (
         <div className="flex w-full justify-between px-4">
           <button
             onClick={handleAddToCard}
-            className="rounded bg-primary-500 py-2 px-4 font-semibold text-white hover:bg-black"
+            className={
+              hasMainPageStyles
+                ? "py-2 px-4 font-semibold leading-loose text-black"
+                : "bg-primary-500 py-2 px-4 text-center font-semibold leading-loose text-white"
+            }
           >
             Add to Cart
           </button>
           <Link
             href="/checkout"
-            className="flex items-center rounded bg-primary-500 py-2 px-4 font-semibold text-white hover:bg-black"
+            className={
+              "bg-primary-500 py-2 px-4 text-center font-semibold leading-loose text-white"
+            }
           >
             Checkout
           </Link>
         </div>
       ) : (
-        <span className="py-2 px-4 font-semibold leading-loose text-black">
+        <span
+          className={
+            !hasMainPageStyles
+              ? "py-2 px-4 font-semibold leading-loose text-black"
+              : "bg-primary-500 py-2 px-4 text-center font-semibold leading-loose text-white"
+          }
+        >
           Out of Stock
         </span>
       )}
-    </>
+    </div>
   );
 };
 

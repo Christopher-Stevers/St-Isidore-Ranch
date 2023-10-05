@@ -183,7 +183,8 @@ class PrimeSteaksBox implements Box {
   items: Item[];
 
   constructor() {
-    this.description = LOREM_IPSUM;
+    this.description =
+      "A box full of our finest steaks for your grilling pleasure!";
     this.title = "Prime Steaks";
     this.totalPrice = 56999;
     this.boxSize = 0;

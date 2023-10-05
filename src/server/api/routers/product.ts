@@ -60,4 +60,16 @@ export const productRouter = createTRPCRouter({
       const { status } = await checkInStock(input, prisma);
       return status;
     }),
+
+  getProductByName: publicProcedure
+    .input(z.string())
+    .query(async ({ ctx: { prisma }, input }) => {
+      return prisma.product.findFirst({
+        where: {
+          productClass: {
+            name: input,
+          },
+        },
+      });
+    }),
 });
