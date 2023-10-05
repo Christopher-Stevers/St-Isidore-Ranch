@@ -28,40 +28,47 @@ const AddToCart = ({
   const handleAddToCard = () => {
     addToCart({ title, orderId: cartState?.id });
   };
-
+  const darkButton =
+    "bg-primary-500 py-2 px-4 text-center font-semibold leading-loose text-white";
+  const lightButton =
+    "w-full py-2 text-center font-semibold leading-loose text-black";
   return (
-    <div className="self-end">
+    <div className="w-full self-center">
       {isInStock ? (
-        <div className="flex w-full justify-between px-4">
+        <div
+          className={`flex w-full justify-between gap-y-8 ${
+            hasMainPageStyles ? "flex-col" : "flex-row"
+          }`}
+        >
           <button
             onClick={handleAddToCard}
-            className={
-              hasMainPageStyles
-                ? "py-2 px-4 font-semibold leading-loose text-black"
-                : "bg-primary-500 py-2 px-4 text-center font-semibold leading-loose text-white"
-            }
+            className={darkButton}
           >
             Add to Cart
           </button>
           <Link
             href="/checkout"
             className={
-              "bg-primary-500 py-2 px-4 text-center font-semibold leading-loose text-white"
+              hasMainPageStyles
+                ? lightButton.concat(
+                    " border-2 border-primary-500",
+                  )
+                : darkButton
             }
           >
             Checkout
           </Link>
         </div>
       ) : (
-        <span
+        <div
           className={
             !hasMainPageStyles
-              ? "py-2 px-4 font-semibold leading-loose text-black"
-              : "bg-primary-500 py-2 px-4 text-center font-semibold leading-loose text-white"
+              ? "w-full py-2 text-center font-semibold leading-loose text-black"
+              : darkButton
           }
         >
           Out of Stock
-        </span>
+        </div>
       )}
     </div>
   );

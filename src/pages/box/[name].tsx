@@ -27,14 +27,18 @@ const ProductPage = () => {
     <LayoutShared title={"St Isidore Ranch"}>
       <div className="mx-auto grid w-[1364px] max-w-fit justify-start justify-items-stretch gap-4  gap-y-16 px-8 lg:grid-cols-[2fr_3fr] lg:gap-24 lg:px-16">
         <div className="flex flex-col gap-y-3 text-2xl md:gap-y-6">
-          <h2 className="font-display text-2xl lg:text-4xl">
+          <h2 className="whitespace-pre font-display text-2xl lg:text-4xl">
             {box.title}
           </h2>
           <p className="">
             {formatDollars(box.totalPrice)}
           </p>
           <p>Free Shipping!</p>
-          <AddToCart title={box.title} items={box.items} />
+          <AddToCart
+            title={box.title}
+            items={box.items}
+            hasMainPageStyles={true}
+          />
           <p>{box.description}</p>
           {boxItems.length
             ? boxItems.map((item) => {
@@ -61,7 +65,7 @@ const ProductPage = () => {
               contactExpanded
                 ? " border-primary-500"
                 : "border-transparent"
-            } p-2 text-3xl font-semibold`}
+            } p-2 text-2xl font-semibold`}
           >
             Ask a Question
             {contactExpanded ? (

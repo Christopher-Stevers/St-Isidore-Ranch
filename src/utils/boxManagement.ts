@@ -387,11 +387,17 @@ export const getBoxFromClass = (title: string) => {
     case `Ground Beef Bundle 
 ( Small )`:
       return new GroundBeefBoxSM();
+    case "Ground Beef Bundle ( Small )":
+      return new GroundBeefBoxSM();
     case `Ground Beef Bundle 
 ( Medium )`:
       return new GroundBeefBoxMD();
+    case "Ground Beef Bundle ( Medium )":
+      return new GroundBeefBoxMD();
     case `Ground Beef Bundle 
 ( Large )`:
+      return new GroundBeefBoxLG();
+    case "Ground Beef Bundle ( Large )":
       return new GroundBeefBoxLG();
     case "Prime Steaks":
       return new PrimeSteaksBox();
