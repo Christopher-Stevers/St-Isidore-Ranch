@@ -799,6 +799,8 @@ export const getBoxGroupFromSlug = (slug: string) => {
       return EightBeefBundleGroup;
     case "quarter-beef":
       return QuarterBeefBundleGroup;
+    case "hamburger-patties":
+      return HamburgerPattiesGroup;
     default:
       throw new Error(`${slug} not found`);
   }
