@@ -44,6 +44,8 @@ type Order =
         boxSize: number;
         orderId: string | null;
         title: string;
+        variant: string | null;
+        slug: string;
       }[];
     }
   | null

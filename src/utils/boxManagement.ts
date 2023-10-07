@@ -326,11 +326,11 @@ class MediumPrimeSteaksBox implements Box {
 
     this.items = [
       {
-        quantity: 6,
+        quantity: 4,
         name: BONELESSRIBEYE,
       },
-      { quantity: 6, name: TENDERLOIN },
-      { quantity: 6, name: SIRLOIN },
+      { quantity: 4, name: TENDERLOIN },
+      { quantity: 4, name: SIRLOIN },
     ];
   }
 }
@@ -419,7 +419,7 @@ class LargeOvenBundle implements Box {
     this.totalPrice = 379.99;
     this.boxSize = 0;
     this.slug = "oven-bundle";
-    this.variant = "sm-small";
+    this.variant = "Large";
     this.src = "/boxPics/roastBeef.jpg";
     this.items = [
       { quantity: 4, name: "London Broil ( 1 lb. )" },
@@ -474,12 +474,12 @@ class LargeHamburgerPatties implements Box {
   constructor() {
     this.description = LOREM_IPSUM;
     this.title = "Hamburger Patties";
-    this.variant = "small";
+    this.variant = "large";
     this.totalPrice = 6999;
     this.slug = "lg-hamburger-patties";
     this.boxSize = 0;
     this.src = "/boxPics/pattyBeef.jpg";
-    this.items = [{ quantity: 8, name: "1/4 patties" }];
+    this.items = [{ quantity: 16, name: "1/4 patties" }];
     this.orderId = "1";
   }
 }
