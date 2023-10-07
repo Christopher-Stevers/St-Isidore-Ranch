@@ -1,4 +1,18 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
-@import url('https://fonts.googleapis.com/css?family=Lobster&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=Lobster&family=Roboto:wght@300;400&family=Rye&display=swap");
+
+@layer utilities {
+  .custom-list-bullet {
+    list-style: none;
+  }
+
+  .custom-list-bullet li::before {
+    content: "\2022"; /* Unicode character for bullet point (you can change this) */
+    color: #000000; /* Custom color for the bullet */
+    font-size: 1rem; /* Custom font size for the bullet */
+    margin-right: 0.5rem; /* Spacing between bullet and list item text */
+    font-family: var(--rye), sans;
+  }
+}

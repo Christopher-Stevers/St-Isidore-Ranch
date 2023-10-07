@@ -1,53 +1,45 @@
 import React, { useState } from "react";
-import { createdBoxes } from "~/utils/boxManagement";
+import { BoxGroups } from "~/utils/boxManagement";
 import LayoutShared from "~/components/shared/LayoutShared";
 import ProductCard from "./ProductCard";
 import Search from "./Search";
 const Shop = () => {
   const [search, setSearch] = useState("");
-  const searchedBoxes = createdBoxes.filter((elem) => {
-    const isTitleMatch = elem.title
-      .toLowerCase()
-      .includes(search.toLowerCase());
-    const isContentsMatch = elem.items
-      .map((elem) => elem.name)
+  const searchedBoxGroups = BoxGroups.filter((elem) => {
+    const groupName = elem.name;
+    const childBoxesNames = elem.Boxes.map(
+      (elem) => elem.title,
+    );
+    const childProductsNames = elem.Boxes.map((elem) =>
+      elem.items.map((elem) => elem.name),
+    ).flat();
+    const searchableStrings = [
+      groupName,
+      ...childBoxesNames,
+      ...childProductsNames,
+    ];
+    const isMatch = searchableStrings
       .join(" ")
       .toLowerCase()
       .includes(search.toLowerCase());
-    return isTitleMatch || isContentsMatch;
+    return isMatch;
   });
+  console.log(searchedBoxGroups, "searchedBoxGroups");
   return (
     <LayoutShared title={"Shop"}>
       <div className="grid grid-cols-[320px] content-center justify-center justify-items-center gap-16 lg:grid-cols-[repeat(2,_320px)] xl:grid-cols-[repeat(3,_320px)] ">
         <Search searchState={[search, setSearch]} />
       </div>
       <div className="grid grid-cols-[320px] content-center justify-center justify-items-center gap-16 lg:grid-cols-[repeat(2,_320px)] xl:grid-cols-[repeat(3,_320px)] ">
-        {searchedBoxes.map((props) => {
-          const {
-            title,
-            items,
-            src,
-            totalPrice,
-            description,
-          } = props;
+        {searchedBoxGroups.map((boxGroup) => {
           return (
             <ProductCard
-              key={title}
-              totalPrice={totalPrice}
-              title={title}
-              src={src}
-              items={items}
-              description={description}
+              key={boxGroup.name}
+              boxGroup={boxGroup}
             />
           );
         })}
-        <ProductCard
-          key={"Call me"}
-          totalPrice={0}
-          title={"Custom Box"}
-          src={"/telephone.jpg"}
-          items={[]}
-        />
+        <ProductCard />
       </div>
     </LayoutShared>
   );

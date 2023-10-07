@@ -8,13 +8,13 @@ datasource db {
 }
 
 model Example {
-  id        String  @id @default(auto()) @map("_id") @db.ObjectId
+  id        String   @id @default(auto()) @map("_id") @db.ObjectId
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
 }
 
 model Account {
-  id                       String @id @default(auto()) @map("_id") @db.ObjectId
+  id                       String  @id @default(auto()) @map("_id") @db.ObjectId
   userId                   String  @db.ObjectId
   type                     String
   provider                 String
@@ -34,7 +34,7 @@ model Account {
 }
 
 model Session {
-  id           String  @id @default(auto()) @map("_id") @db.ObjectId
+  id           String   @id @default(auto()) @map("_id") @db.ObjectId
   sessionToken String   @unique
   userId       String   @db.ObjectId
   expires      DateTime
@@ -44,18 +44,17 @@ model Session {
 }
 
 model User {
-  id            String   @id @default(auto()) @map("_id") @db.ObjectId
+  id            String    @id @default(auto()) @map("_id") @db.ObjectId
   name          String?
   email         String?   @unique
   emailVerified DateTime?
   image         String?
   accounts      Account[]
   sessions      Session[]
-  
 }
 
 model Box {
-  id         String   @id @default(auto()) @map("_id") @db.ObjectId
+  id         String    @id @default(auto()) @map("_id") @db.ObjectId
   createdAt  DateTime  @default(now())
   updatedAt  DateTime?
   totalPrice Float
@@ -63,12 +62,15 @@ model Box {
   items      Product[]
   Order      Order?    @relation(fields: [orderId], references: [id])
   orderId    String?   @db.ObjectId
-title String
+  slug       String    @unique
+  title      String
+  variant    String?
+
   @@index([orderId])
 }
 
 model BoxTemplate {
-  id              String        @id @default(auto()) @map("_id") @db.ObjectId
+  id              String         @id @default(auto()) @map("_id") @db.ObjectId
   createdAt       DateTime       @default(now())
   updatedAt       DateTime       @updatedAt
   name            String
@@ -79,34 +81,35 @@ model BoxTemplate {
 }
 
 model Order {
-  id         String  @id @default(auto()) @map("_id") @db.ObjectId
-  createdAt  DateTime @default(now())
-  updatedAt  DateTime @updatedAt
-  totalPrice Float
-  boxes      Box[]
-  paymentIntent String? @unique
-  addressId String? @db.ObjectId 
-  address Address? @relation(fields: [addressId], references: [id])
-  paid Boolean @default(false)
+  id            String   @id @default(auto()) @map("_id") @db.ObjectId
+  createdAt     DateTime @default(now())
+  updatedAt     DateTime @updatedAt
+  totalPrice    Float
+  boxes         Box[]
+  paymentIntent String?  @unique
+  addressId     String?  @db.ObjectId
+  address       Address? @relation(fields: [addressId], references: [id])
+  paid          Boolean  @default(false)
 }
+
 model Address {
-  id         String  @id @default(auto()) @map("_id") @db.ObjectId
+  id         String   @id @default(auto()) @map("_id") @db.ObjectId
   createdAt  DateTime @default(now())
   updatedAt  DateTime @updatedAt
-  name String?
-  address1 String?
-  address2 String?
-  city String?
-  state String?
+  name       String?
+  address1   String?
+  address2   String?
+  city       String?
+  state      String?
   postalCode String?
-  country String?
-  email String?
-  orders Order[]
-  orderIds String[] @db.ObjectId
+  country    String?
+  email      String?
+  orders     Order[]
+  orderIds   String[] @db.ObjectId
 }
 
 model Product {
-  id             String      @id @default(auto()) @map("_id") @db.ObjectId
+  id             String       @id @default(auto()) @map("_id") @db.ObjectId
   quantity       Float
   productClass   ProductClass @relation(fields: [productClassId], references: [id])
   productClassId String       @db.ObjectId
@@ -119,7 +122,7 @@ model Product {
 }
 
 model ProductClass {
-  id             String       @id @default(auto()) @map("_id") @db.ObjectId
+  id             String        @id @default(auto()) @map("_id") @db.ObjectId
   createdAt      DateTime      @default(now())
   updatedAt      DateTime      @updatedAt
   name           String
@@ -130,24 +133,22 @@ model ProductClass {
 }
 
 model VerificationToken {
-  identifier String  @id @default(auto()) @map("_id") @db.ObjectId
+  identifier String   @id @default(auto()) @map("_id") @db.ObjectId
   token      String   @unique
   expires    DateTime
 
   @@unique([identifier, token])
-
-  
 }
 
 model StripeEvent {
-    id               String   @id @map("_id") 
-    api_version      String?
-    data             Json
-    request          Json?
-    type             String
-    object           String
-    account          String?
-    created          DateTime
-    livemode         Boolean
-    pending_webhooks Float
+  id               String   @id @map("_id")
+  api_version      String?
+  data             Json
+  request          Json?
+  type             String
+  object           String
+  account          String?
+  created          DateTime
+  livemode         Boolean
+  pending_webhooks Float
 }

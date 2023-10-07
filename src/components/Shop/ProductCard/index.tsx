@@ -1,28 +1,38 @@
 import Image from "next/image";
-import { type Item } from "~/utils/boxManagement";
 import AddToCart from "./AddToCartButtons";
 import { formatDollars } from "~/utils/lib";
+import { type BoxGroupType } from "~/utils/boxManagement";
 import Link from "next/link";
-export type ProductCardProps = {
-  title: string;
-  src: string;
-  items: Item[];
-  totalPrice: number;
-  description?: string;
-};
+
 const ProductCard = ({
-  title,
-  items,
-  src,
-  totalPrice,
-  description,
-}: ProductCardProps) => {
+  boxGroup,
+}: {
+  boxGroup?: BoxGroupType;
+}) => {
+  const renderboxGroup = boxGroup ?? {
+    name: "Custom Box",
+    description:
+      "Call me at 519-703-6780 if you'd like a custom box :)",
+    slug: "/contact",
+    priceMax: null,
+    priceMin: null,
+    src: "/telephone.jpg",
+    isContact: true,
+    Boxes: [],
+  };
+  const { name, description, src } = renderboxGroup;
+  const isContact = renderboxGroup.slug === "/contact";
+  const slug = isContact
+    ? renderboxGroup.slug
+    : `/box-options/${renderboxGroup.slug}`;
+  const Boxes = renderboxGroup.Boxes ?? [];
+  const primaryBox = Boxes[0];
+  const totalPrice = primaryBox?.totalPrice ?? 0;
+  const boxItems = primaryBox?.items ?? [];
+
   return (
     <div className="grid w-80 grid-rows-[180px_36px] gap-x-16  gap-y-4 bg-backdrop-500 px-4 pb-8">
-      <Link
-        className="-mx-4 underline"
-        href={`/box/${title}`}
-      >
+      <Link className="-mx-4 underline" href={slug}>
         <Image
           alt="picture of product"
           className="h-[180px] w-[320px]  "
@@ -34,22 +44,24 @@ const ProductCard = ({
 
       <div className="flex items-center justify-between">
         <h3 className="whitespace-pre text-3xl font-semibold">
-          {title}
+          {name}
         </h3>
       </div>
       <div className="text-lg">
         <div className=" w-full">{description}</div>
-        <Link className="underline" href={`/box/${title}`}>
+        <Link className="underline" href={`/box/${slug}`}>
           more info
         </Link>
       </div>
 
       <div className="rounded-full text-left text-2xl">
-        {!totalPrice ? "" : formatDollars(totalPrice)}
+        {primaryBox?.totalPrice
+          ? formatDollars(totalPrice)
+          : "Call for pricing"}
       </div>
       <div className="flex justify-center font-semibold text-slate-500">
-        {totalPrice !== 0 && (
-          <AddToCart items={items} title={title} />
+        {primaryBox && (
+          <AddToCart items={boxItems} slug={slug} />
         )}
       </div>
     </div>

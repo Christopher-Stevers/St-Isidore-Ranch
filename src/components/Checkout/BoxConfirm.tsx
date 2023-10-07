@@ -1,5 +1,8 @@
 import { type Box } from "@prisma/client";
-import { getBoxFromClass } from "~/utils/boxManagement";
+import {
+  type Item,
+  getBoxFromSlug,
+} from "~/utils/boxManagement";
 import { XCircleIcon } from "@heroicons/react/24/outline";
 import { api } from "~/utils/api";
 import { useCart } from "~/providers/cart";
@@ -21,7 +24,7 @@ const BoxConfirm = ({ box }: { box: Box }) => {
     removeItem({
       boxId: box.id,
       orderId: box.orderId,
-      boxTitle: box.title,
+      slug: box.slug,
     });
   };
   return (
@@ -33,11 +36,13 @@ const BoxConfirm = ({ box }: { box: Box }) => {
         <span className="whitespace-pre text-xl">
           {box.title}
         </span>
-        {getBoxFromClass(box.title)?.items.map((item) => (
-          <div key={item.name}>
-            {item.quantity} {item.name}
-          </div>
-        ))}
+        {getBoxFromSlug(box.slug)?.items.map(
+          (item: Item) => (
+            <div key={item.name}>
+              {item.quantity} {item.name}
+            </div>
+          ),
+        )}
       </div>
       <span>{formatDollars(box.totalPrice)}</span>
       <button

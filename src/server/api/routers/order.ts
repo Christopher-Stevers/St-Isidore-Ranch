@@ -1,5 +1,5 @@
 import { z } from "zod";
-import { getBoxFromClass } from "~/utils/boxManagement";
+import { getBoxFromSlug } from "~/utils/boxManagement";
 import { checkInStock } from "~/server/helpers/inventory";
 
 import {
@@ -43,12 +43,12 @@ export const orderRouter = createTRPCRouter({
     .input(
       z.object({
         orderId: z.string().nullable(),
-        boxTitle: z.string(),
+        slug: z.string(),
         boxId: z.string(),
       }),
     )
     .mutation(async ({ ctx: { prisma }, input }) => {
-      const box = getBoxFromClass(input.boxTitle);
+      const box = getBoxFromSlug(input.slug);
       if (!input.orderId) return null;
       return prisma.order.update({
         where: {
@@ -60,7 +60,6 @@ export const orderRouter = createTRPCRouter({
           boxes: {
             deleteMany: [
               {
-                title: input.boxTitle,
                 id: input.boxId,
               },
             ],
@@ -76,12 +75,12 @@ export const orderRouter = createTRPCRouter({
   addToOrder: publicProcedure
     .input(
       z.object({
-        title: z.string(),
+        slug: z.string(),
         orderId: z.string().optional(),
       }),
     )
     .mutation(async ({ ctx: { prisma }, input }) => {
-      const box = getBoxFromClass(input.title);
+      const box = getBoxFromSlug(input.slug);
       const { neededProducts, status } = await checkInStock(
         box.items,
         prisma,
@@ -96,7 +95,8 @@ export const orderRouter = createTRPCRouter({
             updatedAt: new Date(),
             boxes: {
               create: {
-                title: input.title,
+                title: box.title,
+                slug: input.slug,
                 totalPrice: box.totalPrice,
                 boxSize: box.boxSize,
                 items: {
@@ -123,7 +123,8 @@ export const orderRouter = createTRPCRouter({
           updatedAt: new Date(),
           boxes: {
             create: {
-              title: input.title,
+              title: box.title,
+              slug: input.slug,
               totalPrice: box.totalPrice,
               boxSize: box.boxSize,
               items: {
