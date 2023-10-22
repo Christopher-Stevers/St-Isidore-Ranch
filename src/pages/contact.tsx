@@ -76,27 +76,8 @@ export const ContactForm = ({
 
 const Contact = () => {
   return (
-    <LayoutShared title={"Contact Me"}>
-      <div className="flex w-full justify-center px-32">
-        <div className="grow">
-          <h3 className="text-3xl font-semibold ">
-            Contact Info
-          </h3>
-          <div className="py-4">
-            <div className="font-semibold">Phone</div>
-            <div>519-703-3780</div>
-          </div>
-          <div className="py-4">
-            <div className="font-semibold">Address</div>
-            <div>5146 Perth line 44</div>
-            <div>Gadshill, ON N0K 1J0</div>
-          </div>
-          <div className="py-4">
-            <div className="font-semibold">Email</div>
-            <div>christopher.stevers1@gmail.com</div>
-          </div>
-        </div>
-
+    <LayoutShared title={"Contact"}>
+      <div className="flex w-full flex-wrap justify-center px-4 lg:px-32">
         <ContactForm />
       </div>
     </LayoutShared>

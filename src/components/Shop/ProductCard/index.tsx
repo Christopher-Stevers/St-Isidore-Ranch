@@ -49,7 +49,7 @@ const ProductCard = ({
       </div>
       <div className="text-lg">
         <div className=" w-full">{description}</div>
-        <Link className="underline" href={`/box/${slug}`}>
+        <Link className="underline" href={`/${slug}`}>
           more info
         </Link>
       </div>

@@ -6,21 +6,24 @@ import TranslateAndFade from "~/components/shared/TranslateAndFade";
 const HomePage = () => {
   return (
     <LayoutMain>
-      <div id="about"></div>
       {cardContent.map((props, index) => {
-        const { title, text, link, video, src } = props;
+        const { title, text, link, video, src, btnText } =
+          props;
         const direction =
           index % 2 === 0 ? "left" : "right";
         return (
-          <TranslateAndFade direction={direction}>
+          <TranslateAndFade
+            key={index}
+            direction={direction}
+          >
             <AboutCard
-              key={title}
               direction={direction}
               title={title}
               text={text}
               link={link}
               video={video}
               src={src}
+              btnText={btnText}
             />
           </TranslateAndFade>
         );

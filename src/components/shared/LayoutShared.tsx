@@ -10,8 +10,8 @@ const LayoutShared = ({
 }) => {
   return (
     <>
-      <HeaderShared>{title}</HeaderShared>
-      <div className="min-h-[calc(100vh-340px)] pb-48 ">
+      <HeaderShared title={title}></HeaderShared>
+      <div className="min-h-[calc(100vh-340px)] pt-16 pb-48 ">
         {children}
       </div>
       <Footer />

@@ -18,7 +18,6 @@ const ProductPage = ({
 }: {
   boxGroup: (typeof BoxGroups)[number];
 }) => {
-  console.log(boxGroup, "my box group");
   const [contactExpanded, setContactExpanded] =
     useState(false);
   const boxOptions = boxGroup.Boxes;
@@ -80,15 +79,17 @@ const ProductPage = ({
                   return (
                     <li
                       key={item.name}
-                      className="flex list-disc gap-2 py-2 text-2xl"
+                      className="flex list-disc gap-2 py-2 font-display text-2xl"
                     >
-                      <span>{item.quantity}</span>
-                      <span className="whitespace-pre">
-                        {item.name.replace(
-                          removeNewlinesRegex,
-                          " ",
-                        )}
-                      </span>
+                      <div className="font-sans">
+                        <span>{item.quantity}</span>{" "}
+                        <span className="whitespace-pre">
+                          {item.name.replace(
+                            removeNewlinesRegex,
+                            " ",
+                          )}
+                        </span>
+                      </div>
                     </li>
                   );
                 })
@@ -156,7 +157,6 @@ export const getServerSideProps = ({
 }) => {
   const { slug } = params;
   const boxGroup = getBoxGroupFromSlug(slug as string);
-  console.log(boxGroup, JSON.stringify(boxGroup));
   return {
     props: {
       boxGroup: {

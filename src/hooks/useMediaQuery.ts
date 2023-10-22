@@ -85,10 +85,6 @@ export const mediaQueryCompare = (
     xl: 3,
     "2xl": 4,
   };
-  console.log(
-    mediaQuery[currentMediaQueryString] >=
-      mediaQuery[targetMediaQueryString],
-  );
   return (
     mediaQuery[currentMediaQueryString] >=
     mediaQuery[targetMediaQueryString]

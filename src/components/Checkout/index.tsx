@@ -32,7 +32,6 @@ const Checkout = () => {
   const router = useRouter();
   const [clientSecret, setClientSecret] = useState("");
   const currentMaxBreakpoint = useMediaQuery();
-  console.log(currentMaxBreakpoint);
   const { mutate } =
     api.stripe.createPaymentIntent.useMutation({
       onSuccess: (data) => {
@@ -79,7 +78,7 @@ const Checkout = () => {
   return (
     <LayoutShared title={"Checkout"}>
       {paymentStep}
-      <div className="px-32">
+      <div className="px-8 lg:px-32">
         <BackLink>
           <button
             onClick={() => {

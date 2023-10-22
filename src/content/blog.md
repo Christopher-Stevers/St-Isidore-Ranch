@@ -10,13 +10,20 @@ ogImage:
   url: '/assets/blog/dynamic-routing/cover.jpg'
 ---
 
-When I was growing up my family's organic farm I was always embarassed by the inevitable weed infestation every summer. As the years passed we realized as much as we tried the only way to manage them would be to plant a crop that could compete with them. And it was a pretty simple - what we needed was grass.
-Hay to be more specific. This was the missing piece, this was what we needed to take our farm from being a broken, un-productive ecosystem to being system that really works.
+### Organic to Regenerative
 
-And it turns out grazing in the summer and hay for the winter the missing piece of agriculture in a broader way.
+When I was growing up my family's organic farm I dreaded the nearly inevitable weed infestation that happens when you don't use chemicals to control them. Try as we might every you are weed problem got worse until we realized our land was trying to teach us.
+The weeds were growing because they were the most successful competitors in the field. It was up to us to find a crop more competitive than corn and soybean and more useful than weeds.
 
-While grazing is still practiced on a large scale in areas with poorer land, the richest soils are relentlessly cropped with a more valueable crop like corn or soybeans. This wouldn't be possible without the use of agri-chemicals, but even with their help soils are slowly degrading. Why is this? Prennial forages have a unique ability to build soils.
+That solution turned out to be pretty simple; what we needed was grass. This was what was missing piece of our little agri-ecosystem. Every ecosystem needs diversity, and we had been lacking it. Bringing grass and other perennial [forages](https://en.wikipedia.org/wiki/Forage) into it, allowed the land to regenerate and build new soil so it can provide food for years to come.
 
+### A Wider Problem
+
+While grazing is still practiced on a large scale in areas dry and infertile land, the richest soils are relentlessly cropped with fieldcrops like corn or soybeans. This wouldn't be possible without the use of agri-chemicals, and even with their help soils are slowly degrading. Why is this? Prennial forages have a unique ability to build soils.
 Forages cover soils, thereby protecting them inevitable erosion that wears away on tilled cropland. Meanwhile the grazing animals generously donate their manure which is readily incorporated into the soil by earthworms and an army of beneficial bugs.
 
-The creates a system literally pulls carbon and nitrogen from the air and creates deep, rich topsoil. And the icing on the cake is a few extra animals 
+The creates a system literally pulls CO2 and Nitrogen from the air and builds soils capable of sustaining people and animals for years to come. At the same time its can provide the most nutrient dense meat in the human diet - grassfed beef. So why isn't this approach more common? It requires a mindshift from the industrial input driven agriculture that is ubiquitous in North America. Fortunately there is a growing movement toward regenerative agriculture through the work of people like [Gabe Brown](https://brownsranch.us/), [Joel Salatin](https://www.polyfacefarms.com/), and [Allan Savory](https://www.savory.global/). At St Isidore ranch we're blessed to be standing on the shoulders of giants as we do our little part in this great shift.
+
+### Be a Part of the Solution ( and eat like a king )
+
+Sounds great, but why does it matter to you? As a consumer you can be a part of this shift by buying local, regeneratively raised meat. With [St Isidore Ranch]("/") you can enjoy premium grassfed beef while knowing that you are choosing a better future at the same time.

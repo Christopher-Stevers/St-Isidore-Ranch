@@ -18,7 +18,7 @@ const emailWrapper = async ({
     const transporter: Transporter =
       nodemailer.createTransport({
         host: "mail.privateemail.com",
-        port: 465, // e.g., "Gmail", "Outlook", "SendGrid", etc.
+        port: 465,
         auth: {
           user: env.EMAIL_USERNAME,
           pass: env.EMAIL_PASSWORD,

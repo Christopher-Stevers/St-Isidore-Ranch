@@ -1,6 +1,7 @@
 import React from "react";
 import Image from "next/image";
 import HeroButton from "./HeroButton";
+import HeaderShared from "~/components/shared/HeaderShared";
 
 const HeaderMain: React.FC = () => {
   return (
@@ -13,7 +14,7 @@ const HeaderMain: React.FC = () => {
           src={"/hero2.jpg"}
         />
         <div
-          className=" absolute top-0 
+          className=" absolute top-0 z-20 
           grid h-screen w-full
           items-center
           justify-center
@@ -21,8 +22,9 @@ const HeaderMain: React.FC = () => {
         gap-16
         bg-black/70 font-display
         text-white
-        lg:grid-cols-2 lg:grid-rows-2 lg:justify-end lg:p-32"
+        lg:grid-cols-2 lg:grid-rows-[1fr_1fr_0.5fr_0.5fr] lg:justify-end lg:p-32"
         >
+          <div className="pt-16"></div>
           <div className="-md:left-20 relative mx-auto grid h-min gap-8 md:col-span-2 lg:col-span-1 lg:col-start-1 lg:self-start">
             <h1 className="flex w-min  flex-wrap justify-center gap-x-4 gap-y-4 whitespace-nowrap font-display text-6xl text-white md:text-7xl lg:flex-nowrap lg:justify-start lg:text-8xl">
               <span className="inline"> St. Isidore </span>
@@ -36,15 +38,19 @@ const HeaderMain: React.FC = () => {
           <HeroButton
             text="About"
             link="#about"
-            className="justify-self-center bg-white text-primary-500 md:row-start-2 md:justify-self-end"
+            className="min-w-[200px] justify-self-center bg-white text-primary-500 md:row-start-3 md:justify-self-end"
           />
 
           <HeroButton
             text="Shop"
             link="/shop"
-            className="row-start-3 border-4 border-white bg-primary-500 text-white md:row-start-2 md:justify-self-start"
+            className="row-start-3 min-w-[200px] border-4 border-white bg-primary-500 text-white md:row-start-3 md:justify-self-start"
           />
         </div>
+        <HeaderShared
+          title={"home"}
+          className="absolute top-0 z-20 bg-transparent"
+        />
       </header>
     </>
   );

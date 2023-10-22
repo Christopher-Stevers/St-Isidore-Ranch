@@ -29,6 +29,7 @@ const Footer: React.FC = () => {
     },
   ];
   const websiteLinks: WebsiteLink[] = [
+    { name: "Home", link: "/" },
     {
       name: "Contact",
       link: "/contact",
@@ -50,7 +51,7 @@ const Footer: React.FC = () => {
           {websiteLinks.map((link: WebsiteLink) => {
             return (
               <Link
-                key={`website-link-link`}
+                key={link.link}
                 className="text-2xl font-semibold hover:underline"
                 href={link.link}
               >
@@ -63,6 +64,7 @@ const Footer: React.FC = () => {
           {socials.map((social: SocialType) => {
             return (
               <Social
+                key={social.name}
                 link={social.link}
                 SocialIcon={social.SocialIcon}
                 name={social.name}

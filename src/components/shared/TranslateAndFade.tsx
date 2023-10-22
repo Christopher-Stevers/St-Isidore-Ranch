@@ -19,7 +19,6 @@ const TranslateAndFade = ({
     IntersectionObserver = window.IntersectionObserver;
     const observer = new IntersectionObserver(
       ([entry]) => {
-        console.log(entry);
         if (entry?.isIntersecting) {
           setIsIntersecting(true);
         } else {
