@@ -6,6 +6,7 @@ import {
   useElements,
 } from "@stripe/react-stripe-js";
 import { type StripePaymentElementOptions } from "@stripe/stripe-js";
+import { env } from "~/env.mjs";
 
 const OrderStripe = () => {
   const stripe = useStripe();
@@ -68,7 +69,7 @@ const OrderStripe = () => {
         elements,
         confirmParams: {
           // Make sure to change this to your payment completion page
-          return_url: "https://stisidoreranch.com",
+          return_url: `${env.NEXT_PUBLIC_VERCEL_URL}/success`,
         },
       })
       .then(({ error }) => {

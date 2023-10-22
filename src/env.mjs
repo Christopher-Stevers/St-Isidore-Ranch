@@ -35,6 +35,7 @@ const server = z.object({
  */
 const client = z.object({
   NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY: z.string(),
+  NEXT_PUBLIC_VERCEL_URL: z.string().url(),
   // NEXT_PUBLIC_CLIENTVAR: z.string().min(1),
 });
 
@@ -57,6 +58,8 @@ const processEnv = {
     process.env.NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY,
   EMAIL_PASSWORD: process.env.EMAIL_PASSWORD,
   EMAIL_USERNAME: process.env.EMAIL_USERNAME,
+  NEXT_PUBLIC_VERCEL_URL:
+    process.env.NEXT_PUBLIC_VERCEL_URL,
   // NEXT_PUBLIC_CLIENTVAR: process.env.NEXT_PUBLIC_CLIENTVAR,
 };
 

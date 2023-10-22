@@ -15,7 +15,6 @@ const emailWrapper = async ({
   htmlMessage,
 }: EmailOptions) => {
   try {
-    console.log("send email");
     const transporter: Transporter =
       nodemailer.createTransport({
         host: "mail.privateemail.com",

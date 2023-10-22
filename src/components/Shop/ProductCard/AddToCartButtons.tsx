@@ -57,12 +57,16 @@ const AddToCart = ({
   const router = useRouter();
   const [checkingOut, setCheckingOut] = useState(false);
   const [cartState, cartDispatch] = useCart();
-  const { isLoading: queryLoading, data: isInStock } =
-    api.product.getInStock.useQuery(items);
+  const {
+    isLoading: queryLoading,
+    data: isInStock,
+    refetch,
+  } = api.product.getInStock.useQuery(items);
   const [cart] = useCart();
   const { isLoading: mutationLoading, mutate: addToCart } =
     api.order.addToOrder.useMutation({
       onSuccess: async (data) => {
+        refetch().catch(console.error);
         cartDispatch({
           type: "UPDATE_CART",
           payload: data,
