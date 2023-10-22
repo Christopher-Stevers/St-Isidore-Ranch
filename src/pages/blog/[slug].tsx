@@ -20,7 +20,7 @@ export default function Post({ post }: Props) {
   return (
     <>
       <LayoutShared title={"Blog"}>
-        <article className="mx-32 mb-32">
+        <article className="mx-4 mb-32 md:mx-32">
           <Head>
             <title>{post.title}</title>
           </Head>

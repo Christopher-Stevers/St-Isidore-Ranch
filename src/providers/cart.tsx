@@ -36,6 +36,7 @@ type Order =
       totalPrice: number;
       paid: boolean;
       address: Address | null;
+      paymentIntent: string | null;
       boxes: {
         id: string;
         createdAt: Date;

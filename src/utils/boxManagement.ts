@@ -654,7 +654,7 @@ export const getBoxFromSlug = (slug: string) => {
     case "1-8-beef":
       return new EightBeefBundle();
     default:
-      throw new Error(`${slug} not found`);
+      return new GroundBeefBoxMD();
   }
 };
 export type BoxGroupType = {

@@ -61,7 +61,10 @@ const ProductCard = ({
       </div>
       <div className="flex justify-center font-semibold text-slate-500">
         {primaryBox && (
-          <AddToCart items={boxItems} slug={slug} />
+          <AddToCart
+            items={boxItems}
+            slug={renderboxGroup.Boxes[0]?.slug ?? ""}
+          />
         )}
       </div>
     </div>

@@ -26,4 +26,4 @@ The creates a system literally pulls CO2 and Nitrogen from the air and builds so
 
 ### Be a Part of the Solution ( and eat like a king )
 
-Sounds great, but why does it matter to you? As a consumer you can be a part of this shift by buying local, regeneratively raised meat. With [St Isidore Ranch]("/") you can enjoy premium grassfed beef while knowing that you are choosing a better future at the same time.
+Sounds great, but why does it matter to you? As a consumer you can be a part of this shift by buying local, regeneratively raised meat. With [St Isidore Ranch](/) you can enjoy premium grassfed beef while knowing that you are choosing a better future at the same time.

@@ -15,10 +15,11 @@ const emailWrapper = async ({
   htmlMessage,
 }: EmailOptions) => {
   try {
+    console.log("send email");
     const transporter: Transporter =
       nodemailer.createTransport({
         host: "mail.privateemail.com",
-        port: 465,
+        port: 465, // e.g., "Gmail", "Outlook", "SendGrid", etc.
         auth: {
           user: env.EMAIL_USERNAME,
           pass: env.EMAIL_PASSWORD,

@@ -4,6 +4,7 @@ import {
 } from "~/server/api/trpc";
 import { z } from "zod";
 import emailWrapper from "~/server/helpers/emailWrapper";
+import { env } from "~/env.mjs";
 
 export const emailRouter = createTRPCRouter({
   emailMe: publicProcedure
@@ -16,7 +17,7 @@ export const emailRouter = createTRPCRouter({
     )
     .mutation(async ({ input }) => {
       await emailWrapper({
-        email: "christopher.stevers1@gmail.com",
+        email: env.EMAIL_USERNAME ?? "",
         subject: "New Message",
         htmlMessage: `<p>New message from ${input.name} at ${input.email} </p><p> ${input.message} </p>`,
         message: `New message from ${input.name} at ${input.email} ${input.message}`,

@@ -4,6 +4,7 @@ import {
   type NextApiRequest,
   type NextApiResponse,
 } from "next";
+import { clearOrderById } from "~/server/helpers/dbHelpers";
 
 const prisma = new PrismaClient();
 
@@ -15,16 +16,20 @@ export default async function handler(
     const oneWeekAgo = new Date();
     oneWeekAgo.setDate(oneWeekAgo.getDate() - 7);
 
-    const deletedBoxes = await prisma.box.deleteMany({
+    // get all orders from over a week ago
+    const oldOrders = await prisma.order.findMany({
       where: {
-        updatedAt: {
+        createdAt: {
           lt: oneWeekAgo,
         },
       },
     });
+    for (const order of oldOrders) {
+      await clearOrderById(prisma, order.id);
+    }
 
     res.status(200).json({
-      message: `Deleted ${deletedBoxes.count} boxes.`,
+      message: `Deleted ${oldOrders.length} orders.`,
     });
   } catch (error) {
     console.error("Error deleting boxes:", error);

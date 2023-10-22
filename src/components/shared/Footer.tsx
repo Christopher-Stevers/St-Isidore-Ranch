@@ -29,7 +29,6 @@ const Footer: React.FC = () => {
     },
   ];
   const websiteLinks: WebsiteLink[] = [
-    { name: "Home", link: "/" },
     {
       name: "Contact",
       link: "/contact",

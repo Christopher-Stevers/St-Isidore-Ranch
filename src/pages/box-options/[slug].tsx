@@ -59,7 +59,7 @@ const ProductPage = ({
                         className="accent-primary-500"
                         id={box.slug}
                         name="size"
-                        checked={
+                        defaultChecked={
                           box.slug === selectedBox.slug
                         }
                         value={box.slug}

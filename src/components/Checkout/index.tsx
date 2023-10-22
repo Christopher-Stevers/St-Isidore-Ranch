@@ -41,7 +41,7 @@ const Checkout = () => {
     });
 
   useEffect(() => {
-    if (cart?.id) {
+    if (cart?.id && !clientSecret) {
       mutate({ orderId: cart?.id ?? "" });
     }
   }, [cart?.id]);
@@ -77,7 +77,6 @@ const Checkout = () => {
 
   return (
     <LayoutShared title={"Checkout"}>
-      {paymentStep}
       <div className="px-8 lg:px-32">
         <BackLink>
           <button

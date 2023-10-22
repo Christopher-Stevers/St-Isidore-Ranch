@@ -59,6 +59,7 @@ const AddToCart = ({
   const [cartState, cartDispatch] = useCart();
   const { isLoading: queryLoading, data: isInStock } =
     api.product.getInStock.useQuery(items);
+  const [cart] = useCart();
   const { isLoading: mutationLoading, mutate: addToCart } =
     api.order.addToOrder.useMutation({
       onSuccess: async (data) => {
@@ -77,10 +78,16 @@ const AddToCart = ({
   };
   const handleCheckout = () => {
     setCheckingOut(true);
-    addToCart({
-      slug,
-      orderId: cartState?.id,
-    });
+    try {
+      addToCart({
+        slug,
+        orderId: cartState?.id,
+      });
+    } catch (e) {
+      if (cart?.boxes.length !== 0) {
+        router.push("/checkout").catch(console.error);
+      }
+    }
   };
   const isLoading = queryLoading || mutationLoading;
   const darkButton =

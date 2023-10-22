@@ -9,8 +9,6 @@ const AddProductClassCard = ({
 }) => {
   const [localProductClass, updateProductClass] =
     useState("");
-  const [localProductPic, updateProductPic] = useState("");
-
   const { mutate: addProductClass } =
     api.productClass.addProductClass.useMutation({
       onSuccess: () => {
@@ -23,7 +21,7 @@ const AddProductClassCard = ({
   const handleAddProductClass = () => {
     addProductClass({
       name: localProductClass,
-      src: localProductPic,
+      src: "",
     });
   };
 
@@ -33,10 +31,6 @@ const AddProductClassCard = ({
       <Input
         placeholder={"Name"}
         onChange={updateProductClass}
-      />
-      <Input
-        placeholder="Image src"
-        onChange={updateProductPic}
       />
       <button
         className="bg-white"

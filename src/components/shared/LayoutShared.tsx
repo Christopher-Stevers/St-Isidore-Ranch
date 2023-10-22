@@ -11,7 +11,7 @@ const LayoutShared = ({
   return (
     <>
       <HeaderShared title={title}></HeaderShared>
-      <div className="min-h-[calc(100vh-340px)] pt-16 pb-48 ">
+      <div className="min-h-[calc(100vh-340px)] pt-8 pb-48 md:pt-16 ">
         {children}
       </div>
       <Footer />

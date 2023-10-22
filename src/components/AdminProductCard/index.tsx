@@ -33,7 +33,7 @@ const AdminProductCard = ({
     },
   };
   const inputStyle = " rounded-xl bg-white text-black";
-  const addDirState = useState("");
+  const addDirState = useState("Add");
   const [addDir] = addDirState;
   const { mutate: updateNameMut } =
     api.productClass.updateProductClass.useMutation(
