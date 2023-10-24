@@ -98,7 +98,15 @@ const ProductPage = ({
           <p className="">
             {formatDollars(selectedBox.totalPrice)}
           </p>
-          <p>Free Shipping!</p>
+          <div>
+            <p className="text-base">Free Shipping!</p>
+            <p className="text-base">
+              Since every animal is slightly different we
+              can't guarantee exact weights, but we do
+              guarantee that you'll get at least the weight
+              you paid for over the entire bundle.
+            </p>
+          </div>
           {boxOptions.map((box) => {
             return (
               <div

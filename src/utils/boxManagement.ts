@@ -200,7 +200,7 @@ class GroundBeefBoxMD implements Box {
 
   constructor() {
     this.description = LOREM_IPSUM;
-    this.totalPrice = 10000;
+    this.totalPrice = 15000;
     this.variant = "small";
     this.slug = "md-ground-beef-bundle";
     this.title = `Ground Beef Bundle 
@@ -228,7 +228,7 @@ class GroundBeefBoxLG implements Box {
   constructor() {
     this.description = LOREM_IPSUM;
     this.variant = "large";
-    this.totalPrice = 20000;
+    this.totalPrice = 30000;
     this.slug = "lg-ground-beef-bundle";
     this.title = `Ground Beef Bundle 
 ( Medium )`;
@@ -254,7 +254,7 @@ class GroundBeefBoxXL implements Box {
 
   constructor() {
     this.description = LOREM_IPSUM;
-    this.totalPrice = 30000;
+    this.totalPrice = 40000;
     this.variant = "XL";
     this.title = `Ground Beef Bundle 
 ( Large )`;
@@ -493,7 +493,7 @@ class QuarterBeefBundle implements Box {
   constructor() {
     this.description = LOREM_IPSUM;
     this.title = "1/4 Beef";
-    this.totalPrice = 132776;
+    this.totalPrice = 125796;
     this.boxSize = 0;
     this.variant = null;
     this.src = "/boxPics/sideBeef.jpg";
@@ -508,16 +508,17 @@ class QuarterBeefBundle implements Box {
         name: NYSTRIP,
       },
       {
-        quantity: 2,
+        quantity: 4,
         name: TENDERLOIN,
       },
       {
         quantity: 4,
         name: SIRLOIN,
       },
-      { quantity: 2, name: LONDONBROIL },
+
+      { quantity: 1, name: SIRLOIN_TIP },
       {
-        quantity: 2,
+        quantity: 1,
         name: BLADEROAST,
       },
       {
@@ -525,16 +526,14 @@ class QuarterBeefBundle implements Box {
         name: STEAKROAST,
       },
       {
-        quantity: 6,
+        quantity: 4,
         name: STEWMEAT,
       },
       {
-        quantity: 4,
+        quantity: 2,
         name: BONEINSHORTRIBS,
       },
       { quantity: 3, name: LONDONBROIL },
-
-      { quantity: 2, name: SIRLOIN_TIP },
       {
         quantity: 32,
         name: GROUNDBEEF,
@@ -563,6 +562,7 @@ class EightBeefBundle implements Box {
     this.variant = null;
     this.src = "/boxPics/sideBeef.jpg";
     this.items = [
+      { quantity: 2, name: TENDERLOIN },
       {
         quantity: 2,
         name: BONELESSRIBEYE,
@@ -575,10 +575,10 @@ class EightBeefBundle implements Box {
         quantity: 2,
         name: SIRLOIN,
       },
-      { quantity: 3, name: LONDONBROIL },
+      { quantity: 1, name: LONDONBROIL },
       {
         quantity: 1,
-        name: BLADEROAST,
+        name: SIRLOIN_TIP,
       },
       {
         quantity: 1,
@@ -588,12 +588,6 @@ class EightBeefBundle implements Box {
         quantity: 3,
         name: STEWMEAT,
       },
-      {
-        quantity: 2,
-        name: BONEINSHORTRIBS,
-      },
-
-      { quantity: 1, name: SIRLOIN_TIP },
       {
         quantity: 16,
         name: GROUNDBEEF,
@@ -737,7 +731,7 @@ const QuarterBeefBundleGroup = new BoxGroup({
   slug: "quarter-beef",
   Boxes: [new QuarterBeefBundle()],
   description:
-    "An quarter of a beef - enough for 2 people for a year!",
+    "An quarter of a beef - approximately 60 lbs of meat!",
   src: "/boxPics/sideBeef.jpg",
 });
 const EightBeefBundleGroup = new BoxGroup({
@@ -745,7 +739,7 @@ const EightBeefBundleGroup = new BoxGroup({
   slug: "eighth-beef",
   Boxes: [new EightBeefBundle()],
   description:
-    "An eighth of a beef - enough for 2 people for 6 months !",
+    "An eighth of a beef - approximately 30 lbs. meat!",
   src: "/boxPics/sideBeef.jpg",
 });
 const HamburgerPattiesGroup = new BoxGroup({
