@@ -36,7 +36,7 @@ export const ContactForm = ({
     <div onClick={handleClick} className="grow">
       {!toggleOpen && (
         <h3 className="text-3xl font-semibold ">
-          {title ?? "Email me"}
+          {title ?? "Contact me"}
         </h3>
       )}
       <div className="grid grid-cols-2 gap-8 py-4">
