@@ -12,7 +12,7 @@ const ProductCard = ({
   const renderboxGroup = boxGroup ?? {
     name: "Custom Box",
     description:
-      "Call me at 519-703-6780 if you'd like a custom box :)",
+      "Looking for that perfect box of steaks for your special occasion? Or maybe you want to load up on organ meats? Call me at 519-703-6780 if you'd like a custom box :)",
     slug: "/contact",
     priceMax: null,
     priceMin: null,
@@ -49,9 +49,12 @@ const ProductCard = ({
       </div>
       <div className="text-lg">
         <div className=" w-full">{description}</div>
-        <Link className="underline" href={`/${slug}`}>
-          more info
-        </Link>
+
+        {!isContact && (
+          <Link className="underline" href={`/${slug}`}>
+            more info
+          </Link>
+        )}
       </div>
 
       <div className="rounded-full text-left text-2xl">

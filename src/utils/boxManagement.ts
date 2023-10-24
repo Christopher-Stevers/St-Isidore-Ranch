@@ -1,23 +1,18 @@
 // box management, todo extract magic strings, then extract to db records.
-
+const LOREM_IPSUM = "";
 // products
-const BONELESSRIBEYE = `Boneless Ribeye Steak 
-( 8 oz. )`;
+const BONELESSRIBEYE = "Boneless Ribeye Steak ( 8 oz. )";
 const NYSTRIP = "NY Strip Steak ( 8 oz. )";
 const SIRLOIN = "Sirloin Steak ( 8 oz. )";
-const HAMBURGER = "1/4 lb. Hamburger Patties";
-const TENDERLOIN = "Tenderloin Steak ( 6 oz. )";
+// const HAMBURGER = "1/4 lb. Hamburger Patties";
+const TENDERLOIN = "Tenderloin Steak ( 5 oz. )";
 const BLADEROAST = "Blade Roast ( 2 lb. )";
 const GROUNDBEEF = "Ground Beef ( 1 lb. )";
 const STEWMEAT = "Stew Meat ( 1 lb. )";
-const BONEINSHORTRIBS = "Bone-In Short Ribs";
+const BONEINSHORTRIBS = "Bone-In Short Ribs ( 12 oz. )";
 const LONDONBROIL = "London Broil ( 2 lb. )";
-const CHUCKROAST = "Chuck Roast ( 2 lb. )";
-const TOPROUND = "Top Round Steak ( 1 lb. )";
-const BOTTOMROUND = "Bottom Round Steak ( 1 lb. )";
-const LIVER = "Liver ( 1 lb. )";
-const LOREM_IPSUM =
-  "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla euismod, nisl eget aliquam ultricies, nunc nunc aliquet nunc, vitae aliquam nun";
+const STEAKROAST = "Steak Roast ( 2 lb. )";
+const SIRLOIN_TIP = "Sirloin Tip Roast ( 2 lb. )";
 
 class Box {
   totalPrice: number;
@@ -86,8 +81,8 @@ export class SmallGrillingBundle extends Box {
         },
 
         {
-          quantity: 16,
-          name: HAMBURGER,
+          quantity: 4,
+          name: GROUNDBEEF,
         },
       ],
     });
@@ -119,8 +114,8 @@ export class LargeGrillingBundle extends Box {
         },
 
         {
-          quantity: 16,
-          name: HAMBURGER,
+          quantity: 4,
+          name: GROUNDBEEF,
         },
       ],
     });
@@ -385,14 +380,14 @@ class SmallOvenBundle implements Box {
     this.variant = "small";
     this.src = "/boxPics/roastBeef.jpg";
     this.items = [
-      { quantity: 2, name: "London Broil ( 1 lb. )" },
+      { quantity: 1, name: LONDONBROIL },
       {
         quantity: 2,
         name: BLADEROAST,
       },
       {
         quantity: 2,
-        name: CHUCKROAST,
+        name: STEAKROAST,
       },
       {
         quantity: 3,
@@ -422,14 +417,14 @@ class LargeOvenBundle implements Box {
     this.variant = "Large";
     this.src = "/boxPics/roastBeef.jpg";
     this.items = [
-      { quantity: 4, name: "London Broil ( 1 lb. )" },
+      { quantity: 2, name: LONDONBROIL },
       {
         quantity: 4,
         name: BLADEROAST,
       },
       {
         quantity: 4,
-        name: CHUCKROAST,
+        name: STEAKROAST,
       },
       {
         quantity: 6,
@@ -527,7 +522,7 @@ class QuarterBeefBundle implements Box {
       },
       {
         quantity: 2,
-        name: CHUCKROAST,
+        name: STEAKROAST,
       },
       {
         quantity: 6,
@@ -539,14 +534,10 @@ class QuarterBeefBundle implements Box {
       },
       { quantity: 3, name: LONDONBROIL },
 
-      { quantity: 2, name: "Bottom Round Roast ( 2 lb. )" },
+      { quantity: 2, name: SIRLOIN_TIP },
       {
         quantity: 32,
         name: GROUNDBEEF,
-      },
-      {
-        quantity: 1,
-        name: LIVER,
       },
     ];
     this.orderId = "1";
@@ -584,14 +575,14 @@ class EightBeefBundle implements Box {
         quantity: 2,
         name: SIRLOIN,
       },
-      { quantity: 1, name: LONDONBROIL },
+      { quantity: 3, name: LONDONBROIL },
       {
         quantity: 1,
         name: BLADEROAST,
       },
       {
         quantity: 1,
-        name: CHUCKROAST,
+        name: STEAKROAST,
       },
       {
         quantity: 3,
@@ -601,16 +592,11 @@ class EightBeefBundle implements Box {
         quantity: 2,
         name: BONEINSHORTRIBS,
       },
-      { quantity: 4, name: TOPROUND },
 
-      { quantity: 2, name: BOTTOMROUND },
+      { quantity: 1, name: SIRLOIN_TIP },
       {
         quantity: 16,
         name: GROUNDBEEF,
-      },
-      {
-        quantity: 1,
-        name: LIVER,
       },
     ];
     this.orderId = "1";

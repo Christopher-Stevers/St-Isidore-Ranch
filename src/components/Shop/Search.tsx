@@ -15,12 +15,12 @@ const Search = ({
     setSearch(e.target.value);
   };
   return (
-    <div className="w-full justify-self-start py-6 lg:col-span-2 xl:col-span-3">
+    <div className="w-full justify-self-start pt-6  lg:col-span-2 xl:col-span-3">
       <input
         onChange={handleSearch}
         value={search}
         placeholder="Search"
-        className="w-full rounded-full border border-black p-2 px-4 text-lg "
+        className="w-full rounded-sm border border-black p-2 px-4 text-lg "
       />
     </div>
   );
