@@ -1,5 +1,8 @@
 import React, { useState } from "react";
-import { BoxGroups } from "~/utils/boxManagement";
+import {
+  BoxGroupGroundFirst,
+  BoxGroups,
+} from "~/utils/boxManagement";
 import LayoutShared from "~/components/shared/LayoutShared";
 import ProductCard from "./ProductCard";
 import Search from "./Search";
@@ -8,51 +11,42 @@ const Shop = () => {
   const [steakChecked, setSteakChecked] = useState(false);
   const [groundChecked, setGroundChecked] = useState(false);
   const [search, setSearch] = useState("");
-  const searchedBoxGroups = BoxGroups.filter((elem) => {
-    const groupName = elem.name;
-    const childBoxesNames = elem.Boxes.map(
-      (elem) => elem.title,
-    );
-    const childProductsNames = elem.Boxes.map((elem) =>
-      elem.items.map((elem) => elem.name),
-    ).flat();
-    const searchableStrings = [
-      groupName,
-      ...childBoxesNames,
-      ...childProductsNames,
-    ];
-    const searchableString = searchableStrings
-      .join(" ")
-      .toLowerCase();
-    const isMatchText = searchableString.includes(
-      search.toLowerCase(),
-    );
-    const isMatchCategory =
-      (roastChecked &&
-        searchableString.includes("roast")) ||
-      (steakChecked &&
-        searchableString.includes("steak") &&
-        !searchableString.includes("oven")) ||
-      (groundChecked &&
-        searchableString.includes("ground")) ||
-      (!roastChecked && !steakChecked && !groundChecked);
-    return isMatchText && isMatchCategory;
-  }).sort((a, b) => {
-    const aName = a.name.toLowerCase();
-    const bName = b.name.toLowerCase();
-    if (groundChecked) {
-      const firstFirst =
-        aName.includes("ground") &&
-        !bName.includes("ground");
-      return firstFirst ? -1 : 1;
-    }
-    const aHas = aName.includes(search.toLowerCase());
-    const bHas = bName.includes(search.toLowerCase());
-    if (aHas && !bHas) return 1;
-    if (!aHas && bHas) return -1;
 
-    return 1;
-  });
+  const sortedBoxGroups = groundChecked
+    ? BoxGroupGroundFirst
+    : BoxGroups;
+  const searchedBoxGroups = sortedBoxGroups.filter(
+    (elem) => {
+      const groupName = elem.name;
+      const childBoxesNames = elem.Boxes.map(
+        (elem) => elem.title,
+      );
+      const childProductsNames = elem.Boxes.map((elem) =>
+        elem.items.map((elem) => elem.name),
+      ).flat();
+      const searchableStrings = [
+        groupName,
+        ...childBoxesNames,
+        ...childProductsNames,
+      ];
+      const searchableString = searchableStrings
+        .join(" ")
+        .toLowerCase();
+      const isMatchText = searchableString.includes(
+        search.toLowerCase(),
+      );
+      const isMatchCategory =
+        (roastChecked &&
+          searchableString.includes("roast")) ||
+        (steakChecked &&
+          searchableString.includes("steak") &&
+          !searchableString.includes("oven")) ||
+        (groundChecked &&
+          searchableString.includes("ground beef")) ||
+        (!roastChecked && !steakChecked && !groundChecked);
+      return isMatchText && isMatchCategory;
+    },
+  );
   const handleRoastChange = () => {
     setRoastChecked(!roastChecked);
   };

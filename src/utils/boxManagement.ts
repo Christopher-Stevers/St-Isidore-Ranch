@@ -763,6 +763,17 @@ export const BoxGroups = [
   QuarterBeefBundleGroup,
   EightBeefBundleGroup,
 ];
+export const BoxGroupGroundFirst = [
+  GroundBeefBoxGroup,
+  GrilingBoxGroup,
+  OvenBoxGroup,
+  PrimeSteaksBoxGroup,
+  EverythingBoxGroup,
+
+  HamburgerPattiesGroup,
+  QuarterBeefBundleGroup,
+  EightBeefBundleGroup,
+];
 export const getBoxGroupFromSlug = (slug: string) => {
   switch (slug) {
     case "ground-beef":
