@@ -25,8 +25,10 @@ const AboutCard = ({
       : "xl:col-start-2";
 
   return (
-    <div className="grid-rows grid w-80 grid-rows-[209px_48px_auto_48px] gap-x-16 gap-y-4 xl:w-min xl:grid-cols-[480px_480px] xl:grid-rows-[48px_auto_48px]">
-      <h3 className="text-3xl font-semibold">{title}</h3>
+    <div className="grid-rows grid w-80 grid-rows-[209px_48px_auto_48px] gap-x-16 gap-y-4 xl:w-min xl:grid-cols-[480px_480px] xl:grid-rows-[auto_auto_48px]">
+      <h3 className="text-3xl font-semibold leading-none">
+        {title}
+      </h3>
       <p className="w-full font-text text-xl">{text} </p>
       {link && (
         <AboutButton

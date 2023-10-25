@@ -11,7 +11,7 @@ const HeaderMain: React.FC = () => {
           className="absolute top-0 object-cover"
           alt="image of cows grazing"
           fill={true}
-          src={"/hero2.jpg"}
+          src={"/boxPics/steakBeef.jpg"}
         />
         <div
           className=" absolute top-0 z-20 

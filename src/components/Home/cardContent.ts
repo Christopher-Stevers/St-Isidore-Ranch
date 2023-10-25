@@ -2,7 +2,7 @@ export default [
   {
     direction: "left",
     title: "Our Herd",
-    text: `Our cattle are 100% grassfed. The cows care for their calves for the first 6 months of their lives. After that, they are fed a diet of pasture, baleage( fermented grass ) and hay. We use no hormones or antibiotics. We believe that the best way to raise a cow is to let it live a happy life.`,
+    text: `Our cattle are 100% grassfed and grass-finished. The cows care for their calves for the first 6 months of their lives. After that, they are fed a diet of pasture, baleage( fermented grass ) and hay. We use no hormones or antibiotics. We believe that the best way to raise a cow is to let it live a happy life.`,
     link: "https://www.instagram.com/chris.stevers/",
     video: "https://www.youtube.com/embed/lIkwIEXWx8c",
     src: "/lilCow.jpg",
@@ -13,7 +13,7 @@ export default [
     title: "Our Beef",
     text: "To guarantee top-notch quality, we uphold rigorous standards of health and animal welfare throughout our operations. After our animals have reached maturity, they are processed by a provincially licensed butcher. Finally, we deliver the beef right to your doorstep using a refrigerated courier service.",
     video: "",
-    src: "/boxPics/steakBeef.jpg",
+    src: "/boxPics/roastBeef.jpg",
   },
   {
     direction: "left",
