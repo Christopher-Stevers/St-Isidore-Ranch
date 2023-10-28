@@ -36,6 +36,8 @@ const server = z.object({
 const client = z.object({
   NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY: z.string(),
   NEXT_PUBLIC_VERCEL_URL: z.string().url(),
+  NEXT_PUBLIC_BTCPAY_KEY: z.string(),
+  NEXT_PUBLIC_STORE_ID: z.string(),
   // NEXT_PUBLIC_CLIENTVAR: z.string().min(1),
 });
 
@@ -60,6 +62,9 @@ const processEnv = {
   EMAIL_USERNAME: process.env.EMAIL_USERNAME,
   NEXT_PUBLIC_VERCEL_URL:
     process.env.NEXT_PUBLIC_VERCEL_URL,
+  NEXT_PUBLIC_BTCPAY_KEY:
+    process.env.NEXT_PUBLIC_BTCPAY_KEY,
+  NEXT_PUBLIC_STORE_ID: process.env.NEXT_PUBLIC_STORE_ID,
   // NEXT_PUBLIC_CLIENTVAR: process.env.NEXT_PUBLIC_CLIENTVAR,
 };
 
