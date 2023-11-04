@@ -6,6 +6,7 @@ import {
   publicProcedure,
 } from "~/server/api/trpc";
 import { checkInStock } from "~/server/helpers/inventory";
+import { getBoxFromSlug } from "~/utils/boxManagement";
 
 export const productRouter = createTRPCRouter({
   addProductsToClass: protectedProcedure
@@ -48,16 +49,15 @@ export const productRouter = createTRPCRouter({
       });
     }),
   getInStock: publicProcedure
-    .input(
-      z.array(
-        z.object({
-          name: z.string(),
-          quantity: z.number(),
-        }),
-      ),
-    )
+    .input(z.string())
     .query(async ({ ctx: { prisma }, input }) => {
-      const { status } = await checkInStock(input, prisma);
+      const box = getBoxFromSlug(input);
+      const items = box.items;
+      const { status } = await checkInStock(
+        items,
+        true,
+        prisma,
+      );
       return status;
     }),
 

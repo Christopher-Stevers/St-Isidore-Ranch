@@ -6,12 +6,14 @@ import {
 import LayoutShared from "~/components/shared/LayoutShared";
 import ProductCard from "./ProductCard";
 import Search from "./Search";
+import { useCart } from "~/providers/cart";
+import HeroButton from "../base/FancyButton";
 const Shop = () => {
   const [roastChecked, setRoastChecked] = useState(false);
   const [steakChecked, setSteakChecked] = useState(false);
   const [groundChecked, setGroundChecked] = useState(false);
   const [search, setSearch] = useState("");
-
+  const [cart] = useCart();
   const sortedBoxGroups = groundChecked
     ? BoxGroupGroundFirst
     : BoxGroups;
@@ -59,7 +61,19 @@ const Shop = () => {
   return (
     <LayoutShared title={"Shop"}>
       <div className="grid grid-cols-[320px] content-center justify-center justify-items-center gap-16 gap-y-4 pb-4 lg:grid-cols-[repeat(2,_320px)] xl:grid-cols-[repeat(3,_320px)] ">
-        <Search searchState={[search, setSearch]} />
+        <div className="flex w-full justify-between gap-4 justify-self-start pt-6 lg:col-span-2  xl:col-span-3">
+          <Search searchState={[search, setSearch]} />
+          {cart?.boxes.length ??
+            (0 > 0 && (
+              <div>
+                <HeroButton
+                  className="bg-primary-500 py-3 px-16 text-backdrop-500"
+                  link={"/checkout"}
+                  text={"Checkout"}
+                />
+              </div>
+            ))}
+        </div>
         <div className=" w-full bg-primary-500 px-4 font-bold text-white lg:col-span-2 xl:col-span-3">
           <div className=" flex flex-col justify-between py-4 lg:flex-row">
             <div className="flex gap-4">

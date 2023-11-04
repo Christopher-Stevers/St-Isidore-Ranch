@@ -64,11 +64,10 @@ const BTCPay = () => {
   const handleCreateInvoice = () => {
     createInvoice();
   };
+  console.log(invoiceId, invoices);
 
   return (
     <div>
-      {invoices?.amount}
-
       <button onClick={handleCreateInvoice}>
         Create invoice
       </button>

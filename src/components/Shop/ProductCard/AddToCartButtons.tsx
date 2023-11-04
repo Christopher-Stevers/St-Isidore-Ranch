@@ -1,4 +1,3 @@
-import { type Item } from "~/utils/boxManagement";
 import { api } from "~/utils/api";
 import { useCart } from "~/providers/cart";
 import { useRouter } from "next/router";
@@ -46,11 +45,9 @@ export const StockLoading = ({
 };
 
 const AddToCart = ({
-  items,
   slug,
   hasMainPageStyles,
 }: {
-  items: Item[];
   slug: string;
   hasMainPageStyles?: boolean;
 }) => {
@@ -61,8 +58,7 @@ const AddToCart = ({
     isLoading: queryLoading,
     data: isInStock,
     refetch,
-  } = api.product.getInStock.useQuery(items);
-  const [cart] = useCart();
+  } = api.product.getInStock.useQuery(slug);
   const { isLoading: mutationLoading, mutate: addToCart } =
     api.order.addToOrder.useMutation({
       onSuccess: async (data) => {
@@ -82,16 +78,11 @@ const AddToCart = ({
   };
   const handleCheckout = () => {
     setCheckingOut(true);
-    try {
-      addToCart({
-        slug,
-        orderId: cartState?.id,
-      });
-    } catch (e) {
-      if (cart?.boxes.length !== 0) {
-        router.push("/checkout").catch(console.error);
-      }
-    }
+
+    addToCart({
+      slug,
+      orderId: cartState?.id,
+    });
   };
   const isLoading = queryLoading || mutationLoading;
   const darkButton =
@@ -121,7 +112,7 @@ const AddToCart = ({
               hasMainPageStyles={hasMainPageStyles}
               isLoading={isLoading}
             >
-              <span>Checkout</span>
+              <span>Order Now</span>
             </StockLoading>
           </button>
         ) : (

@@ -6,6 +6,7 @@ import {
   createTRPCRouter,
   publicProcedure,
 } from "~/server/api/trpc";
+import { type Product } from "@prisma/client";
 
 export const orderRouter = createTRPCRouter({
   getOrder: publicProcedure
@@ -81,10 +82,11 @@ export const orderRouter = createTRPCRouter({
     )
     .mutation(async ({ ctx: { prisma }, input }) => {
       const box = getBoxFromSlug(input.slug);
-      const { neededProducts, status } = await checkInStock(
-        box.items,
-        prisma,
-      );
+      const { neededProducts, status } =
+        (await checkInStock(box.items, false, prisma)) as {
+          neededProducts: Product[];
+          status: boolean;
+        };
       if (!status) {
         throw new Error("Not enough items in stock");
       }
