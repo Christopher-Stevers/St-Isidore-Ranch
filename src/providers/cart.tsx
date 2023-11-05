@@ -100,6 +100,9 @@ const CartProvider = ({
               payload: data,
             });
           }
+          if (!data) {
+            localStorage.removeItem("orderId");
+          }
         },
       },
     );

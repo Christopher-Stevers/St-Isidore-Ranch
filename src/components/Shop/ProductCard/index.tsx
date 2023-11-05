@@ -28,7 +28,6 @@ const ProductCard = ({
   const Boxes = renderboxGroup.Boxes ?? [];
   const primaryBox = Boxes[0];
   const totalPrice = primaryBox?.totalPrice ?? 0;
-  const boxItems = primaryBox?.items ?? [];
 
   return (
     <div className="grid w-80 grid-rows-[180px_36px] gap-x-16  gap-y-4 bg-backdrop-500 px-4 pb-8">
@@ -65,7 +64,6 @@ const ProductCard = ({
       <div className="flex justify-center font-semibold text-slate-500">
         {primaryBox && (
           <AddToCart
-            items={boxItems}
             slug={renderboxGroup.Boxes[0]?.slug ?? ""}
           />
         )}

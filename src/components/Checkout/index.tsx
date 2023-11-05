@@ -1,10 +1,16 @@
-import { useEffect, useState } from "react";
+import {
+  type Dispatch,
+  type SetStateAction,
+  useEffect,
+  useState,
+} from "react";
 import { Elements } from "@stripe/react-stripe-js";
 
 import { useCart } from "~/providers/cart";
 import CSSSwitch from "~/components/base/CSSSwitch";
 import { api } from "~/utils/api";
 import { env } from "~/env.mjs";
+import Image from "next/image";
 
 import LayoutShared from "~/components/shared/LayoutShared";
 import OrderStripe from "./OrderStripe";
@@ -19,6 +25,9 @@ import { useRouter } from "next/router";
 import useMediaQuery, {
   mediaQueryCompare,
 } from "~/hooks/useMediaQuery";
+import BTCPay from "../BtcPay";
+import PayWithBubble from "./PayWithBubble";
+
 const stripePromise = loadStripe(
   env.NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY,
 );
@@ -26,25 +35,87 @@ export const REVIEW = "REVIEW";
 export const ADDRESS = "ADDRESS";
 export const PAYMENT = "PAYMENT";
 
+export const CARD = "CARD";
+export const BTC = "BTC";
+
 const Checkout = () => {
-  const [paymentStep, setPaymentStep] = useState(REVIEW);
+  const [paymentStep, setPaymentStep] = useState(PAYMENT);
+  const [paymentType, setPaymentType] = useState(CARD);
+  const [btcPaymentUrl, setBtcPaymentUrl] = useState<
+    string | null
+  >(null);
   const [cart] = useCart();
   const router = useRouter();
   const [clientSecret, setClientSecret] = useState("");
+  const [stripePaymentIntentId, setStripePaymentIntentId] =
+    useState<string | null>(null);
+  const [btcPaymentIntentId, setBtcPaymentIntentId] =
+    useState<string | null>(null);
   const currentMaxBreakpoint = useMediaQuery();
-  const { mutate } =
+  const { mutate: createPaymentIntent } =
     api.stripe.createPaymentIntent.useMutation({
       onSuccess: (data) => {
+        console.log(data);
         if (!data?.client_secret) return;
+        setStripePaymentIntentId(data.id);
         setClientSecret(data.client_secret);
+      },
+    });
+  const { mutate: createBtcPaymentIntent } =
+    api.stripe.createBTCPayLighteningPaymentIntent.useMutation(
+      {
+        onSuccess: (data) => {
+          setBtcPaymentIntentId(data.id);
+          setBtcPaymentUrl(data.checkoutLink);
+        },
+      },
+    );
+  const { mutate: setOrderPaymentIntent } =
+    api.stripe.setOrderPaymentIntent.useMutation({
+      onSuccess: (data) => {
+        console.log(data);
       },
     });
 
   useEffect(() => {
-    if (cart?.id && !clientSecret) {
-      mutate({ orderId: cart?.id ?? "" });
+    console.log(paymentType, btcPaymentIntentId);
+    switch (paymentType) {
+      case CARD:
+        if (
+          cart?.id &&
+          !clientSecret &&
+          !stripePaymentIntentId
+        ) {
+          console.log("make payment intent");
+          createPaymentIntent({ orderId: cart?.id ?? "" });
+        } else if (cart?.id && stripePaymentIntentId) {
+          setOrderPaymentIntent({
+            orderId: cart?.id,
+            paymentIntentId: stripePaymentIntentId,
+          });
+        }
+      case BTC:
+        if (cart?.id && !btcPaymentIntentId) {
+          createBtcPaymentIntent({
+            orderId: cart?.id ?? "",
+          });
+        } else if (cart?.id && btcPaymentIntentId) {
+          console.log("happening");
+          setOrderPaymentIntent({
+            orderId: cart?.id,
+            paymentIntentId: btcPaymentIntentId,
+          });
+        }
     }
-  }, [cart?.id]);
+  }, [
+    cart?.id,
+    paymentStep,
+    paymentType,
+    clientSecret,
+    btcPaymentIntentId,
+    createBtcPaymentIntent,
+    createPaymentIntent,
+  ]);
 
   const appearance: StripeElementsOptions["appearance"] = {
     rules: {
@@ -128,19 +199,47 @@ const Checkout = () => {
             variable={paymentStep}
             constants={PAYMENT}
           >
-            {clientSecret && (
-              <div className="flex flex-col gap-y-6">
-                <h3 className="text-3xl font-semibold ">
+            <div className="flex flex-col gap-y-6">
+              <div className="flex">
+                <h3 className="justify between text-3xl font-semibold">
                   Purchase Information
                 </h3>
-                <Elements
-                  options={options}
-                  stripe={stripePromise}
-                >
-                  <OrderStripe />
-                </Elements>
               </div>
-            )}
+              <div className="flex gap-8">
+                <PayWithBubble
+                  title={"Credit Card"}
+                  slug={CARD}
+                  value={paymentType}
+                  setValue={setPaymentType}
+                />
+                <PayWithBubble
+                  title={"Bitcoin"}
+                  slug={BTC}
+                  src={"/bitcoin.png"}
+                  value={paymentType}
+                  setValue={setPaymentType}
+                />
+              </div>
+              <CSSSwitch
+                variable={paymentType}
+                constants={CARD}
+              >
+                {clientSecret && (
+                  <Elements
+                    options={options}
+                    stripe={stripePromise}
+                  >
+                    <OrderStripe />
+                  </Elements>
+                )}
+              </CSSSwitch>
+              <CSSSwitch
+                variable={paymentType}
+                constants={BTC}
+              >
+                <BTCPay btcPaymentUrl={btcPaymentUrl} />
+              </CSSSwitch>
+            </div>
           </CSSSwitch>
         </div>
       </div>

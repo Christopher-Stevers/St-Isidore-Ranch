@@ -1,4 +1,3 @@
-import { type GetServerSidePropsContext } from "next";
 import { appRouter } from "~/server/api/root";
 import { createServerSideHelpers } from "@trpc/react-query/server";
 import superjson from "superjson";
@@ -11,9 +10,7 @@ export default function Page() {
   return <Shop />;
 }
 
-export async function getServerSideProps(
-  context: GetServerSidePropsContext<{ id: string }>,
-) {
+export async function getServerSideProps() {
   const helpers = createServerSideHelpers({
     router: appRouter,
     ctx: {

@@ -5,6 +5,8 @@ import {
 import { useState } from "react";
 import { env } from "~/env.mjs";
 
+const cryptoCode = "BTC";
+
 export const btcPayPublicClient = async (
   url: string,
   method: "GET" | "POST" = "GET",
@@ -15,6 +17,7 @@ export const btcPayPublicClient = async (
   const optionalBody = body
     ? { body: JSON.stringify(body) }
     : {};
+  console.log(url);
   const rawResponse = await fetch(url, {
     headers: {
       Authorization: `token ${env.NEXT_PUBLIC_BTCPAY_KEY}`,
@@ -27,50 +30,28 @@ export const btcPayPublicClient = async (
   return rawResponse.json();
 };
 
-const BTCPay = () => {
+const BTCPay = ({
+  btcPaymentUrl,
+}: {
+  btcPaymentUrl: string;
+}) => {
   const cryptoCode = "BTC";
-  const [invoiceId, setInvoiceId] = useState<string>("");
   const storeId = env.NEXT_PUBLIC_STORE_ID;
-  const { data: invoices, refetch } = useQuery(
-    ["invoices", cryptoCode],
-    () =>
-      btcPayPublicClient(
-        `https://btcpay.btc.aw/api/v1/stores/${storeId}/lightning/${cryptoCode}/invoices/${invoiceId}`,
-      ),
-  );
-  const { mutate: createInvoice } = useMutation(
-    ["invoices", cryptoCode],
-    () =>
-      btcPayPublicClient(
-        `https://btcpay.btc.aw/api/v1/stores/${storeId}/lightning/${cryptoCode}/invoices`,
-        "POST",
-        {
-          amount: "20",
-          description: "string",
-          descriptionHashOnly: false,
-          expiry: 90,
-          privateRouteHints: false,
-        },
-        { "Content-Type": "application/json" },
-      ),
-    {
-      onSuccess: (data) => {
-        console.log(data);
-        setInvoiceId(data.id);
-        refetch().catch(console.error);
-      },
-    },
-  );
-  const handleCreateInvoice = () => {
-    createInvoice();
+
+  const handleSubmit = () => {
+    localStorage.removeItem("orderId");
   };
-  console.log(invoiceId, invoices);
+
+  const handleCreateInvoice = () => {};
 
   return (
-    <div>
-      <button onClick={handleCreateInvoice}>
-        Create invoice
-      </button>
+    <div className="w-full">
+      {btcPaymentUrl && (
+        <iframe
+          src={btcPaymentUrl}
+          className="h-[1000px] w-full"
+        />
+      )}
     </div>
   );
 };

@@ -27,6 +27,7 @@ const server = z.object({
   DISCORD_CLIENT_SECRET: z.string(),
   STRIPE_SECRET_KEY: z.string(),
   STRIPE_WEBHOOK_SECRET: z.string(),
+  NEXT_PUBLIC_BTCPAY_URL: z.string().url(),
 });
 
 /**
@@ -38,6 +39,7 @@ const client = z.object({
   NEXT_PUBLIC_VERCEL_URL: z.string().url(),
   NEXT_PUBLIC_BTCPAY_KEY: z.string(),
   NEXT_PUBLIC_STORE_ID: z.string(),
+  NEXT_PUBLIC_BTCPAY_URL: z.string().url(),
   // NEXT_PUBLIC_CLIENTVAR: z.string().min(1),
 });
 
@@ -65,6 +67,8 @@ const processEnv = {
   NEXT_PUBLIC_BTCPAY_KEY:
     process.env.NEXT_PUBLIC_BTCPAY_KEY,
   NEXT_PUBLIC_STORE_ID: process.env.NEXT_PUBLIC_STORE_ID,
+  NEXT_PUBLIC_BTCPAY_URL:
+    process.env.NEXT_PUBLIC_BTCPAY_URL,
   // NEXT_PUBLIC_CLIENTVAR: process.env.NEXT_PUBLIC_CLIENTVAR,
 };
 
