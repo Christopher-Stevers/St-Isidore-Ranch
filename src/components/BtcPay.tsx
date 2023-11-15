@@ -1,11 +1,4 @@
-import {
-  useQuery,
-  useMutation,
-} from "@tanstack/react-query";
-import { useState } from "react";
 import { env } from "~/env.mjs";
-
-const cryptoCode = "BTC";
 
 export const btcPayPublicClient = async (
   url: string,
@@ -35,15 +28,6 @@ const BTCPay = ({
 }: {
   btcPaymentUrl: string;
 }) => {
-  const cryptoCode = "BTC";
-  const storeId = env.NEXT_PUBLIC_STORE_ID;
-
-  const handleSubmit = () => {
-    localStorage.removeItem("orderId");
-  };
-
-  const handleCreateInvoice = () => {};
-
   return (
     <div className="w-full">
       {btcPaymentUrl && (

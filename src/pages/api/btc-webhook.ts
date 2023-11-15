@@ -19,18 +19,20 @@ export type BtcPayServerWebhookRequestBody = {
   invoiceId: string;
 };
 
-import { NextApiRequest, NextApiResponse } from "next";
+import {
+  type NextApiRequest,
+  type NextApiResponse,
+} from "next";
 import crypto from "crypto";
 import { btcPayPublicClient } from "~/components/BtcPay";
 import btcEventHandlers from "~/server/helpers/btcEventHandlers";
 import { env } from "~/env.mjs";
 
-const headerSignatureMatchesWebhookKey = async (
+const headerSignatureMatchesWebhookKey = (
   sig: string,
   body: BtcPayServerWebhookRequestBody,
 ) => {
   const webhookKey = env.BTC_PAY_WEBHOOK_SECRET;
-  console.log(webhookKey, "webhookKey");
   if (!webhookKey) {
     return false;
   }
@@ -69,10 +71,10 @@ export default async (
     }
 
     if (
-      !(await headerSignatureMatchesWebhookKey(
+      !headerSignatureMatchesWebhookKey(
         headers["btcpay-sig"] as string,
         data,
-      ))
+      )
     ) {
       throw new Error(
         "api/webhooks/btc-pay-server: invalid BTCPAY_SIG",

@@ -1,16 +1,10 @@
-import {
-  type Dispatch,
-  type SetStateAction,
-  useEffect,
-  useState,
-} from "react";
+import { useEffect, useState } from "react";
 import { Elements } from "@stripe/react-stripe-js";
 
 import { useCart } from "~/providers/cart";
 import CSSSwitch from "~/components/base/CSSSwitch";
 import { api } from "~/utils/api";
 import { env } from "~/env.mjs";
-import Image from "next/image";
 
 import LayoutShared from "~/components/shared/LayoutShared";
 import OrderStripe from "./OrderStripe";
@@ -235,8 +229,10 @@ const Checkout = () => {
               <CSSSwitch
                 variable={paymentType}
                 constants={BTC}
-              >{btcPaymentUrl &&
-                <BTCPay btcPaymentUrl={btcPaymentUrl} />}
+              >
+                {btcPaymentUrl && (
+                  <BTCPay btcPaymentUrl={btcPaymentUrl} />
+                )}
               </CSSSwitch>
             </div>
           </CSSSwitch>

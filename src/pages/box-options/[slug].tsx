@@ -106,7 +106,9 @@ const ProductPage = ({
               you paid for over the entire bundle.
             </p>
           </div>
-            <p className="whitespace-pre font-display text-2xl lg:text-4xl">Free Shipping!</p>
+          <p className="whitespace-pre font-display text-2xl lg:text-4xl">
+            Free Shipping!
+          </p>
           {boxOptions.map((box) => {
             return (
               <div
