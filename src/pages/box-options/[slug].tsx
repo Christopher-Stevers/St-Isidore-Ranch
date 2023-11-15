@@ -99,7 +99,6 @@ const ProductPage = ({
             {formatDollars(selectedBox.totalPrice)}
           </p>
           <div>
-            <p className="text-base">Free Shipping!</p>
             <p className="text-base">
               Since every animal is slightly different we
               can't guarantee exact weights, but we do
@@ -107,6 +106,7 @@ const ProductPage = ({
               you paid for over the entire bundle.
             </p>
           </div>
+            <p className="whitespace-pre font-display text-2xl lg:text-4xl">Free Shipping!</p>
           {boxOptions.map((box) => {
             return (
               <div
@@ -118,7 +118,6 @@ const ProductPage = ({
               >
                 <AddToCart
                   slug={box.slug}
-                  items={box.items}
                   hasMainPageStyles={true}
                 />
               </div>

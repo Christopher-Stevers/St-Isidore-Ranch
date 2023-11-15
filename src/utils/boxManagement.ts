@@ -200,7 +200,7 @@ class GroundBeefBoxMD implements Box {
 
   constructor() {
     this.description = LOREM_IPSUM;
-    this.totalPrice = 15000;
+    this.totalPrice = 10000;
     this.variant = "small";
     this.slug = "md-ground-beef-bundle";
     this.title = `Ground Beef Bundle 
@@ -228,7 +228,7 @@ class GroundBeefBoxLG implements Box {
   constructor() {
     this.description = LOREM_IPSUM;
     this.variant = "large";
-    this.totalPrice = 30000;
+    this.totalPrice = 22000;
     this.slug = "lg-ground-beef-bundle";
     this.title = `Ground Beef Bundle 
 ( Medium )`;
@@ -254,7 +254,7 @@ class GroundBeefBoxXL implements Box {
 
   constructor() {
     this.description = LOREM_IPSUM;
-    this.totalPrice = 40000;
+    this.totalPrice = 30000;
     this.variant = "XL";
     this.title = `Ground Beef Bundle 
 ( Large )`;
@@ -448,7 +448,7 @@ class SmallHamburgerPatties implements Box {
     this.description = LOREM_IPSUM;
     this.title = "Hamburger Patties";
     this.variant = "small";
-    this.totalPrice = 3999;
+    this.totalPrice = 2599;
     this.slug = "sm-hamburger-patties";
     this.boxSize = 0;
     this.src = "/boxPics/pattyBeef.jpg";
@@ -731,7 +731,7 @@ const QuarterBeefBundleGroup = new BoxGroup({
   slug: "quarter-beef",
   Boxes: [new QuarterBeefBundle()],
   description:
-    "An quarter of a beef - approximately 60 lbs of meat!",
+    "A quarter of a beef - approximately 60 lbs of meat, perfect for a family of 4",
   src: "/boxPics/sideBeef.jpg",
 });
 const EightBeefBundleGroup = new BoxGroup({
@@ -739,7 +739,7 @@ const EightBeefBundleGroup = new BoxGroup({
   slug: "eighth-beef",
   Boxes: [new EightBeefBundle()],
   description:
-    "An eighth of a beef - approximately 30 lbs. meat!",
+    "Don't have a lot of freezer space? Try an eighth of a beef - approximately 30 lbs of meat, great for individuals and small families",
   src: "/boxPics/sideBeef.jpg",
 });
 const HamburgerPattiesGroup = new BoxGroup({

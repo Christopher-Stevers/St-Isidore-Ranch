@@ -78,7 +78,6 @@ const Checkout = () => {
     });
 
   useEffect(() => {
-    console.log(paymentType, btcPaymentIntentId);
     switch (paymentType) {
       case CARD:
         if (
@@ -236,8 +235,8 @@ const Checkout = () => {
               <CSSSwitch
                 variable={paymentType}
                 constants={BTC}
-              >
-                <BTCPay btcPaymentUrl={btcPaymentUrl} />
+              >{btcPaymentUrl &&
+                <BTCPay btcPaymentUrl={btcPaymentUrl} />}
               </CSSSwitch>
             </div>
           </CSSSwitch>

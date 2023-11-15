@@ -153,10 +153,9 @@ export const stripeRouter = createTRPCRouter({
       const result = await btcPayPublicClient(
         `${env.NEXT_PUBLIC_BTCPAY_URL}/api/v1/stores/${storeId}/invoices`,
         "POST",
-        getSampleBody(order?.totalPrice / 100),
+        getSampleBody(order?.totalPrice ?? 0 / 100),
         { "Content-Type": "application/json" },
       );
-      console.log(result, "end");
       return result;
     }),
   setOrderPaymentIntent: publicProcedure

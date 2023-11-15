@@ -152,3 +152,8 @@ model StripeEvent {
   livemode         Boolean
   pending_webhooks Float
 }
+
+model BtcPayEvent {
+  id              String  @id @map("_id")
+  metadata        Json
+}
