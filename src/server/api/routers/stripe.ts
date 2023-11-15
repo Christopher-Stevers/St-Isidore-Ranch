@@ -49,13 +49,16 @@ const getSampleBody = (amount: number) => {
     },
     checkout: {
       speedPolicy: "HighSpeed",
-      paymentMethods: ["BTC-LightningNetwork"],
+      paymentMethods: [
+        "BTC-LightningNetwork",
+        "BTC-OnChain",
+      ],
       defaultPaymentMethod: "BTC-LightningNetwork",
       lazyPaymentMethods: false,
       expirationMinutes: 90,
       monitoringMinutes: 90,
       paymentTolerance: 1,
-      redirectURL: "https://stisidoreranch.com",
+      redirectURL: "https://stisidoreranch.com/success",
       redirectAutomatically: true,
       requiresRefundEmail: true,
       checkoutType: null,
@@ -153,7 +156,7 @@ export const stripeRouter = createTRPCRouter({
       const result = await btcPayPublicClient(
         `${env.NEXT_PUBLIC_BTCPAY_URL}/api/v1/stores/${storeId}/invoices`,
         "POST",
-        getSampleBody(order?.totalPrice ?? 0 / 100),
+        getSampleBody((order?.totalPrice ?? 0) / 100),
         { "Content-Type": "application/json" },
       );
       return result;
