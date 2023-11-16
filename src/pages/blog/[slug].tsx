@@ -6,6 +6,7 @@ import Head from "next/head";
 import { remark } from "remark";
 import html from "remark-html";
 import LayoutShared from "~/components/shared/LayoutShared";
+import Image from "next/image";
 
 type Props = {
   post: PostType;
@@ -25,9 +26,18 @@ export default function Post({ post }: Props) {
             <title>{post.title}</title>
           </Head>
           <div className="blog-post">
-            <h2 className="py-8 text-3xl font-semibold">
-              {post.title}
-            </h2>
+            <div className="flex flex-wrap justify-between">
+              <h2 className="py-8 text-3xl font-semibold">
+                {post.title}
+              </h2>
+              <Image
+                alt="cover image"
+                className="w-max-[300px] md:w-max-[600px]"
+                height={600}
+                width={600}
+                src={post.ogImage.url}
+              />
+            </div>
             <div
               dangerouslySetInnerHTML={{
                 __html: post.content,
