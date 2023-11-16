@@ -55,8 +55,14 @@ type Order =
 type CartAction = { type: "UPDATE_CART"; payload: Order };
 
 const CartContext = createContext<
-  [Order | null, React.Dispatch<CartAction>]
->({} as [Order | null, React.Dispatch<CartAction>]);
+  [Order | null, React.Dispatch<CartAction>, () => void]
+>(
+  {} as [
+    Order | null,
+    React.Dispatch<CartAction>,
+    () => void,
+  ],
+);
 
 export const useCart = () => {
   const context = React.useContext(CartContext);
@@ -121,7 +127,9 @@ const CartProvider = ({
     }
   }, [state?.id]);
   return (
-    <CartContext.Provider value={[state, dispatch]}>
+    <CartContext.Provider
+      value={[state, dispatch, refetchOrder]}
+    >
       <Link
         href="/checkout"
         className="fixed bottom-6 right-6 rounded-full border-4 border-primary-500  bg-backdrop-700 p-3 text-primary-500"

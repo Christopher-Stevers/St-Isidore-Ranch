@@ -3,6 +3,8 @@ import { env } from "~/env.mjs";
 import { api } from "~/utils/api";
 import { useRouter } from "next/router";
 import AddressFieldInput from "~/components/Checkout/AddressFieldInput";
+import { BTC, PAYMENT } from "./Checkout";
+import { useCart } from "~/providers/cart";
 
 export const btcPayPublicClient = async (
   url: string,
@@ -26,13 +28,23 @@ export const btcPayPublicClient = async (
   return rawResponse.json();
 };
 
-const BTCPay = ({ invoiceId }: { invoiceId: string }) => {
+const BTCPay = ({
+  invoiceId,
+  paymentStep,
+  paymentType,
+}: {
+  invoiceId: string;
+  paymentStep: string;
+  paymentType: string;
+}) => {
   const router = useRouter();
+  const [, , refetchOrder] = useCart();
   const { data: invoice } =
     api.stripe.getBtcPayInvoice.useQuery({ invoiceId });
   const btcPaymentUrl = invoice?.checkoutLink;
   useEffect(() => {
     if (invoice?.status === "Settled") {
+      refetchOrder();
       router.push("/success").catch((err) => {
         console.log(err);
       });
@@ -46,12 +58,14 @@ const BTCPay = ({ invoiceId }: { invoiceId: string }) => {
         please fill in your email below.
       </div>
       <AddressFieldInput name="Email" field="email" />
-      {btcPaymentUrl && (
-        <iframe
-          src={btcPaymentUrl}
-          className="h-[1000px] w-full"
-        />
-      )}
+      {btcPaymentUrl &&
+        paymentStep === PAYMENT &&
+        paymentType === BTC && (
+          <iframe
+            src={btcPaymentUrl}
+            className="h-[1000px] w-full"
+          />
+        )}
     </div>
   );
 };

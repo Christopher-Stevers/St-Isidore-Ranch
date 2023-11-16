@@ -227,7 +227,11 @@ const Checkout = () => {
                 constants={BTC}
               >
                 {btcPaymentIntentId && (
-                  <BTCPay invoiceId={btcPaymentIntentId} />
+                  <BTCPay
+                    invoiceId={btcPaymentIntentId}
+                    paymentStep={paymentStep}
+                    paymentType={paymentType}
+                  />
                 )}
               </CSSSwitch>
             </div>
