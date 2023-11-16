@@ -15,11 +15,25 @@ const AddAddress = ({
       </h3>
 
       <p>
-        Please note that we only ship to Perth County,
-        London, and Waterloo at this time. If you live
-        outside of that, please{" "}
-        <Link href="/contact">contact me</Link> and I'll do
-        my best to accomodate you.
+        Currently we deliver anywhere in the GTA as well as
+        a wide swath of southern-central Ontario. There is a
+        full map of our delivery area{" "}
+        <Link
+          className="text-primary-500 underline"
+          href="/blog/how-we-deliver"
+          target="_blank"
+        >
+          here
+        </Link>
+        . If you live in Ontario you probably within our
+        delivery area. If not, please{" "}
+        <Link
+          className="text-primary-500 underline"
+          href="/contact"
+        >
+          contact me
+        </Link>{" "}
+        and I'll do my best to accomodate you.
       </p>
       <AddressFieldInput
         name="Address line 1"
