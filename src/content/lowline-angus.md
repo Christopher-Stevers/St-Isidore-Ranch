@@ -7,16 +7,16 @@ author:
   name: Christopher Stevers
   picture: '/assets/blog/authors/jj.jpeg'
 ogImage:
-  url: '/assets/blog/dynamic-routing/cover.jpg'
+  url: '/hero2.jpg'
 ---
 
 ### Our Herd
 
-Our cattle are primarily Lowline Angus, an Australian cattle breed specifically for grass-finishing. Known for their docile tempermeant and small size they are perfect for low stress handling. The smaller the cows the less force, and less stress us, the human handler need to use to work with them.
+Our cattle are primarily Lowline Angus, an Australian cattle breed created specifically for grass-finishing. Known for their docile temper and small size they are perfect for low stress handling. The smaller the cows the less force, and less stress us, the human handler need to use to work with them.
 
 ### Rotational Grazing
 
-Our cattle get fresh grash every day rotating through their pasture 4-6 times per season. Why not let them have free range of the whole thing? Rotationaly grazing mimics the behaviour of migratory herds in nature. This ensures that the cattle have easy access to fresh grash every day, while also giving the land a chance to recover between passes. Without rotational grazing cattle tend to overgraze one area while letting other parts of the pasture grow tall and woody.
+Our cattle get fresh grash almost every day by rotating through their pasture 4-6 times per season. Why not let them have free range of the whole thing? Rotationaly grazing mimics the behaviour of migratory herds in nature. This ensures that the cattle have easy access to fresh grash every day, while also giving the land a chance to recover between passes. Without rotational grazing cattle tend to overgraze one area and let other parts of the pasture grow tall and woody.
 
 ### From Calf to Stocker
 
@@ -24,7 +24,7 @@ Our calves our born on the pasture or in the barn depending on the time of year.
 
 ### Our Butcher
 
-After about 18 months ( this is slow food! ) the cattle are ready for the butcher. Our Custom Butcher, (Greens Meat Market) [https://greensmeatmarket.com/] is a family run facility in Wingham Ontario. They age our meat for 14 - 21 days for optimal flavour and tenderness. Once it's been aged, they cut and vacuum seal it for us. Then it heads to our freezer, ready for your order.
+After about 18 months ( this is slow food! ) the cattle are ready for the butcher. Our Custom Butcher, [Greens Meat Market](https://greensmeatmarket.com/) is a family run facility in Wingham Ontario. They age our meat for 14 - 21 days for optimal flavour and tenderness. Once it's been aged, they cut and vacuum seal it for us. Then it heads to our freezer, ready for your order.
 
 ### Want to See More?
 
