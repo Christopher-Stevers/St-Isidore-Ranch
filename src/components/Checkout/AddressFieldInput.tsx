@@ -13,7 +13,8 @@ const AddressFieldInput = ({
     | "address2"
     | "city"
     | "postalCode"
-    | "name";
+    | "name"
+    | "email";
 }) => {
   const [order] = useCart();
   const [value, setValue] = useState("");

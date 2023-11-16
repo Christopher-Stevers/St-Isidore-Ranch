@@ -1,5 +1,8 @@
+import { useEffect } from "react";
 import { env } from "~/env.mjs";
 import { api } from "~/utils/api";
+import { useRouter } from "next/router";
+import AddressFieldInput from "~/components/Checkout/AddressFieldInput";
 
 export const btcPayPublicClient = async (
   url: string,
@@ -24,14 +27,25 @@ export const btcPayPublicClient = async (
 };
 
 const BTCPay = ({ invoiceId }: { invoiceId: string }) => {
+  const router = useRouter();
   const { data: invoice } =
     api.stripe.getBtcPayInvoice.useQuery({ invoiceId });
-  const btcPaymentUrl = invoice
-    ? `${env.NEXT_PUBLIC_BTCPAY_URL}/i/${invoice.id}`
-    : null;
+  const btcPaymentUrl = invoice?.checkoutLink;
+  useEffect(() => {
+    if (invoice?.status === "Settled") {
+      router.push("/success").catch((err) => {
+        console.log(err);
+      });
+    }
+  }, [invoice]);
 
   return (
-    <div className="w-full">
+    <div className="flex w-full flex-col gap-6">
+      <div>
+        If you'd like to recieve email confirmation of your
+        please fill in your email below.
+      </div>
+      <AddressFieldInput name="Email" field="email" />
       {btcPaymentUrl && (
         <iframe
           src={btcPaymentUrl}

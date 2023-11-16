@@ -15,17 +15,21 @@ const PayWithBubble = ({
   setValue: Dispatch<SetStateAction<string>>;
 }) => {
   const handleSelect = () => {
+    console.log("select");
     setValue(slug);
   };
   return (
     <button
-      onChange={handleSelect}
+      onClick={handleSelect}
       className="flex w-full max-w-[300px] items-center gap-4 rounded-md border-2 border-primary-500 bg-backdrop-500 px-4 py-2 text-lg font-bold text-form"
     >
       <input
         checked={value === slug}
         id={slug}
         type="radio"
+        onChange={() => {
+          return null;
+        }}
       />
       <label className="flex" htmlFor={slug}>
         Pay With {title}
