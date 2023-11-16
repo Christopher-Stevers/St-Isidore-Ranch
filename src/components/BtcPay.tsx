@@ -39,8 +39,12 @@ const BTCPay = ({
 }) => {
   const router = useRouter();
   const [, , refetchOrder] = useCart();
+  const ONE_SECONDS = 1000;
   const { data: invoice } =
-    api.stripe.getBtcPayInvoice.useQuery({ invoiceId });
+    api.stripe.getBtcPayInvoice.useQuery(
+      { invoiceId },
+      { refetchInterval: ONE_SECONDS },
+    );
   const btcPaymentUrl = invoice?.checkoutLink;
   useEffect(() => {
     if (invoice?.status === "Settled") {

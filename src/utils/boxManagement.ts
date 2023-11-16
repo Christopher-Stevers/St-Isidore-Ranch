@@ -68,7 +68,7 @@ export class SmallGrillingBundle extends Box {
       src: "/boxPics/grilledBeef.jpg",
       slug: "sm-grilling-bundle",
       variant: "small",
-      totalPrice: 16999,
+      totalPrice: 14500,
       boxSize: 0,
       items: [
         {
@@ -97,7 +97,7 @@ export class LargeGrillingBundle extends Box {
       src: "/boxPics/grilledBeef.jpg",
       slug: "lg-grilling-bundle",
       variant: "large",
-      totalPrice: 27999,
+      totalPrice: 24000,
       boxSize: 0,
       items: [
         {
@@ -127,7 +127,7 @@ class LargeEverythingBundle extends Box {
     super({
       description: LOREM_IPSUM,
       title: "Everything Bundle",
-      totalPrice: 25999,
+      totalPrice: 23000,
       variant: "large",
       src: "/boxPics/everythingBeef.jpg",
       boxSize: 0,
@@ -162,7 +162,7 @@ class SmallEverythingBundle extends Box {
     super({
       description: LOREM_IPSUM,
       title: "Everything Bundle",
-      totalPrice: 15999,
+      totalPrice: 15000,
       variant: "small",
       src: "/boxPics/everythingBeef.jpg",
       boxSize: 0,
@@ -200,7 +200,7 @@ class GroundBeefBoxMD implements Box {
 
   constructor() {
     this.description = LOREM_IPSUM;
-    this.totalPrice = 0;
+    this.totalPrice = 10000;
     this.variant = "small";
     this.slug = "md-ground-beef-bundle";
     this.title = `Ground Beef Bundle 
@@ -283,7 +283,7 @@ class LargePrimeSteaksBox implements Box {
     this.description =
       "A box full of our finest steaks for your grilling pleasure!";
     this.title = "Prime Steaks";
-    this.totalPrice = 56999;
+    this.totalPrice = 50000;
     this.slug = "lg-prime-steaks";
     this.boxSize = 0;
     this.src = "/boxPics/steakBeef.jpg";
@@ -313,7 +313,7 @@ class MediumPrimeSteaksBox implements Box {
     this.description =
       "A box full of our finest steaks for your grilling pleasure!";
     this.title = "Prime Steaks";
-    this.totalPrice = 38999;
+    this.totalPrice = 34000;
     this.slug = "md-prime-steaks";
     this.boxSize = 0;
     this.src = "/boxPics/steakBeef.jpg";
@@ -343,7 +343,7 @@ class SmallPrimeSteaksBox implements Box {
     this.description =
       "A box full of our finest steaks for your grilling pleasure!";
     this.title = "Prime Steaks";
-    this.totalPrice = 19999;
+    this.totalPrice = 17500;
     this.slug = "sm-prime-steaks";
     this.boxSize = 0;
     this.src = "/boxPics/steakBeef.jpg";
@@ -374,7 +374,7 @@ class SmallOvenBundle implements Box {
   constructor() {
     this.description = LOREM_IPSUM;
     this.title = "Oven Bundle";
-    this.totalPrice = 19599;
+    this.totalPrice = 17000;
     this.boxSize = 0;
     this.slug = "sm-oven-bundle";
     this.variant = "small";
@@ -411,7 +411,7 @@ class LargeOvenBundle implements Box {
   constructor() {
     this.description = LOREM_IPSUM;
     this.title = "Oven Bundle";
-    this.totalPrice = 379.99;
+    this.totalPrice = 320.0;
     this.boxSize = 0;
     this.slug = "oven-bundle";
     this.variant = "Large";
@@ -448,7 +448,7 @@ class SmallHamburgerPatties implements Box {
     this.description = LOREM_IPSUM;
     this.title = "Hamburger Patties";
     this.variant = "small";
-    this.totalPrice = 2599;
+    this.totalPrice = 2500;
     this.slug = "sm-hamburger-patties";
     this.boxSize = 0;
     this.src = "/boxPics/pattyBeef.jpg";
@@ -470,7 +470,7 @@ class LargeHamburgerPatties implements Box {
     this.description = LOREM_IPSUM;
     this.title = "Hamburger Patties";
     this.variant = "large";
-    this.totalPrice = 6999;
+    this.totalPrice = 5000;
     this.slug = "lg-hamburger-patties";
     this.boxSize = 0;
     this.src = "/boxPics/pattyBeef.jpg";
@@ -493,7 +493,7 @@ class QuarterBeefBundle implements Box {
   constructor() {
     this.description = LOREM_IPSUM;
     this.title = "1/4 Beef";
-    this.totalPrice = 125796;
+    this.totalPrice = 110000;
     this.boxSize = 0;
     this.variant = null;
     this.src = "/boxPics/sideBeef.jpg";
@@ -556,7 +556,7 @@ class EightBeefBundle implements Box {
   constructor() {
     this.description = LOREM_IPSUM;
     this.title = "1/8 Beef";
-    this.totalPrice = 66388;
+    this.totalPrice = 60000;
     this.slug = "1-8-beef";
     this.boxSize = 0;
     this.variant = null;
