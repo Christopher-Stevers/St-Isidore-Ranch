@@ -35,9 +35,6 @@ export const BTC = "BTC";
 const Checkout = () => {
   const [paymentStep, setPaymentStep] = useState(PAYMENT);
   const [paymentType, setPaymentType] = useState(CARD);
-  const [btcPaymentUrl, setBtcPaymentUrl] = useState<
-    string | null
-  >(null);
   const [cart] = useCart();
   const router = useRouter();
   const [clientSecret, setClientSecret] = useState("");
@@ -49,7 +46,6 @@ const Checkout = () => {
   const { mutate: createPaymentIntent } =
     api.stripe.createPaymentIntent.useMutation({
       onSuccess: (data) => {
-        console.log(data);
         if (!data?.client_secret) return;
         setStripePaymentIntentId(data.id);
         setClientSecret(data.client_secret);
@@ -60,7 +56,6 @@ const Checkout = () => {
       {
         onSuccess: (data) => {
           setBtcPaymentIntentId(data.id);
-          setBtcPaymentUrl(data.checkoutLink);
         },
       },
     );
@@ -89,6 +84,7 @@ const Checkout = () => {
         }
       case BTC:
         if (cart?.id && !btcPaymentIntentId) {
+          console.log("make btc payment intent");
           createBtcPaymentIntent({
             orderId: cart?.id ?? "",
           });
@@ -230,8 +226,8 @@ const Checkout = () => {
                 variable={paymentType}
                 constants={BTC}
               >
-                {btcPaymentUrl && (
-                  <BTCPay btcPaymentUrl={btcPaymentUrl} />
+                {btcPaymentIntentId && (
+                  <BTCPay invoiceId={btcPaymentIntentId} />
                 )}
               </CSSSwitch>
             </div>

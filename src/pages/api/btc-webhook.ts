@@ -89,6 +89,7 @@ export default async (
       invoiceId,
       amount,
     );
+    console.log("ok yeah this is ok");
     res.status(200).send("ok");
   } catch (error) {
     console.log(error);

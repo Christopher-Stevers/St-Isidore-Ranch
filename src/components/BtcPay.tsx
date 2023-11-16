@@ -1,4 +1,5 @@
 import { env } from "~/env.mjs";
+import { api } from "~/utils/api";
 
 export const btcPayPublicClient = async (
   url: string,
@@ -10,7 +11,6 @@ export const btcPayPublicClient = async (
   const optionalBody = body
     ? { body: JSON.stringify(body) }
     : {};
-  console.log(url);
   const rawResponse = await fetch(url, {
     headers: {
       Authorization: `token ${env.NEXT_PUBLIC_BTCPAY_KEY}`,
@@ -23,11 +23,13 @@ export const btcPayPublicClient = async (
   return rawResponse.json();
 };
 
-const BTCPay = ({
-  btcPaymentUrl,
-}: {
-  btcPaymentUrl: string;
-}) => {
+const BTCPay = ({ invoiceId }: { invoiceId: string }) => {
+  const { data: invoice } =
+    api.stripe.getBtcPayInvoice.useQuery({ invoiceId });
+  const btcPaymentUrl = invoice
+    ? `${env.NEXT_PUBLIC_BTCPAY_URL}/i/${invoice.id}`
+    : null;
+
   return (
     <div className="w-full">
       {btcPaymentUrl && (

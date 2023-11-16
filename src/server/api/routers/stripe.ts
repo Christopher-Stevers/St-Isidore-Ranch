@@ -1,52 +1,6 @@
 const getSampleBody = (amount: number) => {
   return {
-    metadata: {
-      orderId: "pos-app_346KRC5BjXXXo8cRFKwTBmdR6ZJ4",
-      orderUrl:
-        "https://localhost:14142/apps/346KRC5BjXXXo8cRFKwTBmdR6ZJ4/pos",
-      itemDesc: "Tea shop",
-      posData: {
-        tip: 0.48,
-        cart: [
-          {
-            id: "pu erh",
-            count: 1,
-            image: "~/img/pos-sample/pu-erh.jpg",
-            price: {
-              type: 2,
-              value: 2,
-              formatted: "$2.00",
-            },
-            title: "Pu Erh",
-            inventory: null,
-          },
-          {
-            id: "rooibos",
-            count: 1,
-            image: "~/img/pos-sample/rooibos.jpg",
-            price: {
-              type: 2,
-              value: 1.2,
-              formatted: "$1.20",
-            },
-            title: "Rooibos",
-            inventory: null,
-          },
-        ],
-        total: 3.68,
-        subTotal: 3.2,
-        customAmount: 0,
-        discountAmount: 0,
-        discountPercentage: 0,
-      },
-      receiptData: {
-        Tip: "$0.48",
-        Cart: {
-          "Pu Erh": "$2.00 x 1 = $2.00",
-          Rooibos: "$1.20 x 1 = $1.20",
-        },
-      },
-    },
+    metadata: {},
     checkout: {
       speedPolicy: "HighSpeed",
       paymentMethods: [
@@ -185,5 +139,19 @@ export const stripeRouter = createTRPCRouter({
           paymentIntent: input.paymentIntentId,
         },
       });
+    }),
+
+  getBtcPayInvoice: publicProcedure
+    .input(
+      z.object({
+        invoiceId: z.string(),
+      }),
+    )
+    .query(async ({ input }) => {
+      const result = await btcPayPublicClient(
+        `${env.NEXT_PUBLIC_BTCPAY_URL}/api/v1/stores/${storeId}/invoices/${input.invoiceId}`,
+        "GET",
+      );
+      return result;
     }),
 });

@@ -71,7 +71,9 @@ export default {
       await emailWrapper({
         email: env.EMAIL_USERNAME ?? "",
         subject: "New Order",
-        htmlMessage,
+        htmlMessage: htmlMessage?.concat(
+          "payed with bitcoin",
+        ),
         message: `New order with id ${order?.id} please enable html email to see full order`,
       });
     }
