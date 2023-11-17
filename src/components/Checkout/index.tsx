@@ -33,7 +33,7 @@ export const CARD = "CARD";
 export const BTC = "BTC";
 
 const Checkout = () => {
-  const [paymentStep, setPaymentStep] = useState(PAYMENT);
+  const [paymentStep, setPaymentStep] = useState(REVIEW);
   const [paymentType, setPaymentType] = useState(CARD);
   const [cart] = useCart();
   const router = useRouter();
