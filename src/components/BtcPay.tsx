@@ -59,7 +59,7 @@ const BTCPay = ({
     <div className="flex w-full flex-col gap-6">
       <div>
         If you'd like to recieve email confirmation of your
-        please fill in your email below.
+        order please fill in your email below.
       </div>
       <AddressFieldInput name="Email" field="email" />
       {btcPaymentUrl &&
