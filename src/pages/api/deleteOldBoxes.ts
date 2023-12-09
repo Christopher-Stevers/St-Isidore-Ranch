@@ -14,7 +14,6 @@ export default async function handler(
 ) {
   try {
     const oneWeekAgo = new Date();
-    oneWeekAgo.setDate(oneWeekAgo.getDate() - 7);
 
     // get all orders from over a week ago
     const oldOrders = await prisma.order.findMany({
