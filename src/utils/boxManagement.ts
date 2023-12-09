@@ -97,7 +97,7 @@ export class LargeGrillingBundle extends Box {
       src: "/boxPics/grilledBeef.jpg",
       slug: "lg-grilling-bundle",
       variant: "large",
-      totalPrice: 24000,
+      totalPrice: 26500,
       boxSize: 0,
       items: [
         {
@@ -127,7 +127,7 @@ class LargeEverythingBundle extends Box {
     super({
       description: LOREM_IPSUM,
       title: "Everything Bundle",
-      totalPrice: 23000,
+      totalPrice: 24000,
       variant: "large",
       src: "/boxPics/everythingBeef.jpg",
       boxSize: 0,
@@ -200,7 +200,7 @@ class GroundBeefBoxMD implements Box {
 
   constructor() {
     this.description = LOREM_IPSUM;
-    this.totalPrice = 10000;
+    this.totalPrice = 95;
     this.variant = "small";
     this.slug = "md-ground-beef-bundle";
     this.title = `Ground Beef Bundle 
@@ -228,7 +228,7 @@ class GroundBeefBoxLG implements Box {
   constructor() {
     this.description = LOREM_IPSUM;
     this.variant = "large";
-    this.totalPrice = 22000;
+    this.totalPrice = 20000;
     this.slug = "lg-ground-beef-bundle";
     this.title = `Ground Beef Bundle 
 ( Medium )`;
@@ -283,7 +283,7 @@ class LargePrimeSteaksBox implements Box {
     this.description =
       "A box full of our finest steaks for your grilling pleasure!";
     this.title = "Prime Steaks";
-    this.totalPrice = 50000;
+    this.totalPrice = 60000;
     this.slug = "lg-prime-steaks";
     this.boxSize = 0;
     this.src = "/boxPics/steakBeef.jpg";
@@ -313,7 +313,7 @@ class MediumPrimeSteaksBox implements Box {
     this.description =
       "A box full of our finest steaks for your grilling pleasure!";
     this.title = "Prime Steaks";
-    this.totalPrice = 34000;
+    this.totalPrice = 38000;
     this.slug = "md-prime-steaks";
     this.boxSize = 0;
     this.src = "/boxPics/steakBeef.jpg";
@@ -324,7 +324,9 @@ class MediumPrimeSteaksBox implements Box {
         quantity: 4,
         name: BONELESSRIBEYE,
       },
-      { quantity: 4, name: TENDERLOIN },
+      { quantity: 2, name: TENDERLOIN },
+
+      { quantity: 2, name: NYSTRIP },
       { quantity: 4, name: SIRLOIN },
     ];
   }
@@ -343,7 +345,7 @@ class SmallPrimeSteaksBox implements Box {
     this.description =
       "A box full of our finest steaks for your grilling pleasure!";
     this.title = "Prime Steaks";
-    this.totalPrice = 17500;
+    this.totalPrice = 18000;
     this.slug = "sm-prime-steaks";
     this.boxSize = 0;
     this.src = "/boxPics/steakBeef.jpg";
@@ -354,7 +356,7 @@ class SmallPrimeSteaksBox implements Box {
         quantity: 2,
         name: BONELESSRIBEYE,
       },
-      { quantity: 2, name: TENDERLOIN },
+      { quantity: 2, name: NYSTRIP },
       { quantity: 2, name: SIRLOIN },
     ];
   }
@@ -374,7 +376,7 @@ class SmallOvenBundle implements Box {
   constructor() {
     this.description = LOREM_IPSUM;
     this.title = "Oven Bundle";
-    this.totalPrice = 17000;
+    this.totalPrice = 26000;
     this.boxSize = 0;
     this.slug = "sm-oven-bundle";
     this.variant = "small";
@@ -411,7 +413,7 @@ class LargeOvenBundle implements Box {
   constructor() {
     this.description = LOREM_IPSUM;
     this.title = "Oven Bundle";
-    this.totalPrice = 320.0;
+    this.totalPrice = 50000;
     this.boxSize = 0;
     this.slug = "oven-bundle";
     this.variant = "Large";
@@ -493,7 +495,7 @@ class QuarterBeefBundle implements Box {
   constructor() {
     this.description = LOREM_IPSUM;
     this.title = "1/4 Beef";
-    this.totalPrice = 110000;
+    this.totalPrice = 95000;
     this.boxSize = 0;
     this.variant = null;
     this.src = "/boxPics/sideBeef.jpg";
@@ -556,7 +558,7 @@ class EightBeefBundle implements Box {
   constructor() {
     this.description = LOREM_IPSUM;
     this.title = "1/8 Beef";
-    this.totalPrice = 60000;
+    this.totalPrice = 52500;
     this.slug = "1-8-beef";
     this.boxSize = 0;
     this.variant = null;
@@ -575,7 +577,7 @@ class EightBeefBundle implements Box {
         quantity: 2,
         name: SIRLOIN,
       },
-      { quantity: 1, name: LONDONBROIL },
+      { quantity: 2, name: LONDONBROIL },
       {
         quantity: 1,
         name: SIRLOIN_TIP,
