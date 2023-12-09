@@ -13,13 +13,14 @@ export default async function handler(
   res: NextApiResponse,
 ) {
   try {
-    const oneWeekAgo = new Date();
+    const oneDayAgo = new Date();
+    oneDayAgo.setDate(oneDayAgo.getDate() - 1);
 
     // get all orders from over a week ago
     const oldOrders = await prisma.order.findMany({
       where: {
         createdAt: {
-          lt: oneWeekAgo,
+          lt: oneDayAgo,
         },
       },
     });
