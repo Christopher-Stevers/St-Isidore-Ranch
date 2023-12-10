@@ -200,7 +200,7 @@ class GroundBeefBoxMD implements Box {
 
   constructor() {
     this.description = LOREM_IPSUM;
-    this.totalPrice = 95;
+    this.totalPrice = 9500;
     this.variant = "small";
     this.slug = "md-ground-beef-bundle";
     this.title = `Ground Beef Bundle 
