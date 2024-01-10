@@ -1,4 +1,5 @@
 import { type AppType } from "next/app";
+import { hotjar } from "react-hotjar";
 import Head from "next/head";
 import { type Session } from "next-auth";
 import { SessionProvider } from "next-auth/react";
@@ -13,6 +14,7 @@ import { api } from "~/utils/api";
 
 import "~/styles/globals.css";
 import { CartProvider } from "~/providers/cart";
+import { useEffect } from "react";
 
 const roboto = Roboto({
   weight: ["400", "700"],
@@ -39,6 +41,9 @@ const MyApp: AppType<{ session: Session | null }> = ({
   Component,
   pageProps: { session, ...pageProps },
 }) => {
+  useEffect(() => {
+    hotjar.initialize(3197536, 6);
+  }, []);
   return (
     <>
       <Head>
@@ -49,16 +54,6 @@ const MyApp: AppType<{ session: Session | null }> = ({
           content="Grass fed beef | from pasture to plate"
         />
         <link rel="icon" href="/favicon.png" />
-        <script>
-    (function(h,o,t,j,a,r){
-        h.hj=h.hj||function(){(h.hj.q=h.hj.q||[]).push(arguments)};
-        h._hjSettings={hjid:3197536,hjsv:6};
-        a=o.getElementsByTagName('head')[0];
-        r=o.createElement('script');r.async=1;
-        r.src=t+h._hjSettings.hjid+j+h._hjSettings.hjsv;
-        a.appendChild(r);
-    })(window,document,'https://static.hotjar.com/c/hotjar-','.js?sv=');
-</script>
       </Head>
       <SessionProvider session={session}>
         <CartProvider>
