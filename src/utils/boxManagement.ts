@@ -68,7 +68,7 @@ export class SmallGrillingBundle extends Box {
       src: "/boxPics/grilledBeef.jpg",
       slug: "sm-grilling-bundle",
       variant: "small",
-      totalPrice: 14500,
+      totalPrice: 12000,
       boxSize: 0,
       items: [
         {
@@ -97,7 +97,7 @@ export class LargeGrillingBundle extends Box {
       src: "/boxPics/grilledBeef.jpg",
       slug: "lg-grilling-bundle",
       variant: "large",
-      totalPrice: 26500,
+      totalPrice: 22000,
       boxSize: 0,
       items: [
         {
@@ -127,7 +127,7 @@ class LargeEverythingBundle extends Box {
     super({
       description: LOREM_IPSUM,
       title: "Everything Bundle",
-      totalPrice: 24000,
+      totalPrice: 20000,
       variant: "large",
       src: "/boxPics/everythingBeef.jpg",
       boxSize: 0,
@@ -162,7 +162,7 @@ class SmallEverythingBundle extends Box {
     super({
       description: LOREM_IPSUM,
       title: "Everything Bundle",
-      totalPrice: 15000,
+      totalPrice: 12500,
       variant: "small",
       src: "/boxPics/everythingBeef.jpg",
       boxSize: 0,
@@ -283,7 +283,7 @@ class LargePrimeSteaksBox implements Box {
     this.description =
       "A box full of our finest steaks for your grilling pleasure!";
     this.title = "Prime Steaks";
-    this.totalPrice = 60000;
+    this.totalPrice = 46000;
     this.slug = "lg-prime-steaks";
     this.boxSize = 0;
     this.src = "/boxPics/steakBeef.jpg";
@@ -313,7 +313,7 @@ class MediumPrimeSteaksBox implements Box {
     this.description =
       "A box full of our finest steaks for your grilling pleasure!";
     this.title = "Prime Steaks";
-    this.totalPrice = 38000;
+    this.totalPrice = 29000;
     this.slug = "md-prime-steaks";
     this.boxSize = 0;
     this.src = "/boxPics/steakBeef.jpg";
@@ -345,7 +345,7 @@ class SmallPrimeSteaksBox implements Box {
     this.description =
       "A box full of our finest steaks for your grilling pleasure!";
     this.title = "Prime Steaks";
-    this.totalPrice = 18000;
+    this.totalPrice = 14000;
     this.slug = "sm-prime-steaks";
     this.boxSize = 0;
     this.src = "/boxPics/steakBeef.jpg";
@@ -376,7 +376,7 @@ class SmallOvenBundle implements Box {
   constructor() {
     this.description = LOREM_IPSUM;
     this.title = "Oven Bundle";
-    this.totalPrice = 26000;
+    this.totalPrice = 20000;
     this.boxSize = 0;
     this.slug = "sm-oven-bundle";
     this.variant = "small";
@@ -413,7 +413,7 @@ class LargeOvenBundle implements Box {
   constructor() {
     this.description = LOREM_IPSUM;
     this.title = "Oven Bundle";
-    this.totalPrice = 50000;
+    this.totalPrice = 38000;
     this.boxSize = 0;
     this.slug = "oven-bundle";
     this.variant = "Large";
@@ -495,7 +495,7 @@ class QuarterBeefBundle implements Box {
   constructor() {
     this.description = LOREM_IPSUM;
     this.title = "1/4 Beef";
-    this.totalPrice = 95000;
+    this.totalPrice = 75000;
     this.boxSize = 0;
     this.variant = null;
     this.src = "/boxPics/sideBeef.jpg";
@@ -558,7 +558,7 @@ class EightBeefBundle implements Box {
   constructor() {
     this.description = LOREM_IPSUM;
     this.title = "1/8 Beef";
-    this.totalPrice = 52500;
+    this.totalPrice = 40000;
     this.slug = "1-8-beef";
     this.boxSize = 0;
     this.variant = null;

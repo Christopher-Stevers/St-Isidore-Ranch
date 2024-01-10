@@ -82,7 +82,7 @@ const ProductPage = ({
                       className="flex list-disc gap-2 py-2 font-display text-2xl"
                     >
                       <div className="font-sans">
-                        <span>{item.quantity}</span>{" "}
+                        <span>{item.quantity}x</span>{" "}
                         <span className="whitespace-pre">
                           {item.name.replace(
                             removeNewlinesRegex,
