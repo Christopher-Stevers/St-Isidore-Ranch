@@ -76,6 +76,9 @@ const ProductPage = ({
           <ul className="custom-list-bullet !list-disc">
             {boxItems.length
               ? boxItems.map((item) => {
+                  //regex that replaces lb with lb each and oz with oz each
+                  const eachRegex = /lb\.|oz\./g;
+
                   return (
                     <li
                       key={item.name}
@@ -84,10 +87,12 @@ const ProductPage = ({
                       <div className="font-sans">
                         <span>{item.quantity}x</span>{" "}
                         <span className="whitespace-pre">
-                          {item.name.replace(
-                            removeNewlinesRegex,
-                            " ",
-                          )}
+                          {item.name
+                            .replace(
+                              removeNewlinesRegex,
+                              " ",
+                            )
+                            .replace(eachRegex, "$& each")}
                         </span>
                       </div>
                     </li>
