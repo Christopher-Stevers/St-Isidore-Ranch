@@ -15,7 +15,6 @@ export default {
   defaultHandler: async (event: Stripe.Event) => {
     await prisma.stripeEvent.create({
       data: {
-        id: event.id,
         type: event.type,
         object: event.object,
         api_version: event.api_version,
@@ -56,10 +55,10 @@ export default {
   handlePaymentIntentSucceeded: async (
     paymentIntent: Stripe.PaymentIntent,
   ) => {
-    const { id } = paymentIntent;
+    const paymentIntentId = paymentIntent.id;
     const order = await prisma.order.findUnique({
       where: {
-        paymentIntent: id,
+        paymentIntent: paymentIntentId,
       },
       include: {
         boxes: {
@@ -71,15 +70,18 @@ export default {
       },
     });
     if (paymentIntent.amount !== order?.totalPrice) {
-      await refundOrder(prisma, id);
-      await stripe.paymentIntents.cancel(id);
+      await refundOrder(prisma, paymentIntentId);
+      await stripe.paymentIntents.cancel(paymentIntentId);
+      console.log(
+        order?.boxes.map((box) => box.items).flat(),
+      );
       throw new Error(
         `${paymentIntent.amount}  ${order?.totalPrice} not equal`,
       );
     } else {
       const order = await prisma.order.findUnique({
         where: {
-          paymentIntent: id,
+          paymentIntent: paymentIntentId,
         },
         include: {
           boxes: {
@@ -97,13 +99,13 @@ export default {
 
       await setOrderAsPayed(
         prisma,
-        id,
+        paymentIntentId,
         items.map((item) => item.id),
       );
 
       const htmlMessage = await htmlMessageTemplate(
         order,
-        id,
+        paymentIntentId,
         items,
         prisma,
       );

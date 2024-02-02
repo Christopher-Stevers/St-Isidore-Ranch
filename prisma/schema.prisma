@@ -141,7 +141,7 @@ model VerificationToken {
 }
 
 model StripeEvent {
-  id               String   @id @map("_id")
+  id               String  @id @default(auto()) @map("_id") @db.ObjectId
   api_version      String?
   data             Json
   request          Json?
