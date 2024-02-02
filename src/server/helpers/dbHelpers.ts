@@ -64,23 +64,12 @@ export const clearOrderById = async (
   });
 };
 
-export const refundOrder = async (
-  prisma: PrismaClient,
+export const refundOrder = (
+  _prisma: PrismaClient,
   paymentIntent: string,
 ) => {
+  console.log("refundOrder, ", paymentIntent);
   // if the order price has issues
-  await stripe.refunds.create({
-    payment_intent: paymentIntent,
-  });
-  await prisma.order.update({
-    where: {
-      paymentIntent: paymentIntent,
-    },
-    data: {
-      paid: false,
-      paymentIntent: null,
-    },
-  });
 };
 export const setOrderAsPayed = async (
   prisma: PrismaClient,
