@@ -82,7 +82,7 @@ const Footer: React.FC = () => {
           />
           by{" "}
           <Link
-            href="https://devstevers.com"
+            href="https://arisedigital.ca"
             className="font-semibold underline"
           >
             in Partnership with Arise Digital{" "}
