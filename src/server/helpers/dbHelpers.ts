@@ -1,4 +1,3 @@
-import stripe from "~/server/stripe/client";
 import { type PrismaClient } from "@prisma/client";
 
 export const clearOrderByPaymentId = async (
