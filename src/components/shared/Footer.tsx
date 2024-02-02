@@ -85,7 +85,7 @@ const Footer: React.FC = () => {
             href="https://devstevers.com"
             className="font-semibold underline"
           >
-            CStevers Development{" "}
+            in Partnership with Arise Digital{" "}
           </Link>
         </div>
       </footer>
