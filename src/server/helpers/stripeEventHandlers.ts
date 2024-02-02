@@ -70,7 +70,7 @@ export default {
       },
     });
     if (paymentIntent.amount !== order?.totalPrice) {
-      await refundOrder(prisma, paymentIntentId);
+      refundOrder(prisma, paymentIntentId);
       await stripe.paymentIntents.cancel(paymentIntentId);
       console.log(
         order?.boxes.map((box) => box.items).flat(),
