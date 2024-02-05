@@ -12,7 +12,7 @@ import useMediaQuery, {
   mediaQueryCompare,
 } from "~/hooks/useMediaQuery";
 import { api } from "~/utils/api";
-import { getPriceWithDiscount } from "~/server/api/routers/stripe";
+import { getPriceWithDiscount } from "~/utils/lib";
 const OrderView = ({
   setPaymentStep,
 }: {

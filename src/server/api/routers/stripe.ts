@@ -1,3 +1,5 @@
+import { getPriceWithDiscount } from "~/utils/lib";
+
 const getSampleBody = (amount: number) => {
   return {
     metadata: {},
@@ -27,20 +29,6 @@ const getSampleBody = (amount: number) => {
     currency: "CAD",
     additionalSearchTerms: ["string"],
   };
-};
-
-export const getPriceWithDiscount = (
-  order:
-    | {
-        coupon: { multiplier: number } | null;
-        totalPrice: number;
-      }
-    | null
-    | undefined,
-) => {
-  const percentageDiscount = order?.coupon?.multiplier ?? 1;
-  const initialPrice = order?.totalPrice ?? 0;
-  return initialPrice * percentageDiscount;
 };
 
 import { z } from "zod";
