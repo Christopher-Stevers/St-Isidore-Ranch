@@ -127,6 +127,7 @@ const CartProvider = ({
 
   useEffect(() => {
     if (state?.id) {
+      console.log("setting order");
       localStorage.setItem("orderId", state?.id);
     }
   }, [state]);
