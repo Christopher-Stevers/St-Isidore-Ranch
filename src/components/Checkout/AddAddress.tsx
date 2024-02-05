@@ -49,6 +49,10 @@ const AddAddress = ({
         field="postalCode"
       />
       <AddressFieldInput name="Name" field="name" />
+      <AddressFieldInput
+        name="Delivery instructions"
+        field="deliveryInstructions"
+      />
 
       <CheckoutConfirmButton
         onClick={() => {

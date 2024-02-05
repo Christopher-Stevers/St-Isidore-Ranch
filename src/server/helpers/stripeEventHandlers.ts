@@ -61,6 +61,7 @@ export default {
         paymentIntent: paymentIntentId,
       },
       include: {
+        coupon: true,
         boxes: {
           include: {
             items: true,
@@ -69,7 +70,11 @@ export default {
         address: true,
       },
     });
-    if (paymentIntent.amount !== order?.totalPrice) {
+    const percentage = order?.coupon?.multiplier ?? 1;
+    if (
+      paymentIntent.amount !==
+      (order?.totalPrice ?? 0) * percentage
+    ) {
       refundOrder(prisma, paymentIntentId);
       await stripe.paymentIntents.cancel(paymentIntentId);
       console.log(

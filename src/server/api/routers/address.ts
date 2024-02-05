@@ -20,6 +20,7 @@ export const addressRouter = createTRPCRouter({
         phone: z.string().optional(),
         country: z.string().optional(),
         email: z.string().optional(),
+        deliveryInstructions: z.string().optional(),
       }),
     )
 
@@ -34,6 +35,7 @@ export const addressRouter = createTRPCRouter({
         phone?: string;
         country?: string;
         email?: string;
+        deliveryInstructions?: string;
       } = {};
       if (input.name) data.name = input.name;
       if (input.address1) data.address1 = input.address1;
@@ -45,6 +47,9 @@ export const addressRouter = createTRPCRouter({
       if (input.phone) data.phone = input.phone;
       if (input.country) data.country = input.country;
       if (input.email) data.email = input.email;
+      if (input.deliveryInstructions)
+        data.deliveryInstructions =
+          input.deliveryInstructions;
       const order = await prisma.order.findUnique({
         where: { id: input.orderId },
       });

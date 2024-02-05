@@ -24,7 +24,7 @@ export async function getServerSideProps() {
    * `prefetch` does not return the result and never throws - if you need that behavior, use `fetch` instead.
    */
 
-  for (const boxGroup of BoxGroups) {
+  for (const boxGroup of BoxGroups.slice(0, 3)) {
     const firstBoxSlug = boxGroup.Boxes[0].slug;
     await helpers.product.getInStock.fetch(firstBoxSlug);
   }

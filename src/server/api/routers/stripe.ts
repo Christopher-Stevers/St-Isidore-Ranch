@@ -29,6 +29,20 @@ const getSampleBody = (amount: number) => {
   };
 };
 
+export const getPriceWithDiscount = (
+  order:
+    | {
+        coupon: { multiplier: number } | null;
+        totalPrice: number;
+      }
+    | null
+    | undefined,
+) => {
+  const percentageDiscount = order?.coupon?.multiplier ?? 1;
+  const initialPrice = order?.totalPrice ?? 0;
+  return initialPrice * percentageDiscount;
+};
+
 import { z } from "zod";
 import stripe from "~/server/stripe/client";
 
@@ -50,7 +64,6 @@ export const btcPayPublicClient = async (
   const optionalBody = body
     ? { body: JSON.stringify(body) }
     : {};
-  console.log(optionalBody, url);
   const rawResponse = await fetch(url, {
     headers: {
       Authorization: `token ${env.NEXT_PUBLIC_BTCPAY_KEY}`,
@@ -64,9 +77,10 @@ export const btcPayPublicClient = async (
 };
 
 export const stripeRouter = createTRPCRouter({
-  createPaymentIntent: publicProcedure
+  upsertPaymentIntent: publicProcedure
     .input(
       z.object({
+        paymentIntentId: z.string().optional(),
         orderId: z.string(),
       }),
     )
@@ -75,25 +89,47 @@ export const stripeRouter = createTRPCRouter({
         where: {
           id: input.orderId,
         },
-      });
-      const paymentIntent =
-        await stripe.paymentIntents.create({
-          amount: order?.totalPrice ?? 0,
-          currency: "cad",
-          automatic_payment_methods: {
-            enabled: true,
-          },
-        });
-      await prisma.order.update({
-        where: {
-          id: input.orderId,
-        },
-        data: {
-          paymentIntent: paymentIntent.id,
-        },
+        include: { coupon: true },
       });
 
-      return paymentIntent;
+      if (input.paymentIntentId) {
+        const paymentIntent =
+          await stripe.paymentIntents.update(
+            input.paymentIntentId,
+            {
+              amount: getPriceWithDiscount(order),
+              currency: "cad",
+            },
+          );
+        await prisma.order.update({
+          where: {
+            id: input.orderId,
+          },
+          data: {
+            paymentIntent: paymentIntent.id,
+          },
+        });
+        return paymentIntent;
+      } else {
+        const paymentIntent =
+          await stripe.paymentIntents.create({
+            amount: getPriceWithDiscount(order),
+            currency: "cad",
+            automatic_payment_methods: {
+              enabled: true,
+            },
+          });
+        await prisma.order.update({
+          where: {
+            id: input.orderId,
+          },
+          data: {
+            paymentIntent: paymentIntent.id,
+          },
+        });
+
+        return paymentIntent;
+      }
     }),
   createBTCPayLighteningPaymentIntent: publicProcedure
     .input(
@@ -106,11 +142,13 @@ export const stripeRouter = createTRPCRouter({
         where: {
           id: input.orderId,
         },
+        include: { coupon: true },
       });
+
       const result = await btcPayPublicClient(
         `${env.NEXT_PUBLIC_BTCPAY_URL}/api/v1/stores/${storeId}/invoices`,
         "POST",
-        getSampleBody((order?.totalPrice ?? 0) / 100),
+        getSampleBody(getPriceWithDiscount(order) / 100),
         { "Content-Type": "application/json" },
       );
       return result;

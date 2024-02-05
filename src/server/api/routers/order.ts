@@ -28,6 +28,7 @@ export const orderRouter = createTRPCRouter({
 
           include: {
             address: true,
+            coupon: true,
             boxes: {
               include: {
                 items: true,
@@ -69,6 +70,33 @@ export const orderRouter = createTRPCRouter({
         include: {
           boxes: true,
           address: true,
+          coupon: true,
+        },
+      });
+    }),
+  linkCouponCodeToOrder: publicProcedure
+    .input(
+      z.object({
+        orderId: z.string(),
+        couponId: z.string(),
+      }),
+    )
+    .mutation(async ({ ctx: { prisma }, input }) => {
+      const { orderId, couponId } = input;
+      return prisma.order.update({
+        where: { id: orderId },
+        data: {
+          coupon: {
+            connect: {
+              id: couponId,
+            },
+          },
+        },
+
+        include: {
+          boxes: true,
+          address: true,
+          coupon: true,
         },
       });
     }),
@@ -113,6 +141,7 @@ export const orderRouter = createTRPCRouter({
           include: {
             boxes: true,
             address: true,
+            coupon: true,
           },
         });
       }
@@ -141,6 +170,7 @@ export const orderRouter = createTRPCRouter({
         include: {
           boxes: true,
           address: true,
+          coupon: true,
         },
       });
     }),

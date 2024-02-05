@@ -37,6 +37,10 @@ type Order =
       paid: boolean;
       address: Address | null;
       paymentIntent: string | null;
+      coupon: {
+        multiplier: number;
+        code: string;
+      } | null;
       boxes: {
         id: string;
         createdAt: Date;
@@ -125,7 +129,7 @@ const CartProvider = ({
     if (state?.id) {
       localStorage.setItem("orderId", state?.id);
     }
-  }, [state?.id]);
+  }, [state]);
   return (
     <CartContext.Provider
       value={[state, dispatch, refetchOrder]}

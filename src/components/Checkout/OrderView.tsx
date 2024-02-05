@@ -1,27 +1,62 @@
 import { useCart } from "~/providers/cart";
 import BoxConfirm from "./BoxConfirm";
 import Link from "next/link";
-import React, { type SetStateAction } from "react";
+import React, {
+  useState,
+  type SetStateAction,
+  type ChangeEvent,
+} from "react";
 import CheckoutConfirmButton from "./CheckoutConfirmButton";
 import { ADDRESS } from ".";
 import useMediaQuery, {
   mediaQueryCompare,
 } from "~/hooks/useMediaQuery";
-import { formatDollars } from "~/utils/lib";
+import { api } from "~/utils/api";
+import { getPriceWithDiscount } from "~/server/api/routers/stripe";
 const OrderView = ({
   setPaymentStep,
 }: {
   setPaymentStep: React.Dispatch<SetStateAction<string>>;
 }) => {
-  const [order] = useCart();
+  const [order, cartDispatch] = useCart();
+  const [couponValue, setCouponValue] = useState(
+    order?.coupon?.code ?? "",
+  );
+  const { mutate } =
+    api.order.linkCouponCodeToOrder.useMutation({
+      onSuccess: (data) => {
+        cartDispatch({
+          type: "UPDATE_CART",
+          payload: data,
+        });
+      },
+    });
+  const linkToOrder = (couponId: string) => {
+    const orderId = order?.id;
+    if (orderId && couponId) {
+      mutate({ couponId, orderId: orderId });
+    }
+  };
+  api.coupon.get.useQuery(couponValue, {
+    onSuccess: (data) => {
+      if (data) {
+        linkToOrder(data.id);
+      }
+    },
+  });
   const currentMaxBreakpoint = useMediaQuery();
+  const handleCoupon = (
+    e: ChangeEvent<HTMLInputElement>,
+  ) => {
+    setCouponValue(e.target.value);
+  };
   return (
     <div className="flex flex-col gap-y-6">
       <h3 className="text-3xl font-semibold">
         Review your order
       </h3>
       {order?.boxes.length ? (
-        <ul className="w-2/3 flex-col gap-8 py-8">
+        <ul className="w-full flex-col gap-8 py-8">
           {order?.boxes.map((box) => (
             <BoxConfirm key={box.id} box={box} />
           ))}
@@ -39,8 +74,22 @@ const OrderView = ({
           .
         </p>
       )}
+      <div>
+        <label
+          className="block text-sm text-form"
+          htmlFor="coupon"
+        >
+          Coupon code ( optional )
+        </label>
+        <input
+          className="block w-full rounded-md border  p-3 text-sm text-form outline-none focus-visible:ring-transparent"
+          id="coupon"
+          value={couponValue}
+          onChange={handleCoupon}
+        />
+      </div>
       <div className="text-xl font-semibold">
-        Total {formatDollars(order?.totalPrice)}
+        Total {getPriceWithDiscount(order)}
       </div>
 
       {!mediaQueryCompare(currentMaxBreakpoint, "lg") && (

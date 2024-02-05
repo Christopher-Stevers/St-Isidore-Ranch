@@ -38,17 +38,16 @@ const Checkout = () => {
   const [cart] = useCart();
   const router = useRouter();
   const [clientSecret, setClientSecret] = useState("");
-  const [stripePaymentIntentId, setStripePaymentIntentId] =
-    useState<string | null>(null);
   const [btcPaymentIntentId, setBtcPaymentIntentId] =
     useState<string | null>(null);
   const currentMaxBreakpoint = useMediaQuery();
-  const { mutate: createPaymentIntent } =
-    api.stripe.createPaymentIntent.useMutation({
+  const { mutate: upsertPaymentIntent } =
+    api.stripe.upsertPaymentIntent.useMutation({
       onSuccess: (data) => {
         if (!data?.client_secret) return;
-        setStripePaymentIntentId(data.id);
-        setClientSecret(data.client_secret);
+        if (!clientSecret) {
+          setClientSecret(data.client_secret);
+        }
       },
     });
   const { mutate: createBtcPaymentIntent } =
@@ -60,36 +59,22 @@ const Checkout = () => {
       },
     );
   const { mutate: setOrderPaymentIntent } =
-    api.stripe.setOrderPaymentIntent.useMutation({
-      onSuccess: (data) => {
-        console.log(data);
-      },
-    });
+    api.stripe.setOrderPaymentIntent.useMutation();
 
   useEffect(() => {
     switch (paymentType) {
       case CARD:
-        if (
-          cart?.id &&
-          !clientSecret &&
-          !stripePaymentIntentId
-        ) {
-          console.log("make payment intent");
-          createPaymentIntent({ orderId: cart?.id ?? "" });
-        } else if (cart?.id && stripePaymentIntentId) {
-          setOrderPaymentIntent({
-            orderId: cart?.id,
-            paymentIntentId: stripePaymentIntentId,
+        if (cart?.id) {
+          upsertPaymentIntent({
+            orderId: cart?.id ?? "",
           });
         }
       case BTC:
         if (cart?.id && !btcPaymentIntentId) {
-          console.log("make btc payment intent");
           createBtcPaymentIntent({
             orderId: cart?.id ?? "",
           });
         } else if (cart?.id && btcPaymentIntentId) {
-          console.log("happening");
           setOrderPaymentIntent({
             orderId: cart?.id,
             paymentIntentId: btcPaymentIntentId,
@@ -98,12 +83,13 @@ const Checkout = () => {
     }
   }, [
     cart?.id,
+    cart?.coupon?.code,
     paymentStep,
     paymentType,
     clientSecret,
     btcPaymentIntentId,
     createBtcPaymentIntent,
-    createPaymentIntent,
+    upsertPaymentIntent,
   ]);
 
   const appearance: StripeElementsOptions["appearance"] = {
@@ -194,7 +180,7 @@ const Checkout = () => {
                   Purchase Information
                 </h3>
               </div>
-              <div className="flex gap-8">
+              <div className="flex flex-col gap-8 lg:flex-row">
                 <PayWithBubble
                   title={"Credit Card"}
                   slug={CARD}
