@@ -81,7 +81,6 @@ export default {
         htmlMessage: `New order with PaymentIntentid ${paymentIntentId} hit an error`,
         message: `New order with paymentIntentid ${paymentIntentId} hit an error`,
       });
-      await stripe.paymentIntents.cancel(paymentIntentId);
 
       throw new Error(
         `${paymentIntent.amount}  ${order?.totalPrice} not equal`,
