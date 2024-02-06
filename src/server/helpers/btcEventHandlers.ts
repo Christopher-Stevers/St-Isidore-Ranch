@@ -5,7 +5,7 @@ import { htmlMessageTemplate } from "./htmlMessageTemplate";
 import { type Product } from "@prisma/client";
 import { env } from "process";
 
-export default {
+const btcEventHandler = {
   defaultHandler: async (id: string, metadata: object) => {
     await prisma.btcPayEvent.create({
       data: {
@@ -79,3 +79,5 @@ export default {
     }
   },
 };
+
+export default btcEventHandler;

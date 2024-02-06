@@ -3,7 +3,7 @@ const EditableDiv = ({
   className,
   editable,
 }: {
-  divState: [string, (val: string) => void];
+  divState: [string, () => void];
   editable: boolean;
   className: string;
 }) => {
@@ -13,7 +13,7 @@ const EditableDiv = ({
       <input
         className={`${className} text-black`}
         value={value}
-        onChange={(e) => setValue(e.target.value)}
+        onChange={() => setValue()}
       />
     );
   return <div className={className}>{value}</div>;

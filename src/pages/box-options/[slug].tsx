@@ -49,10 +49,10 @@ const ProductPage = ({
             <div>
               <div>Select box size</div>
               <form className="flex gap-6 ">
-                {boxOptions.map((box) => {
+                {boxOptions.map((box, index) => {
                   if (!box.variant) return null;
                   return (
-                    <div className="flex content-center gap-2">
+                    <div key={index} className="flex content-center gap-2">
                       <input
                         onClick={() => setSelectedBox(box)}
                         type="radio"
@@ -106,17 +106,18 @@ const ProductPage = ({
           <div>
             <p className="text-base">
               Since every animal is slightly different we
-              can't guarantee exact weights, but we do
-              guarantee that you'll get at least the weight
+              can{"'"}t guarantee exact weights, but we do
+              guarantee that you{"'"}ll get at least the weight
               you paid for over the entire bundle.
             </p>
           </div>
           <p className="whitespace-pre font-display text-2xl lg:text-4xl">
             Free Shipping!
           </p>
-          {boxOptions.map((box) => {
+          {boxOptions.map((box, index) => {
             return (
               <div
+              key={index}
                 className={
                   box.slug === selectedBox.slug
                     ? "block"

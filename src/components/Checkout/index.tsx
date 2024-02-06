@@ -70,6 +70,7 @@ const Checkout = () => {
             paymentIntentId: cart.paymentIntent,
           });
         }
+        break;
       case BTC:
         if (cart?.id && !btcPaymentIntentId) {
           createBtcPaymentIntent({
@@ -81,7 +82,9 @@ const Checkout = () => {
             paymentIntentId: btcPaymentIntentId,
           });
         }
+        break
     }
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [
     cart?.id,
     cart?.coupon?.code,

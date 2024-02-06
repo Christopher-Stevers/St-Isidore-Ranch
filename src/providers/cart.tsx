@@ -123,6 +123,7 @@ const CartProvider = ({
       setLocalOrderId(localOrderId);
       refetchOrder().catch(console.error);
     }
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   useEffect(() => {
