@@ -50,12 +50,6 @@ const config = {
     "@typescript-eslint/no-unsafe-return": "off",
     "@typescript-eslint/no-unnecessary-type-assertion":
       "off",
-    "prettier/prettier": [
-      "error",
-      {
-        endOfLine: "auto",
-      },
-    ],
   },
 };
 
