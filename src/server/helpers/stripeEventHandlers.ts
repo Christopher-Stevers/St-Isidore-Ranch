@@ -11,7 +11,7 @@ import { type Product } from "@prisma/client";
 import { env } from "process";
 import { getPriceWithDiscount } from "~/utils/lib";
 
-export default {
+const stripeHandlers = {
   defaultHandler: async (event: Stripe.Event) => {
     await prisma.stripeEvent.create({
       data: {
@@ -125,3 +125,5 @@ export default {
     }
   },
 };
+
+export default stripeHandlers;

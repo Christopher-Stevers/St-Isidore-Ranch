@@ -13,7 +13,7 @@ export const config = {
     bodyParser: false,
   },
 };
-export default async function (
+const stripeWebhookHandler = async function (
   req: Readable & NextRequest,
   res: NextApiResponse,
 ) {
@@ -38,17 +38,15 @@ export default async function (
 
     // Handle the event
     switch (event.type) {
-      case "payment_intent.payment_failed":
-        {
-          await stripeEventHandlers.handlePaymentIntentPaymentFailed(
-            paymentIntent as Stripe.PaymentIntent,
-          );
-          break;
-        }
-        // Used to provision services after the trial has ended.
-        // The status of the invoice will show up as paid. Store the status in your database to reference when a user accesses your service to avoid hitting rate limits.
-
+      case "payment_intent.payment_failed": {
+        await stripeEventHandlers.handlePaymentIntentPaymentFailed(
+          paymentIntent as Stripe.PaymentIntent,
+        );
         break;
+      }
+      // Used to provision services after the trial has ended.
+      // The status of the invoice will show up as paid. Store the status in your database to reference when a user accesses your service to avoid hitting rate limits.
+
       case "payment_intent.succeeded": {
         await stripeEventHandlers.handlePaymentIntentSucceeded(
           paymentIntent as Stripe.PaymentIntent,
@@ -72,6 +70,6 @@ export default async function (
     res.status(400).send(err);
     return;
   }
-}
+};
 
-// eslint-disable-next-line @typescript-eslint/no-explicit-any
+export default stripeWebhookHandler;
