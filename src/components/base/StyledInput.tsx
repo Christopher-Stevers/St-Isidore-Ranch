@@ -1,3 +1,5 @@
+import { Dispatch, SetStateAction } from "react";
+
 const AddressFieldInput = ({
   value,
   setValue,
@@ -7,7 +9,7 @@ const AddressFieldInput = ({
 }: {
   value: string;
   className?: string;
-  setValue: React.Dispatch<React.SetStateAction<string>>;
+  setValue: Dispatch<SetStateAction<string>>;
   title: string;
   field: string;
 }) => {

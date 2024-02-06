@@ -66,7 +66,7 @@ const OrderView = ({
         </ul>
       ) : (
         <p>
-          Oops, looks like you didn't add anything to your
+          Oops, looks like you didn{"'"}t add anything to your
           cart - go back and add some items in the{" "}
           <Link
             className="text-primary-500 underline"
