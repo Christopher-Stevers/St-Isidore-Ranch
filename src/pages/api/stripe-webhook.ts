@@ -43,6 +43,7 @@ export default async function (
           await stripeEventHandlers.handlePaymentIntentPaymentFailed(
             paymentIntent as Stripe.PaymentIntent,
           );
+          break;
         }
         // Used to provision services after the trial has ended.
         // The status of the invoice will show up as paid. Store the status in your database to reference when a user accesses your service to avoid hitting rate limits.
@@ -52,6 +53,7 @@ export default async function (
         await stripeEventHandlers.handlePaymentIntentSucceeded(
           paymentIntent as Stripe.PaymentIntent,
         );
+        break;
       }
       case "charge.succeeded":
         {

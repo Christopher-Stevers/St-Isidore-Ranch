@@ -12,7 +12,10 @@ import useMediaQuery, {
   mediaQueryCompare,
 } from "~/hooks/useMediaQuery";
 import { api } from "~/utils/api";
-import { getPriceWithDiscount } from "~/utils/lib";
+import {
+  formatDollars,
+  getPriceWithDiscount,
+} from "~/utils/lib";
 const OrderView = ({
   setPaymentStep,
 }: {
@@ -56,7 +59,7 @@ const OrderView = ({
         Review your order
       </h3>
       {order?.boxes.length ? (
-        <ul className="w-full flex-col gap-8 py-8">
+        <ul className="w-full flex-col gap-8 py-8 lg:w-3/4">
           {order?.boxes.map((box) => (
             <BoxConfirm key={box.id} box={box} />
           ))}
@@ -82,14 +85,14 @@ const OrderView = ({
           Coupon code ( optional )
         </label>
         <input
-          className="block w-full rounded-md border  p-3 text-sm text-form outline-none focus-visible:ring-transparent"
+          className="block w-full rounded-md border  p-3 text-sm text-form outline-none focus-visible:ring-transparent lg:w-3/4"
           id="coupon"
           value={couponValue}
           onChange={handleCoupon}
         />
       </div>
       <div className="text-xl font-semibold">
-        Total {getPriceWithDiscount(order)}
+        Total {formatDollars(getPriceWithDiscount(order))}
       </div>
 
       {!mediaQueryCompare(currentMaxBreakpoint, "lg") && (

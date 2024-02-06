@@ -8,7 +8,7 @@ export const clearOrderByPaymentId = async (
     where: {
       Box: {
         Order: {
-          paymentIntent: paymentIntentId,
+          paymentIntent: { has: paymentIntentId },
         },
       },
     },
@@ -17,19 +17,22 @@ export const clearOrderByPaymentId = async (
       boxId: null,
     },
   });
-  // delete order and boxes
-  await prisma.box.deleteMany({
-    where: {
-      Order: {
-        paymentIntent: paymentIntentId,
+  if (paymentIntentId) {
+    // delete order and boxes
+    await prisma.box.deleteMany({
+      where: {
+        Order: {
+          paymentIntent: { has: paymentIntentId },
+        },
       },
-    },
-  });
-  await prisma.order.delete({
-    where: {
-      paymentIntent: paymentIntentId,
-    },
-  });
+    });
+
+    await prisma.order.deleteMany({
+      where: {
+        paymentIntent: { has: paymentIntentId },
+      },
+    });
+  }
 };
 export const clearOrderById = async (
   prisma: PrismaClient,
@@ -75,9 +78,14 @@ export const setOrderAsPayed = async (
   paymentIntentId: string,
   itemIds: string[],
 ) => {
+  const order = await prisma.order.findFirst({
+    where: {
+      paymentIntent: { has: paymentIntentId },
+    },
+  });
   await prisma.order.update({
     where: {
-      paymentIntent: paymentIntentId,
+      id: order?.id as string,
     },
     data: {
       paid: true,

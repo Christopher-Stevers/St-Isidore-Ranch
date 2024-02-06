@@ -86,7 +86,7 @@ model Order {
   updatedAt     DateTime @updatedAt
   totalPrice    Float
   boxes         Box[]
-  paymentIntent String?  @unique
+  paymentIntent String[]  
   addressId     String?  @db.ObjectId
   address       Address? @relation(fields: [addressId], references: [id])
   paid          Boolean  @default(false)

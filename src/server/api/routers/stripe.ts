@@ -68,7 +68,10 @@ export const stripeRouter = createTRPCRouter({
   upsertPaymentIntent: publicProcedure
     .input(
       z.object({
-        paymentIntentId: z.string().optional(),
+        paymentIntentId: z
+          .array(z.string())
+          .nullable()
+          .optional(),
         orderId: z.string(),
       }),
     )
@@ -79,11 +82,14 @@ export const stripeRouter = createTRPCRouter({
         },
         include: { coupon: true },
       });
-
-      if (input.paymentIntentId) {
+      const stripePaymentIntent =
+        input.paymentIntentId?.find(
+          (elem) => elem.slice(0, 3) == "pi_",
+        );
+      if (stripePaymentIntent) {
         const paymentIntent =
           await stripe.paymentIntents.update(
-            input.paymentIntentId,
+            stripePaymentIntent,
             {
               amount: getPriceWithDiscount(order),
               currency: "cad",
@@ -94,7 +100,7 @@ export const stripeRouter = createTRPCRouter({
             id: input.orderId,
           },
           data: {
-            paymentIntent: paymentIntent.id,
+            paymentIntent: { push: paymentIntent.id },
           },
         });
         return paymentIntent;
@@ -112,13 +118,14 @@ export const stripeRouter = createTRPCRouter({
             id: input.orderId,
           },
           data: {
-            paymentIntent: paymentIntent.id,
+            paymentIntent: { push: paymentIntent.id },
           },
         });
 
         return paymentIntent;
       }
     }),
+
   createBTCPayLighteningPaymentIntent: publicProcedure
     .input(
       z.object({
@@ -141,6 +148,7 @@ export const stripeRouter = createTRPCRouter({
       );
       return result;
     }),
+
   setOrderPaymentIntent: publicProcedure
     .input(
       z.object({
@@ -162,7 +170,7 @@ export const stripeRouter = createTRPCRouter({
           id: input.orderId,
         },
         data: {
-          paymentIntent: input.paymentIntentId,
+          paymentIntent: { push: input.paymentIntentId },
         },
       });
     }),

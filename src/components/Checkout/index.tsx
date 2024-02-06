@@ -60,13 +60,14 @@ const Checkout = () => {
     );
   const { mutate: setOrderPaymentIntent } =
     api.stripe.setOrderPaymentIntent.useMutation();
-
+  console.log(cart?.paymentIntent);
   useEffect(() => {
     switch (paymentType) {
       case CARD:
         if (cart?.id) {
           upsertPaymentIntent({
-            orderId: cart?.id ?? "",
+            orderId: cart?.id,
+            paymentIntentId: cart.paymentIntent,
           });
         }
       case BTC:

@@ -10,6 +10,7 @@ import {
 import { htmlMessageTemplate } from "./htmlMessageTemplate";
 import { type Product } from "@prisma/client";
 import { env } from "process";
+import { getPriceWithDiscount } from "~/utils/lib";
 
 export default {
   defaultHandler: async (event: Stripe.Event) => {
@@ -56,9 +57,9 @@ export default {
     paymentIntent: Stripe.PaymentIntent,
   ) => {
     const paymentIntentId = paymentIntent.id;
-    const order = await prisma.order.findUnique({
+    const order = await prisma.order.findFirst({
       where: {
-        paymentIntent: paymentIntentId,
+        paymentIntent: { has: paymentIntentId },
       },
       include: {
         coupon: true,
@@ -70,23 +71,25 @@ export default {
         address: true,
       },
     });
-    const percentage = order?.coupon?.multiplier ?? 1;
     if (
-      paymentIntent.amount !==
-      (order?.totalPrice ?? 0) * percentage
+      paymentIntent.amount !== getPriceWithDiscount(order)
     ) {
       refundOrder(prisma, paymentIntentId);
+      await emailWrapper({
+        email: env.EMAIL_USERNAME ?? "",
+        subject: "Refund",
+        htmlMessage: `New order with PaymentIntentid ${paymentIntentId} hit an error`,
+        message: `New order with paymentIntentid ${paymentIntentId} hit an error`,
+      });
       await stripe.paymentIntents.cancel(paymentIntentId);
-      console.log(
-        order?.boxes.map((box) => box.items).flat(),
-      );
+
       throw new Error(
         `${paymentIntent.amount}  ${order?.totalPrice} not equal`,
       );
     } else {
-      const order = await prisma.order.findUnique({
+      const order = await prisma.order.findFirst({
         where: {
-          paymentIntent: paymentIntentId,
+          paymentIntent: { has: paymentIntentId },
         },
         include: {
           boxes: {

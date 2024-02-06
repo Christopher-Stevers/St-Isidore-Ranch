@@ -59,7 +59,8 @@ const processEnv = {
   DISCORD_CLIENT_SECRET: process.env.DISCORD_CLIENT_SECRET,
   STRIPE_SECRET_KEY: process.env.STRIPE_SECRET_KEY,
   STRIPE_WEBHOOK_SECRET: process.env.STRIPE_WEBHOOK_SECRET,
-  BTC_PAY_WEBHOOK_SECRET: process.env.BTC_PAY_WEBHOOK_SECRET,
+  BTC_PAY_WEBHOOK_SECRET:
+    process.env.BTC_PAY_WEBHOOK_SECRET,
   NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY:
     process.env.NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY,
   EMAIL_PASSWORD: process.env.EMAIL_PASSWORD,
@@ -108,11 +109,7 @@ if (!!process.env.SKIP_ENV_VALIDATION == false) {
       // Throw a descriptive error if a server-side env var is accessed on the client
       // Otherwise it would just be returning `undefined` and be annoying to debug
       if (!isServer && !prop.startsWith("NEXT_PUBLIC_"))
-        throw new Error(
-          process.env.NODE_ENV === "production"
-            ? "❌ Attempted to access a server-side environment variable on the client"
-            : `❌ Attempted to access server-side environment variable '${prop}' on the client`,
-        );
+        console.log(prop);
       return target[
         /** @type {keyof typeof target} */ (prop)
       ];

@@ -36,7 +36,7 @@ type Order =
       totalPrice: number;
       paid: boolean;
       address: Address | null;
-      paymentIntent: string | null;
+      paymentIntent: string[] | null;
       coupon: {
         multiplier: number;
         code: string;
