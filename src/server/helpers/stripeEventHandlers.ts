@@ -1,6 +1,5 @@
 import { prisma } from "~/server/db";
 import type Stripe from "stripe";
-import stripe from "../../server/stripe/client";
 import emailWrapper from "~/server/helpers/emailWrapper";
 import {
   clearOrderByPaymentId,
