@@ -1,17 +1,18 @@
 ---
-title: 'How We Deliver Your Meat'
+title: "How We Deliver Your Meat"
 
-coverImage: '/assets/blog/dynamic-routing/cover.jpg'
-date: '2020-03-16T05:35:07.322Z'
+coverImage: "/assets/blog/dynamic-routing/cover.jpg"
+date: "2020-03-16T05:35:07.322Z"
 author:
   name: Christopher Stevers
-  picture: '/assets/blog/authors/jj.jpeg'
+  picture: "/assets/blog/authors/jj.jpeg"
 ogImage:
-  url: '/map.png'
+  url: "/map.png"
 ---
+
 ### Shipping Range
 
-We deliver to all of the GTHA as well as a wide swath of Southern Ontario. If you are unsure if we deliver to your area,  please check the map above or [contact us](/contact).
+We deliver to all of the GTHA as well as a wide swath of Southern Ontario. If you are unsure if we deliver to your area, please check the map above or [contact us](/contact).
 
 ### Keeping it Cold
 

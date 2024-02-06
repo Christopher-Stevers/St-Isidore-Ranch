@@ -19,7 +19,8 @@ const config = {
     ],
   },
   rules: {
-    "@typescript-eslint/restrict-template-expressions": "off",
+    "@typescript-eslint/restrict-template-expressions":
+      "off",
     "@typescript-eslint/no-unused-vars": [
       "error",
       {
@@ -34,7 +35,10 @@ const config = {
         fixStyle: "inline-type-imports",
       },
     ],
-    "import/consistent-type-specifier-style": ["error", "prefer-inline"],
+    "import/consistent-type-specifier-style": [
+      "error",
+      "prefer-inline",
+    ],
 
     // These rules are only disabled because we hit a bug in linting.
     // See https://github.com/t3-oss/create-t3-app/pull/1036#discussion_r1060505136
@@ -44,7 +48,8 @@ const config = {
     "@typescript-eslint/no-unsafe-call": "off",
     "@typescript-eslint/no-unsafe-member-access": "off",
     "@typescript-eslint/no-unsafe-return": "off",
-    "@typescript-eslint/no-unnecessary-type-assertion": "off",
+    "@typescript-eslint/no-unnecessary-type-assertion":
+      "off",
     "prettier/prettier": [
       "error",
       {
