@@ -13,16 +13,8 @@ export default async function handler(
   res: NextApiResponse,
 ) {
   try {
-    const oneDayAgo = new Date();
-
     // get all orders from over a week ago
-    const oldOrders = await prisma.order.findMany({
-      where: {
-        createdAt: {
-          lt: oneDayAgo,
-        },
-      },
-    });
+    const oldOrders = await prisma.order.findMany({});
     for (const order of oldOrders) {
       await clearOrderById(prisma, order.id);
     }
