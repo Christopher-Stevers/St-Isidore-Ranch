@@ -2,9 +2,9 @@
 const LOREM_IPSUM = "";
 // products
 const BONELESSRIBEYE = "Boneless Ribeye Steak ( 8 oz. )";
-const BONELESSRIBEYE6OZ = "Boneless Ribeye Steak ( 8 oz. )";
+const BONELESSRIBEYE6OZ = "Boneless Ribeye Steak ( 6 oz. )";
 const NYSTRIP = "NY Strip Steak ( 8 oz. )";
-const NYSTRIP6OZ = "NY Strip Steak ( 8 oz. )";
+const NYSTRIP6OZ = "NY Strip Steak ( 6 oz. )";
 const SIRLOIN = "Sirloin Steak ( 8 oz. )";
 // const HAMBURGER = "1/4 lb. Hamburger Patties";
 const TENDERLOIN = "Tenderloin Steak ( 5 oz. )";
