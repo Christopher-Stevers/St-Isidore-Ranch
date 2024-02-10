@@ -82,9 +82,9 @@ const Checkout = () => {
             paymentIntentId: btcPaymentIntentId,
           });
         }
-        break
+        break;
     }
-  // eslint-disable-next-line react-hooks/exhaustive-deps
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [
     cart?.id,
     cart?.coupon?.code,
@@ -127,7 +127,7 @@ const Checkout = () => {
 
   return (
     <LayoutShared title={"Checkout"}>
-      <div className="px-8 lg:px-32">
+      <div className="px-2 sm:px-8 lg:px-32">
         <BackLink>
           <button
             onClick={() => {
