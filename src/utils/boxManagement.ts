@@ -2,17 +2,26 @@
 const LOREM_IPSUM = "";
 // products
 const BONELESSRIBEYE = "Boneless Ribeye Steak ( 8 oz. )";
+const BONELESSRIBEYE6OZ = "Boneless Ribeye Steak ( 6 oz. )";
 const NYSTRIP = "NY Strip Steak ( 8 oz. )";
+const NYSTRIP6OZ = "NY Strip Steak ( 6 oz. )";
 const SIRLOIN = "Sirloin Steak ( 8 oz. )";
 // const HAMBURGER = "1/4 lb. Hamburger Patties";
 const TENDERLOIN = "Tenderloin Steak ( 5 oz. )";
+
 const BLADEROAST = "Blade Roast ( 2 lb. )";
 const GROUNDBEEF = "Ground Beef ( 1 lb. )";
+
+const LEAN_GROUNDBEEF = "Ground Beef ( 1.2 lb. )";
+const EXTRA_LEAN_GROUNDBEEF =
+  "Extra Lean Ground Beef ( 1 lb. )";
 const STEWMEAT = "Stew Meat ( 1 lb. )";
-const BONEINSHORTRIBS = "Bone-In Short Ribs ( 12 oz. )";
+const ROUND_STEAK = "Round Steak ( 1 lb. )";
+const BONEINSHORTRIBS = "Bone-In Short Ribs ( 14 oz. )";
 const LONDONBROIL = "London Broil ( 2 lb. )";
 const STEAKROAST = "Steak Roast ( 2 lb. )";
 const SIRLOIN_TIP = "Sirloin Tip Roast ( 2 lb. )";
+const CROSS_RIB_ROAST = "Cross Rib Roast ( 2 lb. )";
 
 class Box {
   totalPrice: number;
@@ -503,11 +512,11 @@ class QuarterBeefBundle implements Box {
     this.items = [
       {
         quantity: 4,
-        name: BONELESSRIBEYE,
+        name: BONELESSRIBEYE6OZ,
       },
       {
-        quantity: 4,
-        name: NYSTRIP,
+        quantity: 6,
+        name: NYSTRIP6OZ,
       },
       {
         quantity: 4,
@@ -520,12 +529,12 @@ class QuarterBeefBundle implements Box {
 
       { quantity: 1, name: SIRLOIN_TIP },
       {
-        quantity: 1,
+        quantity: 2,
         name: BLADEROAST,
       },
       {
-        quantity: 2,
-        name: STEAKROAST,
+        quantity: 1,
+        name: CROSS_RIB_ROAST,
       },
       {
         quantity: 4,
@@ -535,11 +544,13 @@ class QuarterBeefBundle implements Box {
         quantity: 2,
         name: BONEINSHORTRIBS,
       },
-      { quantity: 3, name: LONDONBROIL },
+      { quantity: 4, name: ROUND_STEAK },
+      { quantity: 1, name: LONDONBROIL },
       {
-        quantity: 32,
-        name: GROUNDBEEF,
+        quantity: 14,
+        name: LEAN_GROUNDBEEF,
       },
+      { quantity: 16, name: EXTRA_LEAN_GROUNDBEEF },
     ];
     this.orderId = "1";
   }
@@ -577,7 +588,7 @@ class EightBeefBundle implements Box {
         quantity: 2,
         name: SIRLOIN,
       },
-      { quantity: 2, name: LONDONBROIL },
+      { quantity: 4, name: ROUND_STEAK },
       {
         quantity: 1,
         name: SIRLOIN_TIP,
