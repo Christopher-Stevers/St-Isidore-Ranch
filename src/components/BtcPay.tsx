@@ -53,12 +53,12 @@ const BTCPay = ({
         console.log(err);
       });
     }
-  }, [invoice]);
+  }, [invoice, refetchOrder, router]);
 
   return (
     <div className="flex w-full flex-col gap-6">
       <div>
-        If you'd like to recieve email confirmation of your
+        If you{`'`}d like to recieve email confirmation of your
         order please fill in your email below.
       </div>
       <AddressFieldInput name="Email" field="email" />

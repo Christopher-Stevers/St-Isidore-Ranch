@@ -1,3 +1,5 @@
+import { getPriceWithDiscount } from "~/utils/lib";
+
 const getSampleBody = (amount: number) => {
   return {
     metadata: {},
@@ -50,7 +52,6 @@ export const btcPayPublicClient = async (
   const optionalBody = body
     ? { body: JSON.stringify(body) }
     : {};
-  console.log(optionalBody, url);
   const rawResponse = await fetch(url, {
     headers: {
       Authorization: `token ${env.NEXT_PUBLIC_BTCPAY_KEY}`,
@@ -64,9 +65,13 @@ export const btcPayPublicClient = async (
 };
 
 export const stripeRouter = createTRPCRouter({
-  createPaymentIntent: publicProcedure
+  upsertPaymentIntent: publicProcedure
     .input(
       z.object({
+        paymentIntentId: z
+          .array(z.string())
+          .nullable()
+          .optional(),
         orderId: z.string(),
       }),
     )
@@ -75,26 +80,52 @@ export const stripeRouter = createTRPCRouter({
         where: {
           id: input.orderId,
         },
+        include: { coupon: true },
       });
-      const paymentIntent =
-        await stripe.paymentIntents.create({
-          amount: order?.totalPrice ?? 0,
-          currency: "cad",
-          automatic_payment_methods: {
-            enabled: true,
+      const stripePaymentIntent =
+        input.paymentIntentId?.find(
+          (elem) => elem.slice(0, 3) == "pi_",
+        );
+      if (stripePaymentIntent) {
+        const paymentIntent =
+          await stripe.paymentIntents.update(
+            stripePaymentIntent,
+            {
+              amount: getPriceWithDiscount(order),
+              currency: "cad",
+            },
+          );
+        await prisma.order.update({
+          where: {
+            id: input.orderId,
+          },
+          data: {
+            paymentIntent: { push: paymentIntent.id },
           },
         });
-      await prisma.order.update({
-        where: {
-          id: input.orderId,
-        },
-        data: {
-          paymentIntent: paymentIntent.id,
-        },
-      });
+        return paymentIntent;
+      } else {
+        const paymentIntent =
+          await stripe.paymentIntents.create({
+            amount: getPriceWithDiscount(order),
+            currency: "cad",
+            automatic_payment_methods: {
+              enabled: true,
+            },
+          });
+        await prisma.order.update({
+          where: {
+            id: input.orderId,
+          },
+          data: {
+            paymentIntent: { push: paymentIntent.id },
+          },
+        });
 
-      return paymentIntent;
+        return paymentIntent;
+      }
     }),
+
   createBTCPayLighteningPaymentIntent: publicProcedure
     .input(
       z.object({
@@ -106,15 +137,18 @@ export const stripeRouter = createTRPCRouter({
         where: {
           id: input.orderId,
         },
+        include: { coupon: true },
       });
+
       const result = await btcPayPublicClient(
         `${env.NEXT_PUBLIC_BTCPAY_URL}/api/v1/stores/${storeId}/invoices`,
         "POST",
-        getSampleBody((order?.totalPrice ?? 0) / 100),
+        getSampleBody(getPriceWithDiscount(order) / 100),
         { "Content-Type": "application/json" },
       );
       return result;
     }),
+
   setOrderPaymentIntent: publicProcedure
     .input(
       z.object({
@@ -136,7 +170,7 @@ export const stripeRouter = createTRPCRouter({
           id: input.orderId,
         },
         data: {
-          paymentIntent: input.paymentIntentId,
+          paymentIntent: { push: input.paymentIntentId },
         },
       });
     }),

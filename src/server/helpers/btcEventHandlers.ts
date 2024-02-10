@@ -5,7 +5,7 @@ import { htmlMessageTemplate } from "./htmlMessageTemplate";
 import { type Product } from "@prisma/client";
 import { env } from "process";
 
-export default {
+const btcEventHandler = {
   defaultHandler: async (id: string, metadata: object) => {
     await prisma.btcPayEvent.create({
       data: {
@@ -19,9 +19,9 @@ export default {
     invoiceId: string,
     amount: number,
   ) => {
-    const order = await prisma.order.findUnique({
+    const order = await prisma.order.findFirst({
       where: {
-        paymentIntent: invoiceId,
+        paymentIntent: { has: invoiceId },
       },
       include: {
         boxes: {
@@ -37,9 +37,9 @@ export default {
         `${amount}  ${order?.totalPrice} not equal`,
       );
     } else {
-      const order = await prisma.order.findUnique({
+      const order = await prisma.order.findFirst({
         where: {
-          paymentIntent: invoiceId,
+          paymentIntent: { has: invoiceId },
         },
         include: {
           boxes: {
@@ -79,3 +79,5 @@ export default {
     }
   },
 };
+
+export default btcEventHandler;

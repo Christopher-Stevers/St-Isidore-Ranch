@@ -1,13 +1,13 @@
 ---
-title: 'Grass, the Missing Piece'
+title: "Grass, the Missing Piece"
 
-coverImage: '/assets/blog/dynamic-routing/cover.jpg'
-date: '2020-03-16T05:35:07.322Z'
+coverImage: "/assets/blog/dynamic-routing/cover.jpg"
+date: "2020-03-16T05:35:07.322Z"
 author:
   name: Christopher Stevers
-  picture: '/assets/blog/authors/jj.jpeg'
+  picture: "/assets/blog/authors/jj.jpeg"
 ogImage:
-  url: '/hero2.jpg'
+  url: "/hero2.jpg"
 ---
 
 ### Organic to Regenerative

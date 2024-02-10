@@ -50,7 +50,7 @@ const ProductCard = ({
         <div className=" w-full">{description}</div>
 
         {!isContact && (
-          <Link className="underline" href={`/${slug}`}>
+          <Link className="underline" href={`${slug}`}>
             more info
           </Link>
         )}

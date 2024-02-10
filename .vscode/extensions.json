@@ -1,13 +1,13 @@
 {
-    "recommendations": [
-      "sonarsource.sonarlint-vscode",
-      "graphql.vscode-graphql-syntax",
-      "graphql.vscode-graphql",
-      "bradlc.vscode-tailwindcss",
-      "csstools.postcss",
-      "hediet.vscode-drawio",
-      "dbaeumer.vscode-eslint",
-      "esbenp.prettier-vscode",
-      "rohit-gohri.format-code-action"
-    ]
-  }
+  "recommendations": [
+    "sonarsource.sonarlint-vscode",
+    "graphql.vscode-graphql-syntax",
+    "graphql.vscode-graphql",
+    "bradlc.vscode-tailwindcss",
+    "csstools.postcss",
+    "hediet.vscode-drawio",
+    "dbaeumer.vscode-eslint",
+    "esbenp.prettier-vscode",
+    "rohit-gohri.format-code-action"
+  ]
+}

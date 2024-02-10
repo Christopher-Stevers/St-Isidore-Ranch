@@ -1,13 +1,13 @@
 ---
-title: 'Making Meat With Miniature Cows'
+title: "Making Meat With Miniature Cows"
 
-coverImage: '/assets/blog/dynamic-routing/cover.jpg'
-date: '2020-03-16T05:35:07.322Z'
+coverImage: "/assets/blog/dynamic-routing/cover.jpg"
+date: "2020-03-16T05:35:07.322Z"
 author:
   name: Christopher Stevers
-  picture: '/assets/blog/authors/jj.jpeg'
+  picture: "/assets/blog/authors/jj.jpeg"
 ogImage:
-  url: '/hero2.jpg'
+  url: "/hero2.jpg"
 ---
 
 ### Our Herd
@@ -28,4 +28,4 @@ After about 18 months ( this is slow food! ) the cattle are ready for the butche
 
 ### Want to See More?
 
-Check out our [Instagram](https://www.instagram.com/stisidoreranch/) for more pictures of our cattle and the ranch. If you want to come out and see the herd for yourself, I'd love to have you. Give me a call at 519-703-6780.
+Check out our [Instagram](https://www.instagram.com/st_isidore_ranch/) for more pictures of our cattle and the ranch. If you want to come out and see the herd for yourself, I'd love to have you. Give me a call at 519-703-6780.

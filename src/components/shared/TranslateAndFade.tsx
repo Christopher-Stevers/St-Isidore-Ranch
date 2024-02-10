@@ -16,6 +16,7 @@ const TranslateAndFade = ({
 
   const ref = useCallback((node: Element | null) => {
     if (!node) return;
+    // eslint-disable-next-line no-global-assign
     IntersectionObserver = window.IntersectionObserver;
     const observer = new IntersectionObserver(
       ([entry]) => {

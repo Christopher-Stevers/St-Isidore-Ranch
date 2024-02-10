@@ -1,3 +1,5 @@
+import { Dispatch, SetStateAction } from "react";
+
 type ToggleItemType = {
   name: string;
 };
@@ -13,7 +15,7 @@ const TogglePlusMinus = ({
   btnClass?: string;
   toggleState: [
     string,
-    React.Dispatch<React.SetStateAction<string>>,
+    Dispatch<SetStateAction<string>>,
   ];
 }) => {
   const [toggle, setToggle] = toggleState;

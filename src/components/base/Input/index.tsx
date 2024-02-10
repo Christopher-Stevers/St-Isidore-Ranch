@@ -1,7 +1,10 @@
+import React from "react";
+
 const Input = ({
   onChange,
   placeholder,
 }: {
+  // eslint-disable-next-line no-unused-vars
   onChange: (e: string) => void;
   placeholder: string;
 }) => {

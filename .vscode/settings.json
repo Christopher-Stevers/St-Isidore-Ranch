@@ -18,5 +18,8 @@
     "editor.defaultFormatter": "esbenp.prettier-vscode"
   },
   "scm.defaultViewMode": "tree",
-  "workbench.colorTheme": "Radical"
+  "workbench.colorTheme": "Radical",
+  "[typescript]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  }
 }

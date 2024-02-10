@@ -1,6 +1,5 @@
 import { prisma } from "~/server/db";
 import type Stripe from "stripe";
-import stripe from "../../server/stripe/client";
 import emailWrapper from "~/server/helpers/emailWrapper";
 import {
   clearOrderByPaymentId,
@@ -10,8 +9,9 @@ import {
 import { htmlMessageTemplate } from "./htmlMessageTemplate";
 import { type Product } from "@prisma/client";
 import { env } from "process";
+import { getPriceWithDiscount } from "~/utils/lib";
 
-export default {
+const stripeHandlers = {
   defaultHandler: async (event: Stripe.Event) => {
     await prisma.stripeEvent.create({
       data: {
@@ -56,11 +56,12 @@ export default {
     paymentIntent: Stripe.PaymentIntent,
   ) => {
     const paymentIntentId = paymentIntent.id;
-    const order = await prisma.order.findUnique({
+    const order = await prisma.order.findFirst({
       where: {
-        paymentIntent: paymentIntentId,
+        paymentIntent: { has: paymentIntentId },
       },
       include: {
+        coupon: true,
         boxes: {
           include: {
             items: true,
@@ -69,19 +70,24 @@ export default {
         address: true,
       },
     });
-    if (paymentIntent.amount !== order?.totalPrice) {
+    if (
+      paymentIntent.amount !== getPriceWithDiscount(order)
+    ) {
       refundOrder(prisma, paymentIntentId);
-      await stripe.paymentIntents.cancel(paymentIntentId);
-      console.log(
-        order?.boxes.map((box) => box.items).flat(),
-      );
+      await emailWrapper({
+        email: env.EMAIL_USERNAME ?? "",
+        subject: "Refund",
+        htmlMessage: `New order with PaymentIntentid ${paymentIntentId} hit an error`,
+        message: `New order with paymentIntentid ${paymentIntentId} hit an error`,
+      });
+
       throw new Error(
         `${paymentIntent.amount}  ${order?.totalPrice} not equal`,
       );
     } else {
-      const order = await prisma.order.findUnique({
+      const order = await prisma.order.findFirst({
         where: {
-          paymentIntent: paymentIntentId,
+          paymentIntent: { has: paymentIntentId },
         },
         include: {
           boxes: {
@@ -119,3 +125,5 @@ export default {
     }
   },
 };
+
+export default stripeHandlers;

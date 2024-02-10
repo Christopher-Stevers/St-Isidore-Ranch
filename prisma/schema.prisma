@@ -86,10 +86,12 @@ model Order {
   updatedAt     DateTime @updatedAt
   totalPrice    Float
   boxes         Box[]
-  paymentIntent String?  @unique
+  paymentIntent String[]  
   addressId     String?  @db.ObjectId
   address       Address? @relation(fields: [addressId], references: [id])
   paid          Boolean  @default(false)
+  coupon      Coupon?  @relation(fields: [couponId], references: [id])
+  couponId    String?  @db.ObjectId
 }
 
 model Address {
@@ -106,6 +108,7 @@ model Address {
   email      String?
   orders     Order[]
   orderIds   String[] @db.ObjectId
+  deliveryInstructions String?
 }
 
 model Product {
@@ -156,4 +159,15 @@ model StripeEvent {
 model BtcPayEvent {
   id              String  @id @map("_id")
   metadata        Json
+}
+model Coupon {
+  id String   @id @default(auto()) @map("_id") @db.ObjectId
+  type  String
+  code  String
+  multiplier  Float
+  subtraction Float
+  
+  orders Order[]
+  
+
 }

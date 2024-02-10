@@ -36,7 +36,11 @@ type Order =
       totalPrice: number;
       paid: boolean;
       address: Address | null;
-      paymentIntent: string | null;
+      paymentIntent: string[] | null;
+      coupon: {
+        multiplier: number;
+        code: string;
+      } | null;
       boxes: {
         id: string;
         createdAt: Date;
@@ -119,13 +123,14 @@ const CartProvider = ({
       setLocalOrderId(localOrderId);
       refetchOrder().catch(console.error);
     }
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   useEffect(() => {
     if (state?.id) {
       localStorage.setItem("orderId", state?.id);
     }
-  }, [state?.id]);
+  }, [state]);
   return (
     <CartContext.Provider
       value={[state, dispatch, refetchOrder]}

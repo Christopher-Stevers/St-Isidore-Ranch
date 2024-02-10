@@ -58,7 +58,6 @@ export default async (
     const { headers } = req;
     const data: BtcPayServerWebhookRequestBody = req.body;
     const { invoiceId, storeId } = data;
-    console.log(invoiceId, storeId, "invoiceId, storeId");
     const btcPayPublic = await btcPayPublicClient(
       `https://btcpay.btc.aw/api/v1/stores/${storeId}/invoices/${invoiceId}`,
     );
@@ -89,7 +88,6 @@ export default async (
       invoiceId,
       amount,
     );
-    console.log("ok yeah this is ok");
     res.status(200).send("ok");
   } catch (error) {
     console.log(error);

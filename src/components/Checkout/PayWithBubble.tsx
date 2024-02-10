@@ -15,7 +15,6 @@ const PayWithBubble = ({
   setValue: Dispatch<SetStateAction<string>>;
 }) => {
   const handleSelect = () => {
-    console.log("select");
     setValue(slug);
   };
   return (

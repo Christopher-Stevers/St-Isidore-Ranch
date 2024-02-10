@@ -28,8 +28,6 @@ const useMediaQuery = (): MediaQueryTypes => {
     setCurrentMediaQueryString,
   ] = useState<MediaQueryTypes>("nothing");
   // ignore ts error
-  // eslint-disable-next-line @typescript-eslint/ban-ts-comment
-  // @ts-ignore
   const {
     md,
     sm,
