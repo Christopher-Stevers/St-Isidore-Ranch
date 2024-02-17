@@ -7,7 +7,6 @@ import {
   setOrderAsPayed,
 } from "~/server/helpers/dbHelpers";
 import { htmlMessageTemplate } from "./htmlMessageTemplate";
-import { type Product } from "@prisma/client";
 import { env } from "process";
 import { getPriceWithDiscount } from "~/utils/lib";
 
@@ -73,17 +72,12 @@ const stripeHandlers = {
     if (
       paymentIntent.amount !== getPriceWithDiscount(order)
     ) {
-      refundOrder(prisma, paymentIntentId);
-      await emailWrapper({
-        email: env.EMAIL_USERNAME ?? "",
-        subject: "Refund",
-        htmlMessage: `New order with PaymentIntentid ${paymentIntentId} hit an error`,
-        message: `New order with paymentIntentid ${paymentIntentId} hit an error`,
-      });
-
-      throw new Error(
-        `${paymentIntent.amount}  ${order?.totalPrice} not equal`,
-      );
+      await refundOrder(prisma, paymentIntentId);
+      if (order && paymentIntent) {
+        throw new Error(
+          `${paymentIntent.amount}  ${order?.totalPrice} not equal`,
+        );
+      }
     } else {
       const order = await prisma.order.findFirst({
         where: {
@@ -101,7 +95,7 @@ const stripeHandlers = {
       if (!order) throw new Error("order not found");
       const items = order?.boxes
         .map((box) => box.items)
-        .flat() as Product[];
+        .flat();
 
       await setOrderAsPayed(
         prisma,

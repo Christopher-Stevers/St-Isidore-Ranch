@@ -1,4 +1,6 @@
 import { type PrismaClient } from "@prisma/client";
+import emailWrapper from "./emailWrapper";
+import { env } from "~/env.mjs";
 
 export const clearOrderByPaymentId = async (
   prisma: PrismaClient,
@@ -66,11 +68,17 @@ export const clearOrderById = async (
   });
 };
 
-export const refundOrder = (
+export const refundOrder = async (
   _prisma: PrismaClient,
   paymentIntent: string,
 ) => {
-  console.log("refundOrder, ", paymentIntent);
+  await emailWrapper({
+    email: env.EMAIL_USERNAME ?? "",
+    subject: "Refund",
+    htmlMessage: `New order with PaymentIntentid ${paymentIntent} hit an error`,
+    message: `New order with paymentIntentid ${paymentIntent} hit an error`,
+  });
+
   // if the order price has issues
 };
 export const setOrderAsPayed = async (

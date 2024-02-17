@@ -1,8 +1,10 @@
 import { prisma } from "~/server/db";
 import emailWrapper from "~/server/helpers/emailWrapper";
-import { setOrderAsPayed } from "~/server/helpers/dbHelpers";
+import {
+  refundOrder,
+  setOrderAsPayed,
+} from "~/server/helpers/dbHelpers";
 import { htmlMessageTemplate } from "./htmlMessageTemplate";
-import { type Product } from "@prisma/client";
 import { env } from "process";
 
 const btcEventHandler = {
@@ -33,9 +35,12 @@ const btcEventHandler = {
       },
     });
     if (amount !== order?.totalPrice) {
-      throw new Error(
-        `${amount}  ${order?.totalPrice} not equal`,
-      );
+      await refundOrder(prisma, invoiceId);
+      if (order && invoiceId) {
+        throw new Error(
+          `${invoiceId}  ${order?.totalPrice} not equal`,
+        );
+      }
     } else {
       const order = await prisma.order.findFirst({
         where: {
@@ -53,7 +58,7 @@ const btcEventHandler = {
       if (!order) throw new Error("order not found");
       const items = order?.boxes
         .map((box) => box.items)
-        .flat() as Product[];
+        .flat();
 
       await setOrderAsPayed(
         prisma,
