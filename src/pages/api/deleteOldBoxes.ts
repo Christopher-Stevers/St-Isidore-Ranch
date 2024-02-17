@@ -9,13 +9,23 @@ import { clearOrderById } from "~/server/helpers/dbHelpers";
 const prisma = new PrismaClient();
 
 export default async function handler(
-  _req: NextApiRequest,
+  req: NextApiRequest,
   res: NextApiResponse,
 ) {
   try {
     const oneDayAgo = new Date();
-    oneDayAgo.setDate(oneDayAgo.getDate() - 1);
-
+    // get query params from the request
+    const { days, hours } = req.query;
+    if (typeof days === "string") {
+      oneDayAgo.setDate(
+        oneDayAgo.getDate() - parseInt(days),
+      );
+    }
+    if (typeof hours === "string") {
+      oneDayAgo.setHours(
+        oneDayAgo.getHours() - parseInt(hours),
+      );
+    }
     // get all orders from over a week ago
     const oldOrders = await prisma.order.findMany({
       where: {

@@ -87,11 +87,13 @@ model Order {
   totalPrice    Float
   boxes         Box[]
   paymentIntent String[]  
+  btcPayId      String[]
   addressId     String?  @db.ObjectId
   address       Address? @relation(fields: [addressId], references: [id])
   paid          Boolean  @default(false)
   coupon      Coupon?  @relation(fields: [couponId], references: [id])
   couponId    String?  @db.ObjectId
+  nextOrderDate DateTime?
 }
 
 model Address {
