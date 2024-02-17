@@ -41,14 +41,12 @@ type Order =
   | undefined;
 
 type OrderAction = { type: "UPDATE_ORDER"; payload: Order };
-type OrderContextType =  {
-  order: Order | null,
-  updateOrder: React.Dispatch<OrderAction>,
- refetchOrder:  () => void,
- }
-const OrderContext = createContext<
- OrderContextType
->(
+type OrderContextType = {
+  order: Order | null;
+  updateOrder: React.Dispatch<OrderAction>;
+  refetchOrder: () => void;
+};
+const OrderContext = createContext<OrderContextType>(
   {} as OrderContextType,
 );
 
@@ -65,11 +63,9 @@ const orderReducer = (
   state: Order,
   action: OrderAction,
 ): Order => {
-  if (action.type==="UPDATE_ORDER") {
-      return action.payload;
-
-  }
-  else return state;
+  if (action.type === "UPDATE_ORDER") {
+    return action.payload;
+  } else return state;
 };
 
 const OrderProvider = ({
@@ -104,26 +100,23 @@ const OrderProvider = ({
   useEffect(() => {
     const localOrderId = localStorage.getItem("orderId");
     if (localOrderId) {
+      console.log("setting local order id", localOrderId);
       setLocalOrderId(localOrderId);
       refetchOrder().catch(console.error);
     }
-  // eslint-disable-next-line react-hooks/exhaustive-deps
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
-  useEffect(() => {
-    if (state?.id) {
-      localStorage.setItem("orderId", state?.id);
-    }
-  }, [state]);
-
   const orderContext = useMemo(() => {
-    return {order:state, updateOrder: dispatch, refetchOrder}
-  }, [state, dispatch, refetchOrder])
+    return {
+      order: state,
+      updateOrder: dispatch,
+      refetchOrder,
+    };
+  }, [state, dispatch, refetchOrder]);
 
   return (
-    <OrderContext.Provider
-      value={orderContext}
-    >
+    <OrderContext.Provider value={orderContext}>
       <Link
         href="/checkout"
         className="fixed bottom-6 right-6 rounded-full border-4 border-primary-500  bg-backdrop-700 p-3 text-primary-500"
@@ -138,4 +131,4 @@ const OrderProvider = ({
   );
 };
 
-export default OrderProvider 
+export default OrderProvider;
