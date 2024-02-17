@@ -1,6 +1,9 @@
 import { getPriceWithDiscount } from "~/utils/lib";
 
 const getSampleBody = (amount: number) => {
+  if (env.NODE_ENV === "development") {
+    amount = 0;
+  }
   return {
     metadata: {},
     checkout: {
@@ -146,18 +149,17 @@ export const paymentsRouter = createTRPCRouter({
             id: input.orderId,
           },
           data: {
-            btcPayId: {push: invoice.id}
+            btcPayId: { push: invoice.id },
+          },
+        });
       }
-    }
-        );
-  }
       return invoice;
     }),
-    
-    getBtcPayInvoice: publicProcedure
+
+  getBtcPayInvoice: publicProcedure
     .input(z.object({ orderId: z.string().optional() }))
     .query(async ({ ctx: { prisma }, input }) => {
-      if(!input.orderId) return null;
+      if (!input.orderId) return null;
       const order = await prisma.order.findUnique({
         where: {
           id: input.orderId,

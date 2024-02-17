@@ -6,6 +6,7 @@ import {
 } from "~/server/helpers/dbHelpers";
 import { htmlMessageTemplate } from "./htmlMessageTemplate";
 import { env } from "process";
+import { getPriceWithDiscount } from "~/utils/lib";
 
 const btcEventHandler = {
   defaultHandler: async (id: string, metadata: object) => {
@@ -26,6 +27,7 @@ const btcEventHandler = {
         paymentIntent: { has: invoiceId },
       },
       include: {
+        coupon: true,
         boxes: {
           include: {
             items: true,
@@ -34,7 +36,11 @@ const btcEventHandler = {
         address: true,
       },
     });
-    if (amount !== order?.totalPrice) {
+
+    if (
+      amount !== getPriceWithDiscount(order) &&
+      env.NODE_ENV !== "development"
+    ) {
       await refundOrder(prisma, invoiceId);
       if (order && invoiceId) {
         throw new Error(
