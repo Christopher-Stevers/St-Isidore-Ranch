@@ -4,7 +4,7 @@ import { api } from "~/utils/api";
 import { useRouter } from "next/router";
 import AddressFieldInput from "~/components/Checkout/AddressFieldInput";
 import { BTC, PAYMENT } from "./Checkout";
-import { useCart } from "~/providers/cart";
+import { useOrder } from "~/providers/OrderProvider";
 
 export const btcPayPublicClient = async (
   url: string,
@@ -29,20 +29,19 @@ export const btcPayPublicClient = async (
 };
 
 const BTCPay = ({
-  invoiceId,
   paymentStep,
   paymentType,
+  
 }: {
-  invoiceId: string;
   paymentStep: string;
   paymentType: string;
 }) => {
   const router = useRouter();
-  const [, , refetchOrder] = useCart();
+  const {order, refetchOrder } = useOrder();
   const ONE_SECONDS = 1000;
   const { data: invoice } =
-    api.stripe.getBtcPayInvoice.useQuery(
-      { invoiceId },
+    api.payments.getBtcPayInvoice.useQuery(
+      { orderId: order?.id },
       { refetchInterval: ONE_SECONDS },
     );
   const btcPaymentUrl = invoice?.checkoutLink;
@@ -66,6 +65,7 @@ const BTCPay = ({
         paymentStep === PAYMENT &&
         paymentType === BTC && (
           <iframe
+          title="btcpay portal"
             src={btcPaymentUrl}
             className="h-[1000px] w-full"
           />

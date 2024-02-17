@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import useDebounce from "~/hooks/useDebounce";
-import { useCart } from "~/providers/cart";
+import {  useOrder } from "~/providers/OrderProvider";
 import { api } from "~/utils/api";
 
 const AddressFieldInput = ({
@@ -17,7 +17,7 @@ const AddressFieldInput = ({
     | "email"
     | "deliveryInstructions";
 }) => {
-  const [order] = useCart();
+  const {order} = useOrder();
   const [value, setValue] = useState("");
   const { mutate: updateAddress } =
     api.address.upsertAddress.useMutation({});

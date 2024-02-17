@@ -24,7 +24,7 @@ const btcEventHandler = {
   ) => {
     const order = await prisma.order.findFirst({
       where: {
-        paymentIntent: { has: invoiceId },
+        btcPayId: { has: invoiceId },
       },
       include: {
         coupon: true,
@@ -50,7 +50,7 @@ const btcEventHandler = {
     } else {
       const order = await prisma.order.findFirst({
         where: {
-          paymentIntent: { has: invoiceId },
+          btcPayId: { has: invoiceId },
         },
         include: {
           boxes: {

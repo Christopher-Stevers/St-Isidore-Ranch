@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { Elements } from "@stripe/react-stripe-js";
 
-import { useCart } from "~/providers/cart";
+import { useOrder } from "~/providers/OrderProvider";
 import CSSSwitch from "~/components/base/CSSSwitch";
 import { api } from "~/utils/api";
 import { env } from "~/env.mjs";
@@ -35,14 +35,17 @@ export const BTC = "BTC";
 const Checkout = () => {
   const [paymentStep, setPaymentStep] = useState(REVIEW);
   const [paymentType, setPaymentType] = useState(CARD);
-  const [cart] = useCart();
+
+  const { order } = useOrder();
   const router = useRouter();
+
   const [clientSecret, setClientSecret] = useState("");
   const [btcPaymentIntentId, setBtcPaymentIntentId] =
     useState<string | null>(null);
+
   const currentMaxBreakpoint = useMediaQuery();
   const { mutate: upsertPaymentIntent } =
-    api.stripe.upsertPaymentIntent.useMutation({
+    api.payments.upsertPaymentIntent.useMutation({
       onSuccess: (data) => {
         if (!data?.client_secret) return;
         if (!clientSecret) {
@@ -50,50 +53,36 @@ const Checkout = () => {
         }
       },
     });
-  const { mutate: createBtcPaymentIntent } =
-    api.stripe.createBTCPayLighteningPaymentIntent.useMutation(
-      {
-        onSuccess: (data) => {
-          setBtcPaymentIntentId(data.id);
-        },
+  const { mutate: upsertBtcPaymentIntent } =
+    api.payments.upsertBtcPaymentIntent.useMutation({
+      onSuccess: (data) => {
+        setBtcPaymentIntentId(data.id);
       },
-    );
-  const { mutate: setOrderPaymentIntent } =
-    api.stripe.setOrderPaymentIntent.useMutation();
-  console.log(cart?.paymentIntent);
+    });
+
   useEffect(() => {
     switch (paymentType) {
       case CARD:
-        if (cart?.id) {
+        if (order?.id) {
           upsertPaymentIntent({
-            orderId: cart?.id,
-            paymentIntentId: cart.paymentIntent,
+            orderId: order?.id,
           });
         }
         break;
       case BTC:
-        if (cart?.id && !btcPaymentIntentId) {
-          createBtcPaymentIntent({
-            orderId: cart?.id ?? "",
-          });
-        } else if (cart?.id && btcPaymentIntentId) {
-          setOrderPaymentIntent({
-            orderId: cart?.id,
-            paymentIntentId: btcPaymentIntentId,
+        if (order?.id) {
+          upsertBtcPaymentIntent({
+            orderId: order?.id,
           });
         }
         break;
     }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [
-    cart?.id,
-    cart?.coupon?.code,
-    paymentStep,
+    order?.id,
+    order?.coupon?.code,
     paymentType,
-    clientSecret,
-    btcPaymentIntentId,
-    createBtcPaymentIntent,
     upsertPaymentIntent,
+    upsertBtcPaymentIntent,
   ]);
 
   const appearance: StripeElementsOptions["appearance"] = {
@@ -218,7 +207,6 @@ const Checkout = () => {
               >
                 {btcPaymentIntentId && (
                   <BTCPay
-                    invoiceId={btcPaymentIntentId}
                     paymentStep={paymentStep}
                     paymentType={paymentType}
                   />

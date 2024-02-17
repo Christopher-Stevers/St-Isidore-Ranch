@@ -13,7 +13,7 @@ import {
 import { api } from "~/utils/api";
 
 import "~/styles/globals.css";
-import { CartProvider } from "~/providers/cart";
+import OrderProvider from "~/providers/OrderProvider";
 import { useEffect } from "react";
 
 const roboto = Roboto({
@@ -56,13 +56,13 @@ const MyApp: AppType<{ session: Session | null }> = ({
         <link rel="icon" href="/favicon.png" />
       </Head>
       <SessionProvider session={session}>
-        <CartProvider>
+        <OrderProvider>
           <main
             className={`${roboto.variable} ${rye.variable} ${cantarell.variable} ${tangerine.variable} font-sans`}
           >
             <Component {...pageProps} />
           </main>
-        </CartProvider>
+        </OrderProvider>
       </SessionProvider>
     </>
   );

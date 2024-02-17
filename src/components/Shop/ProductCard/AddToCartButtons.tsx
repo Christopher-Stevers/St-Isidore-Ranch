@@ -1,5 +1,5 @@
 import { api } from "~/utils/api";
-import { useCart } from "~/providers/cart";
+import { useOrder } from "~/providers/OrderProvider";
 import { useRouter } from "next/router";
 import { useState } from "react";
 import { ArrowPathIcon } from "@heroicons/react/24/solid";
@@ -53,7 +53,7 @@ const AddToCart = ({
 }) => {
   const router = useRouter();
   const [checkingOut, setCheckingOut] = useState(false);
-  const [cartState, cartDispatch] = useCart();
+  const { order, updateOrder } = useOrder();
   const [justAdded, setJustAdded] = useState(false);
   const {
     isLoading: queryLoading,
@@ -63,10 +63,10 @@ const AddToCart = ({
   const { isLoading: mutationLoading, mutate: addToCart } =
     api.order.addToOrder.useMutation({
       onSuccess: async (data) => {
+        refetch().catch(console.error);
         setJustAdded(true);
-        setTimeout(() => setJustAdded(false), 4000);
-        cartDispatch({
-          type: "UPDATE_CART",
+        updateOrder({
+          type: "UPDATE_ORDER",
           payload: data,
         });
         refetch().catch(console.error);
@@ -77,14 +77,14 @@ const AddToCart = ({
     });
 
   const handleAddToCard = () => {
-    addToCart({ slug, orderId: cartState?.id });
+    addToCart({ slug, orderId: order?.id });
   };
   const handleCheckout = () => {
     setCheckingOut(true);
 
     addToCart({
       slug,
-      orderId: cartState?.id,
+      orderId: order?.id,
     });
   };
   const isLoading = queryLoading || mutationLoading;

@@ -5,16 +5,16 @@ import {
 } from "~/utils/boxManagement";
 import { XCircleIcon } from "@heroicons/react/24/outline";
 import { api } from "~/utils/api";
-import { useCart } from "~/providers/cart";
+import {  useOrder } from "~/providers/OrderProvider";
 import { formatDollars } from "~/utils/lib";
 
 const BoxConfirm = ({ box }: { box: Box }) => {
-  const [, cartDispatch] = useCart();
+  const {updateOrder} = useOrder();
   const { mutate: removeItem } =
     api.order.removeItemFromOrder.useMutation({
       onSuccess: (data) => {
-        cartDispatch({
-          type: "UPDATE_CART",
+        updateOrder({
+          type: "UPDATE_ORDER",
           payload: data,
         });
       },

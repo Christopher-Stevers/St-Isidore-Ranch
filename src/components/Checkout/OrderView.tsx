@@ -1,4 +1,4 @@
-import { useCart } from "~/providers/cart";
+import {  useOrder } from "~/providers/OrderProvider";
 import BoxConfirm from "./BoxConfirm";
 import Link from "next/link";
 import React, {
@@ -21,15 +21,15 @@ const OrderView = ({
 }: {
   setPaymentStep: React.Dispatch<SetStateAction<string>>;
 }) => {
-  const [order, cartDispatch] = useCart();
+  const {order, updateOrder} = useOrder();
   const [couponValue, setCouponValue] = useState(
     order?.coupon?.code ?? "",
   );
   const { mutate } =
     api.order.linkCouponCodeToOrder.useMutation({
       onSuccess: (data) => {
-        cartDispatch({
-          type: "UPDATE_CART",
+        updateOrder({
+          type: "UPDATE_ORDER",
           payload: data,
         });
       },
