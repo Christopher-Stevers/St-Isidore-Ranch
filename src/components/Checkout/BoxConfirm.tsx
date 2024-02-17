@@ -32,25 +32,27 @@ const BoxConfirm = ({ box }: { box: Box }) => {
       key={box.title}
       className="flex gap-6 bg-backdrop-500 px-8 py-4"
     >
-      <div className="w-60">
-        <span className="whitespace-pre text-xl">
-          {box.title}
-        </span>
+      <div className="w-full flex-col">
+        <div className="flex w-full justify-between">
+          <div className="flex items-center gap-6">
+            <span className="text-xl">{box.title}</span>
+          </div>
+          <button
+            onClick={handleRemoveFronOrder}
+            className="relative flex w-full flex-1 justify-end"
+          >
+            <XCircleIcon className="h-6 w-6 cursor-pointer justify-end justify-self-end" />
+          </button>
+        </div>
+        <span>{formatDollars(box.totalPrice)}</span>
         {getBoxFromSlug(box.slug)?.items.map(
           (item: Item) => (
-            <div key={item.name}>
+            <div className="whitespace-pre" key={item.name}>
               {item.quantity} {item.name}
             </div>
           ),
         )}
       </div>
-      <span>{formatDollars(box.totalPrice)}</span>
-      <button
-        onClick={handleRemoveFronOrder}
-        className="relative flex w-full flex-1"
-      >
-        <XCircleIcon className="absolute right-0 h-6 w-6 flex-1 cursor-pointer justify-self-end" />
-      </button>
     </li>
   );
 };

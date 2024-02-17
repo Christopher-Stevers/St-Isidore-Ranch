@@ -54,6 +54,7 @@ const AddToCart = ({
   const router = useRouter();
   const [checkingOut, setCheckingOut] = useState(false);
   const [cartState, cartDispatch] = useCart();
+  const [justAdded, setJustAdded] = useState(false);
   const {
     isLoading: queryLoading,
     data: isInStock,
@@ -62,11 +63,13 @@ const AddToCart = ({
   const { isLoading: mutationLoading, mutate: addToCart } =
     api.order.addToOrder.useMutation({
       onSuccess: async (data) => {
-        refetch().catch(console.error);
+        setJustAdded(true);
+        setTimeout(() => setJustAdded(false), 4000);
         cartDispatch({
           type: "UPDATE_CART",
           payload: data,
         });
+        refetch().catch(console.error);
         if (checkingOut) {
           await router.push("/checkout");
         }
@@ -110,7 +113,7 @@ const AddToCart = ({
           >
             <StockLoading
               hasMainPageStyles={hasMainPageStyles}
-              isLoading={isLoading}
+              isLoading={isLoading && !justAdded}
             >
               <span>Order Now</span>
             </StockLoading>

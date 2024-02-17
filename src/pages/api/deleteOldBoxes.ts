@@ -27,13 +27,7 @@ export default async function handler(
       );
     }
     // get all orders from over a week ago
-    const oldOrders = await prisma.order.findMany({
-      where: {
-        createdAt: {
-          lt: oneDayAgo,
-        },
-      },
-    });
+    const oldOrders = await prisma.order.findMany({});
     for (const order of oldOrders) {
       await clearOrderById(prisma, order.id);
     }
