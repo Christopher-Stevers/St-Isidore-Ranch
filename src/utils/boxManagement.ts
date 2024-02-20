@@ -106,7 +106,7 @@ export class LargeGrillingBundle extends Box {
       src: "/boxPics/grilledBeef.jpg",
       slug: "lg-grilling-bundle",
       variant: "large",
-      totalPrice: 22000,
+      totalPrice: 20000,
       boxSize: 0,
       items: [
         {
@@ -123,7 +123,7 @@ export class LargeGrillingBundle extends Box {
         },
 
         {
-          quantity: 4,
+          quantity: 6,
           name: GROUNDBEEF,
         },
       ],
@@ -159,7 +159,7 @@ class LargeEverythingBundle extends Box {
           name: GROUNDBEEF,
         },
         {
-          quantity: 1,
+          quantity: 2,
           name: "Stewing Beef ( 1 lb. )",
         },
       ],
@@ -182,8 +182,8 @@ class SmallEverythingBundle extends Box {
           name: NYSTRIP,
         },
         {
-          quantity: 1,
-          name: BONEINSHORTRIBS,
+          quantity: 2,
+          name: BONELESSRIBEYE,
         },
         {
           quantity: 1,
@@ -292,7 +292,7 @@ class LargePrimeSteaksBox implements Box {
     this.description =
       "A box full of our finest steaks for your grilling pleasure!";
     this.title = "Prime Steaks";
-    this.totalPrice = 46000;
+    this.totalPrice = 34000;
     this.slug = "lg-prime-steaks";
     this.boxSize = 0;
     this.src = "/boxPics/steakBeef.jpg";
@@ -322,7 +322,7 @@ class MediumPrimeSteaksBox implements Box {
     this.description =
       "A box full of our finest steaks for your grilling pleasure!";
     this.title = "Prime Steaks";
-    this.totalPrice = 29000;
+    this.totalPrice = 23000;
     this.slug = "md-prime-steaks";
     this.boxSize = 0;
     this.src = "/boxPics/steakBeef.jpg";
@@ -354,7 +354,7 @@ class SmallPrimeSteaksBox implements Box {
     this.description =
       "A box full of our finest steaks for your grilling pleasure!";
     this.title = "Prime Steaks";
-    this.totalPrice = 14000;
+    this.totalPrice = 11000;
     this.slug = "sm-prime-steaks";
     this.boxSize = 0;
     this.src = "/boxPics/steakBeef.jpg";
